@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container'
 import { Link } from '@material-ui/core'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
+import { emailNotTaken } from '../validations/email'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,7 +38,8 @@ const validationSchema = yup.object({
   email: yup
     .string()
     .email('Enter a valid email')
-    .required('Email is required'),
+    .required('Email is required')
+    .test('is-email-taken', 'Email is already registered', emailNotTaken),
   password: yup
     .string()
     .min(8, 'Password should be of minimum 8 characters length')

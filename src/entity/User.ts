@@ -7,6 +7,15 @@ export class User {
   id: string
 
   @Column('varchar', { length: 255 })
+  firstName: string
+
+  @Column('varchar', { length: 255 })
+  lastName: string
+
+  @Column('varchar', { length: 255 })
+  email: string
+
+  @Column('varchar', { length: 255 })
   username: string
 
   @Column('text')
