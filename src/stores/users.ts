@@ -19,7 +19,7 @@ import { User } from '../entity/User'
 
 export const getUserByUsername = async (username: string) => {
   const entityManager = getManager()
-  return entityManager.findOne(User, { where: { username } })
+  return entityManager.findOne(User, { where: { username: ILike(username) } })
 }
 
 export const getUserByEmail = async (email: string) => {

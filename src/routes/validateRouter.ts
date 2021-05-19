@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getUserByEmail } from '../stores/users'
+import { getUserByEmail, getUserByUsername } from '../stores/users'
 import asyncHandler from '../utils/asyncHandler'
 
 const router = Router()
@@ -20,6 +20,10 @@ router.post(
   '/username',
   asyncHandler(async (req, res) => {
     // query database for user with this username
+    const user = await getUserByUsername(req.body.username)
+    res.json({
+      valid: user === undefined,
+    })
   }),
 )
 

@@ -13,6 +13,7 @@ import { Link } from '@material-ui/core'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { emailNotTaken } from '../validations/email'
+import { usernameNotTaken } from '../validations/username'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -55,7 +56,12 @@ const validationSchema = yup.object({
   userName: yup
     .string()
     .min(3, 'enter real words')
-    .required('username is required'),
+    .required('username is required')
+    .test(
+      'is-username-taken',
+      'Username is already registered',
+      usernameNotTaken,
+    ),
 })
 
 export const Signup = () => {
