@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getUserByEmail } from 'src/stores/users'
+import { getUserByEmail } from '../stores/users'
 import asyncHandler from '../utils/asyncHandler'
 
 const router = Router()
@@ -9,6 +9,7 @@ router.post(
   asyncHandler(async (req, res) => {
     // query database for user with this email
     const user = await getUserByEmail(req.body.email)
+    // console.log('user', user)
     // if user doesn't exist then return valid
     res.json({
       valid: user === undefined,

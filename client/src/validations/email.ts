@@ -7,7 +7,7 @@ export const emailNotTaken = (email: string | undefined): Promise<boolean> => {
       'Content-Type': 'application/json',
     },
     method: 'POST',
-    body: JSON.stringify(email),
+    body: JSON.stringify({ email }),
   })
     .then((res) => res.json())
     .then((body) => body.valid)

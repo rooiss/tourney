@@ -6,7 +6,7 @@ services:
     image: postgres
     restart: always
     volumes:
-      - ./.dbData:/data/db
+      - $PWD/.dbData:/data/db
     networks:
       - skynet
     environment:
@@ -27,7 +27,7 @@ services:
     image: redis:alpine
     restart: always
     volumes:
-      - ./.sessionsData:/data
+      - $PWD/.sessionsData:/data
     networks:
       - skynet
   app:

@@ -18,3 +18,5 @@
 - [ ] validateRouter
   - [ ] username
   - [ ] email
+- [ ] lowercase the email when finding and inserting
+- [ ] throttle/delay async in formik for form validations
