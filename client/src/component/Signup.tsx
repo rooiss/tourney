@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -14,6 +14,9 @@ import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { emailNotTaken } from '../validations/email'
 import { usernameNotTaken } from '../validations/username'
+import { Alert } from '@material-ui/lab'
+import { SignUpPanties } from '../types/user'
+import { signup } from '../api/signup'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  serverErrorMsg: {
+    width: '100%',
+    marginTop: theme.spacing(2),
   },
 }))
 
@@ -53,7 +60,7 @@ const validationSchema = yup.object({
     .string()
     .min(3, 'enter real words')
     .required('last name is required'),
-  userName: yup
+  username: yup
     .string()
     .min(3, 'enter real words')
     .required('username is required')
@@ -71,13 +78,25 @@ export const Signup = () => {
       lastName: '',
       email: '',
       password: '',
-      userName: '',
+      username: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values: SignUpPanties) => {
+      // clear any previous errors
+      setServerError('')
       // AJAX call to /api/something
+      return signup(values).then(
+        () => {
+          window.location.href = '/'
+        },
+        () => {
+          setServerError('An error occurred on the server, please try again')
+        },
+      )
     },
   })
+
+  const [serverError, setServerError] = useState('')
 
   const classes = useStyles()
 
@@ -91,6 +110,12 @@ export const Signup = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
+        {serverError && (
+          <Alert className={classes.serverErrorMsg} severity="error">
+            {serverError}
+          </Alert>
+        )}
+
         <form
           className={classes.form}
           noValidate
@@ -152,16 +177,16 @@ export const Signup = () => {
                 variant="outlined"
                 required
                 fullWidth
-                id="userName"
+                id="username"
                 label="username"
-                name="userName"
-                value={formik.values.userName}
+                name="username"
+                value={formik.values.username}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.userName && Boolean(formik.errors.userName)
+                  formik.touched.username && Boolean(formik.errors.username)
                 }
-                helperText={formik.touched.userName && formik.errors.userName}
-                autoComplete="userName"
+                helperText={formik.touched.username && formik.errors.username}
+                autoComplete="username"
               />
             </Grid>
             <Grid item xs={12}>

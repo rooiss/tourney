@@ -15,8 +15,9 @@
   - [ ] create tournament page
 - [ ] create a follow function for home page
 - [ ] create button which creates tournament which goes to a create tournament page
-- [ ] validateRouter
-  - [ ] username
-  - [ ] email
-- [x] lowercase the email when finding and inserting
+- [x] validateRouter
+  - [x] username
+  - [x] email
+- [x] lowercase the email and username when finding and inserting
 - [ ] throttle/delay async in formik for form validations
+- [ ] formik submit form
