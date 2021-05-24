@@ -9,13 +9,13 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
-import { Link } from '@material-ui/core'
+import { LinearProgress, Link } from '@material-ui/core'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { emailNotTaken } from '../validations/email'
 import { usernameNotTaken } from '../validations/username'
 import { Alert } from '@material-ui/lab'
-import { SignUpPanties } from '../types/user'
+import { SignUpCred } from '../types/users'
 import { signup } from '../api/signup'
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
   },
   serverErrorMsg: {
     width: '100%',
+    marginTop: theme.spacing(2),
+  },
+  progressIcon: {
     marginTop: theme.spacing(2),
   },
 }))
@@ -81,7 +84,7 @@ export const Signup = () => {
       username: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values: SignUpPanties) => {
+    onSubmit: (values: SignUpCred) => {
       // clear any previous errors
       setServerError('')
       // AJAX call to /api/something
@@ -208,6 +211,14 @@ export const Signup = () => {
               />
             </Grid>
           </Grid>
+          {/* this is to display things in formik */}
+          {/* <pre>{JSON.stringify(formik, null, 2)}</pre> */}
+          {formik.isSubmitting && (
+            <LinearProgress
+              className={classes.progressIcon}
+              color={'secondary'}
+            />
+          )}
           <Button
             type="submit"
             fullWidth

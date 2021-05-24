@@ -19,5 +19,9 @@
   - [x] username
   - [x] email
 - [x] lowercase the email and username when finding and inserting
-- [ ] throttle/delay async in formik for form validations
 - [ ] formik submit form
+  - [ ] call create store user function
+  - [ ] log the user in using passport
+- [ ] throttle/delay/debounce async in formik for form validations
+- [ ] use express session and redis to create session
+  - [ ] create a function that takes req as an arg and User as arg and assigns it to

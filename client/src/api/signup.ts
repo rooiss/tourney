@@ -1,7 +1,8 @@
-import { SignUpPanties } from '../types/user'
+import { SignUpCred } from '../types/users'
 
-export async function signup(values: SignUpPanties) {
-  return fetch('/api/users', {
+// we use SignUpCred because typescript needs to know what types the values are
+export async function signup(values: SignUpCred) {
+  return fetch('/api/users/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

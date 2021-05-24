@@ -5,6 +5,6 @@ export interface User {
   username: string
 }
 
-export interface SignUpPanties extends User {
+export interface SignUpCred extends User {
   password: string
 }

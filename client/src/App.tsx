@@ -24,6 +24,9 @@ export default function App() {
         <Router>
           <ButtonAppBar />
           <Switch>
+            <Route path="/login" exact>
+              {/* <Login /> */}
+            </Route>
             <Route path="/signup" exact>
               <Signup />
             </Route>
@@ -36,3 +39,5 @@ export default function App() {
     </ThemeProvider>
   )
 }
+
+// what is app responsible for?
