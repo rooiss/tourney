@@ -8,3 +8,8 @@ export interface User {
 export interface SignUpCred extends User {
   password: string
 }
+
+export interface LoginUser {
+  email: string
+  password: string
+}

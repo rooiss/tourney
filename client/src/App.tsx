@@ -7,6 +7,7 @@ import { AuthProvider } from './component/AuthContext'
 import { ButtonAppBar } from './component/AppBar'
 import { Home } from './component/Home'
 import { Signup } from './component/Signup'
+import { Login } from './component/Login'
 
 export default function App() {
   const theme = createMuiTheme({
@@ -25,7 +26,7 @@ export default function App() {
           <ButtonAppBar />
           <Switch>
             <Route path="/login" exact>
-              {/* <Login /> */}
+              <Login />
             </Route>
             <Route path="/signup" exact>
               <Signup />
