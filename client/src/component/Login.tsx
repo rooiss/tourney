@@ -41,8 +41,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }))
-// TODO
-// validation schema .test needs to change
+
 const validationSchema = yup.object({
   email: yup.string().required('Email is required'),
   password: yup.string().required('Password is required'),
@@ -59,16 +58,19 @@ export const Login = () => {
     onSubmit: (values: LoginUser) => {
       // clear any previous errors
       setServerError('')
-      // AJAX call to /api/something
       // console.log('ARE YOU EVEN WORKING??????')
-      return login(values).then(
-        () => {
+      return login(values).then(({ body, status }) => {
+        if (status === 200) {
           window.location.href = '/'
-        },
-        () => {
-          setServerError('An error occurred on the server, please try again')
-        },
-      )
+          return
+        }
+        if (status === 400) {
+          return setServerError('Invalid credentials')
+        }
+        return setServerError(
+          'An error occurred on the server, please try again.',
+        )
+      })
     },
   })
 

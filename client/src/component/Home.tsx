@@ -16,14 +16,16 @@ const useStyles = makeStyles({
   },
 })
 export const Home = ({}: HomeProps) => {
-  const classes = useStyles()
+  // TODO
+  // styles of home component
+  // const classes = useStyles()
   const { user } = useAuth()
   return (
     <div>
       <h1>Sign up. Check in. Start playing.</h1>
       {user ? (
         // make the endpoint work first
-        <div>{user}</div>
+        <div>{user?.username}</div>
       ) : (
         <>
           <p>

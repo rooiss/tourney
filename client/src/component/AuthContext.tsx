@@ -1,22 +1,33 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 
-export const AuthContext = createContext({
+interface IAuthContext {
+  isAuthenticated: boolean
+  status: 'pending' | 'success' | 'error'
+  user: null | {
+    firstName: string
+    username: string
+    email: string
+  }
+}
+
+export const AuthContext = createContext<IAuthContext>({
   isAuthenticated: false,
   status: 'pending',
   user: null,
 })
 
 export const AuthProvider = ({ children }: any) => {
-  const [state, setState] = useState({
+  const [state, setState] = useState<IAuthContext>({
     isAuthenticated: false,
     status: 'pending',
     user: null,
   })
 
   useEffect(() => {
-    fetch('/api/whoami')
+    fetch('/api/users/whoami')
       .then((res) => res.json())
       .then((body) => {
+        console.log(`body`, body)
         if (body.user) {
           setState({
             isAuthenticated: true,
@@ -31,7 +42,7 @@ export const AuthProvider = ({ children }: any) => {
           })
         }
       })
-      .finally(() => {
+      .catch(() => {
         setState({
           isAuthenticated: false,
           status: 'success',
@@ -39,6 +50,7 @@ export const AuthProvider = ({ children }: any) => {
         })
       })
   }, [])
+  console.log(`state`, state)
 
   return (
     <AuthContext.Provider value={state}>

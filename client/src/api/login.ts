@@ -8,5 +8,21 @@ export async function login(values: LoginUser) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(values),
-  }).then((res) => res.json())
+  }).then(
+    async (res) => {
+      const body = await res.json()
+      return {
+        body,
+        status: res.status,
+      }
+    },
+    () => {
+      return {
+        body: {
+          success: false,
+        },
+        status: 500,
+      }
+    },
+  )
 }

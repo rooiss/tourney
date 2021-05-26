@@ -29,26 +29,28 @@ router.post(
     const user = req.body
     const userByEmail = await getUserByEmail(user.email)
     if (!userByEmail) {
+      console.log('SOMETHING HEREEEEEEE=============')
       // return stuff by conditional statements or
       // else it will keep running the code
       return res.status(400).json({ success: false })
     }
-    if (user.password !== userByEmail?.password) {
-      console.log('PASSWORD DIDNT MATCH=========')
+    if (user.password !== userByEmail.password) {
+      console.log('PASSWORDS DONT MATCH DUDEE ======>')
       return res.status(400).json({ success: false })
-    }
-    if (userByEmail) {
-      console.log('form password ========', user.password)
-      console.log('User obj password', userByEmail.password)
-      if (user.password === userByEmail.password)
-        setUserToSession(req, userByEmail)
+    } else {
+      // console.log('form password ========', user.password)
+      // console.log('User obj password', userByEmail.password)
+      setUserToSession(req, userByEmail)
       console.log('SESSION WORKED============', req.session)
+      return res.json({ success: true })
     }
   }),
 )
-router.post(
+router.get(
   '/whoami',
-  asyncHandler(async (req: Request, res) => {}),
+  asyncHandler(async (req: any, res) => {
+    return res.json({ user: req.session.user })
+  }),
 )
 
 export default router

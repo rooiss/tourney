@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development ts-node-dev src/server.ts"
+    "start": "NODE_ENV=development ts-node-dev src/server.ts",
+    "stop": "docker-compose -f ./docker/dev/docker-compose.yml down"
   },
   "repository": {
     "type": "git",
