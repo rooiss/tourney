@@ -58,7 +58,6 @@ export const Login = () => {
     onSubmit: (values: LoginUser) => {
       // clear any previous errors
       setServerError('')
-      // console.log('ARE YOU EVEN WORKING??????')
       return login(values).then(({ body, status }) => {
         if (status === 200) {
           window.location.href = '/'

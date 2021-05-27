@@ -24,3 +24,5 @@
 - [ ] throttle/delay/debounce async in formik for form validations
 - [x] use express session and redis to create session
   - [x] create a function that takes req as an arg and User as arg and assigns it to
+- [ ] conditional rendering on navbar for logout/login
+- [ ] link for sign up on login component

@@ -1,4 +1,4 @@
-import { Request, Router } from 'express'
+import { Router } from 'express'
 import { setUserToSession } from '../stores/sessions'
 import { createUser, getUserByEmail } from '../stores/users'
 import asyncHandler from '../utils/asyncHandler'
@@ -29,19 +29,14 @@ router.post(
     const user = req.body
     const userByEmail = await getUserByEmail(user.email)
     if (!userByEmail) {
-      console.log('SOMETHING HEREEEEEEE=============')
       // return stuff by conditional statements or
       // else it will keep running the code
       return res.status(400).json({ success: false })
     }
     if (user.password !== userByEmail.password) {
-      console.log('PASSWORDS DONT MATCH DUDEE ======>')
       return res.status(400).json({ success: false })
     } else {
-      // console.log('form password ========', user.password)
-      // console.log('User obj password', userByEmail.password)
       setUserToSession(req, userByEmail)
-      console.log('SESSION WORKED============', req.session)
       return res.json({ success: true })
     }
   }),
@@ -52,5 +47,14 @@ router.get(
     return res.json({ user: req.session.user })
   }),
 )
+
+router.get('/logout', (req: any, res) => {
+  if (req.session) {
+    console.log(`req.session`, req.session)
+    req.session.destroy()
+    return res.json({ success: true })
+  }
+  return res.json({ success: true })
+})
 
 export default router

@@ -55,7 +55,6 @@ export const AuthProvider = ({ children }: any) => {
   return (
     <AuthContext.Provider value={state}>
       {state.status === 'pending' ? <div>loading...</div> : children}
-      {/* {state.status === 'success' ? children : children} */}
     </AuthContext.Provider>
   )
 }
