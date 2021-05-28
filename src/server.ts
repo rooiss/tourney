@@ -1,8 +1,8 @@
+// import 'reflect-metadata'
 import express from 'express'
 import { setupDB } from './setup-db'
 import validateRouter from './routes/validateRouter'
 import userRouter from './routes/userRouter'
-// import { sessionMw } from './middleware/session'
 
 const redis = require('redis')
 const session = require('express-session')

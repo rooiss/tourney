@@ -13,6 +13,7 @@ const devConfig = {
     entities: ['src/entity/**/*.ts'],
     migrations: ['src/migration/**/*.ts'],
     subscribers: ['src/subscriber/**/*.ts'],
+    logging: true,
   },
   // redis: {
   //   password: process.env.REDIS_PASSWORD || '',

@@ -12,7 +12,7 @@ export class Tournament {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column()
+  @Column('varchar')
   name: string
 
   @OneToOne(() => User)

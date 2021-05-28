@@ -1,4 +1,4 @@
-import { User } from '../entity/User'
+import { User } from '../types/users'
 
 declare module 'express-session' {
   interface Session {

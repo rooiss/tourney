@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { setUserToSession } from '../stores/sessions'
-import { createUser, getUserByEmail } from '../stores/users'
+import { createUser, getUserByEmail, searchUsersByAll } from '../stores/users'
 import asyncHandler from '../utils/asyncHandler'
 
 const router = Router()
@@ -25,7 +25,7 @@ router.post(
 
 router.post(
   '/login',
-  asyncHandler(async (req: any, res) => {
+  asyncHandler(async (req, res) => {
     const user = req.body
     const userByEmail = await getUserByEmail(user.email)
     if (!userByEmail) {
@@ -41,6 +41,7 @@ router.post(
     }
   }),
 )
+
 router.get(
   '/whoami',
   asyncHandler(async (req: any, res) => {
@@ -50,11 +51,29 @@ router.get(
 
 router.get('/logout', (req: any, res) => {
   if (req.session) {
-    console.log(`req.session`, req.session)
     req.session.destroy()
     return res.json({ success: true })
   }
   return res.json({ success: true })
 })
+
+router.get(
+  '/search',
+  asyncHandler(async (req, res) => {
+    // need the term to query so get that
+    let results = await searchUsersByAll(req.query.term as string)
+    // console.log(`req.query.term`, req.query.term)
+    // results.toString()
+    console.log(`results.length`, results.length)
+    return res.json({
+      results: results.map((u) => ({
+        firstName: u.firstName,
+        lastNameLetter: u.lastName.charAt(0),
+        username: u.username,
+      })),
+      term: req.query.term,
+    })
+  }),
+)
 
 export default router
