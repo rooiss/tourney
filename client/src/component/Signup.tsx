@@ -55,14 +55,8 @@ const validationSchema = yup.object({
     .string()
     .min(8, 'Password should be of minimum 8 characters length')
     .required('Password is required'),
-  firstName: yup
-    .string()
-    .min(2, 'your name is not 2 letters')
-    .required('first name is required'),
-  lastName: yup
-    .string()
-    .min(3, 'enter real words')
-    .required('last name is required'),
+  firstName: yup.string().required('first name is required'),
+  lastName: yup.string().required('last name is required'),
   username: yup
     .string()
     .min(3, 'enter real words')

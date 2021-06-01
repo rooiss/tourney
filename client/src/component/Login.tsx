@@ -14,7 +14,8 @@ import { useFormik } from 'formik'
 import { Alert } from '@material-ui/lab'
 import { LoginUser } from '../types/users'
 import { login } from '../api/login'
-
+import { Link as RouterLink } from 'react-router-dom'
+import { Link } from '@material-ui/core'
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -150,6 +151,9 @@ export const Login = () => {
           >
             Login
           </Button>
+          <Link component={RouterLink} to="/signup">
+            Don't have an account? Sign Up
+          </Link>
         </form>
       </div>
     </Container>

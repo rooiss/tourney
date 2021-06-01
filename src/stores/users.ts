@@ -20,6 +20,11 @@ export const getUserByEmail = async (email: string) => {
   return entityManager.findOne(User, { where: { email: ILike(email) } })
 }
 
+// export const getAllUsers = async () => {
+//   const entityManager = getManager()
+//   return entityManager.find(User)
+// }
+
 export const searchUsersByAll = async (term: string): Promise<User[]> => {
   const entityManager = getManager()
   // separate out the search in here

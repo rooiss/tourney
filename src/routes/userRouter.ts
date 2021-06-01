@@ -60,11 +60,10 @@ router.get('/logout', (req: any, res) => {
 router.get(
   '/search',
   asyncHandler(async (req, res) => {
-    // need the term to query so get that
+    // get term from req.query
+
     let results = await searchUsersByAll(req.query.term as string)
-    // console.log(`req.query.term`, req.query.term)
-    // results.toString()
-    console.log(`results.length`, results.length)
+    // console.log(`results.length`, results.length)
     return res.json({
       results: results.map((u) => ({
         firstName: u.firstName,
