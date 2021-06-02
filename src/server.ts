@@ -9,7 +9,9 @@ const session = require('express-session')
 
 let RedisStore = require('connect-redis')(session)
 let redisClient = redis.createClient({ host: 'redis' })
-redisClient.on('connect', () => console.log('connected to redis!!'))
+redisClient.on('connect', () =>
+  console.log('Redis connection intialized======='),
+)
 
 const app = express()
 app.use(express.urlencoded({ extended: false }))

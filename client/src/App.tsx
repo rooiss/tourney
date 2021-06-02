@@ -13,6 +13,7 @@ import { ButtonAppBar } from './component/AppBar'
 import { Home } from './component/Home'
 import { Signup } from './component/Signup'
 import { Login } from './component/Login'
+import { Tournament } from './component/Tournament'
 
 export default function App() {
   const theme = createMuiTheme({
@@ -32,6 +33,9 @@ export default function App() {
           <Switch>
             <Route path="/login" exact>
               <Login />
+            </Route>
+            <Route path="/tournament" exact>
+              <Tournament />
             </Route>
             {/* need to apply some logic in the logout */}
             {/* <Route path="/logout" exact>
