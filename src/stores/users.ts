@@ -1,3 +1,4 @@
+import { Follow } from '../entity/Follow'
 import { getManager, ILike } from 'typeorm'
 import { User } from '../entity/User'
 import { SignUpCred } from '../types/users'
@@ -41,6 +42,19 @@ export const searchUsersByAll = async (term: string): Promise<User[]> => {
       { email: ILike(`%${terms[0]}%`) },
     ],
   })
+}
+
+export const followUser = async (
+  personToFollow: User,
+  personFollowing: User,
+) => {
+  // needs to take in the current user and the user to follow
+  const entityManager = getManager()
+  const follow = entityManager.create(Follow, {
+    personToFollow,
+    personFollowing,
+  })
+  return await entityManager.save(follow)
 }
 
 // stores should just return entity objects

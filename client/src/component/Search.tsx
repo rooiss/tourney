@@ -2,7 +2,8 @@
 import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-import { makeStyles } from '@material-ui/core'
+import { Button, makeStyles } from '@material-ui/core'
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
 
 interface Option {
   firstName: string
@@ -13,7 +14,8 @@ interface Option {
 const useStyles = makeStyles({
   optionBox: {
     fontSize: 'x-small',
-    padding: '0',
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
 })
 
@@ -31,6 +33,15 @@ export default function Search() {
         console.log(`data`, data)
       })
   }
+  const onFollow = (username: string) => () => {
+    fetch('/api/follows', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username }),
+    })
+  }
 
   return (
     <div style={{ width: 350 }}>
@@ -38,14 +49,21 @@ export default function Search() {
         id="free-solo-demo"
         // getOptionLabel is what the search input is looking up by
         // if its option.firstName then it only takes first name as the input
-        // getOptionLabel={(option: Option) => option.username}
+        getOptionLabel={(option: Option) => option.username}
         // renderOption is what is displayed from the input
         // renderOption also requires getOptionLabel
         renderOption={(option: Option) => {
           return (
             <div className={classes.optionBox}>
-              <h2>{`${option.firstName} ${option.lastNameLetter}.`}</h2>
-              <h3>@{`${option.username}`}</h3>
+              <div>
+                <h2>{`${option.firstName} ${option.lastNameLetter}.`}</h2>
+                <h3>@{`${option.username}`}</h3>
+              </div>
+              <div>
+                <Button onClick={onFollow(option.username)}>
+                  <PersonAddIcon />
+                </Button>
+              </div>
             </div>
           )
         }}

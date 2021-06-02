@@ -37,10 +37,6 @@ export default function App() {
             <Route path="/tournament" exact>
               <Tournament />
             </Route>
-            {/* need to apply some logic in the logout */}
-            {/* <Route path="/logout" exact>
-              <Redirect to={'/'} />
-            </Route> */}
             <Route path="/signup" exact>
               <Signup />
             </Route>

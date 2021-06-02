@@ -1,13 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { User } from './User'
 
 @Entity()
 export class Follow {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column()
-  follower: string
+  @ManyToOne(() => User)
+  personFollowing: User
 
-  @Column()
-  followed: string
+  @ManyToOne(() => User)
+  personToFollow: User
 }
