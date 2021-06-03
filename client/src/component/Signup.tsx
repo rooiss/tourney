@@ -81,7 +81,6 @@ export const Signup = () => {
     onSubmit: (values: SignUpCred) => {
       // clear any previous errors
       setServerError('')
-      // AJAX call to /api/something
       return signup(values).then(
         () => {
           window.location.href = '/'

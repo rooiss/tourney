@@ -63,12 +63,12 @@ router.get(
     // get term from req.query
 
     let results = await searchUsersByAll(req.query.term as string)
-    // console.log(`results.length`, results.length)
     return res.json({
       results: results.map((u) => ({
         firstName: u.firstName,
         lastNameLetter: u.lastName.charAt(0),
         username: u.username,
+        id: u.id,
       })),
       term: req.query.term,
     })

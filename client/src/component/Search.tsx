@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { Button, makeStyles } from '@material-ui/core'
@@ -9,6 +9,7 @@ interface Option {
   firstName: string
   lastNameLetter: string
   username: string
+  id: string
 }
 
 const useStyles = makeStyles({
@@ -22,6 +23,7 @@ const useStyles = makeStyles({
 export default function Search() {
   const [term, setTerm] = useState('')
   const [options, setOptions] = useState<Option[]>([])
+  const [following, setFollowing] = useState([])
   const classes = useStyles()
 
   const handleChange = (e: any) => {
@@ -33,15 +35,27 @@ export default function Search() {
         console.log(`data`, data)
       })
   }
-  const onFollow = (username: string) => () => {
+
+  const onFollow = (id: string) => () => {
     fetch('/api/follows', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username }),
+      body: JSON.stringify({ id }),
     })
+    // setFollowing(following => [...following,])
   }
+
+  // need to move this to the home component
+  useEffect(() => {
+    fetch('/api/follows/')
+      .then((res) => res.json())
+      .then((data) => {
+        setFollowing(data)
+      })
+  }, [])
+  console.log('following', following)
 
   return (
     <div style={{ width: 350 }}>
@@ -60,7 +74,7 @@ export default function Search() {
                 <h3>@{`${option.username}`}</h3>
               </div>
               <div>
-                <Button onClick={onFollow(option.username)}>
+                <Button onClick={onFollow(option.id)}>
                   <PersonAddIcon />
                 </Button>
               </div>

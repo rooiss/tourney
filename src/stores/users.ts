@@ -19,6 +19,11 @@ export const getUserByEmail = async (email: string) => {
   return entityManager.findOne(User, { where: { email: ILike(email) } })
 }
 
+export const getUserById = async (id: string) => {
+  const entityManager = getManager()
+  return entityManager.findOne(User, id)
+}
+
 export const searchUsersByAll = async (term: string): Promise<User[]> => {
   const entityManager = getManager()
   // separate out the search in here
@@ -55,6 +60,13 @@ export const followUser = async (
     personFollowing,
   })
   return await entityManager.save(follow)
+}
+
+export const getFollowedUsers = async (personFollowing: User) => {
+  const entityManager = getManager()
+  return await entityManager.find(Follow, {
+    where: { personFollowing: `${personFollowing.id}` },
+  })
 }
 
 // stores should just return entity objects

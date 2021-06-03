@@ -1,10 +1,5 @@
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  Unique,
-} from 'typeorm'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Follow } from './Follow'
 import { Tournament } from './Tournament'
 
 @Entity()
@@ -29,4 +24,7 @@ export class User {
 
   @OneToMany(() => Tournament, (tournament) => tournament.creator)
   tournaments: Tournament[]
+
+  @OneToMany(() => Follow, (follow) => follow.personFollowing)
+  follows: Follow[]
 }

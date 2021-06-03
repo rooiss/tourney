@@ -6,6 +6,7 @@ export const setUserToSession = (req: any, userModel: User) => {
     lastName: userModel.lastName,
     username: userModel.username,
     email: userModel.email,
+    id: userModel.id,
   }
   req.session.user = user
 }
