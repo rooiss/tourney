@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { Button, makeStyles } from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
+import { UserToSearchResult } from '../types/users'
 
 interface Option {
   firstName: string
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
 export default function Search() {
   const [term, setTerm] = useState('')
   const [options, setOptions] = useState<Option[]>([])
-  const [following, setFollowing] = useState([])
+  const [following, setFollowing] = useState<Set<string>>(new Set())
   const classes = useStyles()
 
   const handleChange = (e: any) => {
@@ -32,7 +33,6 @@ export default function Search() {
       .then((res) => res.json())
       .then((data) => {
         setOptions(data.results)
-        console.log(`data`, data)
       })
   }
 
@@ -43,19 +43,31 @@ export default function Search() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id }),
+    }).then(() => {
+      const newFollowing = new Set(following)
+      newFollowing.add(id)
+      setFollowing(newFollowing)
     })
-    // setFollowing(following => [...following,])
   }
 
   // need to move this to the home component
+  // what does this useEffect depend on
+  console.log(`following`, following)
+  // following getting updated twice once on home render and then again on search render
   useEffect(() => {
     fetch('/api/follows/')
       .then((res) => res.json())
       .then((data) => {
-        setFollowing(data)
+        // setFollowing(data.followedUsers.map((user) => user.id))
+        console.log('data', data.followedUsers)
+        const followSet = new Set<string>(
+          data.followedUsers.map((user) => user.id),
+        )
+        setFollowing(followSet)
       })
   }, [])
-  console.log('following', following)
+  // if the id matches the ones in the option list then
+  // disable the add button and replace with "following" text
 
   return (
     <div style={{ width: 350 }}>
@@ -74,8 +86,13 @@ export default function Search() {
                 <h3>@{`${option.username}`}</h3>
               </div>
               <div>
-                <Button onClick={onFollow(option.id)}>
+                <Button
+                  onClick={onFollow(option.id)}
+                  disabled={following.has(option.id)}
+                >
                   <PersonAddIcon />
+                  {console.log('following????', option.id)}
+                  {following.has(option.id) ? 'following' : 'follow'}
                 </Button>
               </div>
             </div>

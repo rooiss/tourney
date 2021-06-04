@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }))
+
 export const Home = () => {
-  // TODO
-  // styles of home component
   const classes = useStyles()
   const { user } = useAuth()
+
   return (
     <Container component="main" maxWidth="xs">
       {user ? (

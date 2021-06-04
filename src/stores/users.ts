@@ -66,6 +66,7 @@ export const getFollowedUsers = async (personFollowing: User) => {
   const entityManager = getManager()
   return await entityManager.find(Follow, {
     where: { personFollowing: `${personFollowing.id}` },
+    relations: ['personToFollow'],
   })
 }
 
