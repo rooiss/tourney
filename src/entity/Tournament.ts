@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { User } from './User'
@@ -13,9 +13,12 @@ export class Tournament {
   id: string
 
   @Column('varchar')
-  name: string
+  selectedDate: string
 
-  @OneToOne(() => User)
+  @Column('varchar')
+  location: string
+
+  @ManyToOne(() => User, (user) => user.tournaments)
   @JoinColumn()
   creator: User
 }

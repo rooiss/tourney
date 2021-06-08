@@ -36,7 +36,7 @@ export const Home = () => {
           <Search />
           <Button
             component={Link}
-            to={'/tournament'}
+            to={'/newtournament'}
             color={'primary'}
             variant={'contained'}
             className={classes.submit}

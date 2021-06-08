@@ -29,7 +29,7 @@ export default function App() {
             <Route path="/login" exact>
               <Login />
             </Route>
-            <Route path="/tournament" exact>
+            <Route path="/newtournament" exact>
               <Tournament />
             </Route>
             <Route path="/signup" exact>
