@@ -5,7 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development ts-node-dev src/server.ts",
-    "stop": "docker-compose -f ./docker/dev/docker-compose.yml down"
+    "stop": "docker-compose -f ./docker/dev/docker-compose.yml down",
+    "copy:types": "cp -rf ./src/types/* ./client/src/types/",
+    "watch:types": "npm-watch copy:types"
+  },
+  "watch": {
+    "copy:types": {
+      "patterns": [
+        "./src/types/*"
+      ],
+      "extensions": "ts",
+      "quiet": false
+    }
   },
   "repository": {
     "type": "git",
@@ -26,6 +37,8 @@
     "@types/passport-local": "^1.0.33",
     "@types/redis": "^2.8.28",
     "@types/uuid": "^8.3.0",
+    "copyfiles": "^2.4.1",
+    "npm-watch": "^0.10.0",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.4"
   },

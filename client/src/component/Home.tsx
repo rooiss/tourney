@@ -2,7 +2,7 @@ import { Button, Container, Typography } from '@material-ui/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import { useAuth } from './AuthContext'
+import { useAuth } from './providers/AuthContext'
 
 import { Landing } from './Landing'
 import Search from './Search'

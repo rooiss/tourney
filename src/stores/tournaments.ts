@@ -8,3 +8,8 @@ export const newTournament = async (tourneyInfo, creator: User) => {
   tournament.creator = creator
   return await entityManager.save(tournament)
 }
+
+export const getTournamentById = async (tournamentId: string) => {
+  const entityManager = getManager()
+  return entityManager.findOne(Tournament, tournamentId)
+}

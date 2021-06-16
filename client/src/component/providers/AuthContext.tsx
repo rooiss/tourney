@@ -27,7 +27,6 @@ export const AuthProvider = ({ children }: any) => {
     fetch('/api/users/whoami')
       .then((res) => res.json())
       .then((body) => {
-        console.log(`body`, body)
         if (body.user) {
           setState({
             isAuthenticated: true,
@@ -50,7 +49,6 @@ export const AuthProvider = ({ children }: any) => {
         })
       })
   }, [])
-  console.log(`state`, state)
 
   return (
     <AuthContext.Provider value={state}>

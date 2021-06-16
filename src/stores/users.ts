@@ -32,7 +32,6 @@ export const searchUsersByAll = async (term: string): Promise<User[]> => {
   // if term has any spaces then make it an array?
 
   const terms = term.split(' ')
-  console.log(`terms`, terms)
   if (terms.length > 1) {
     return entityManager.find(User, {
       where: {

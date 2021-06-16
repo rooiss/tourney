@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
 import { logout } from '../api/logout'
+import { useAuth } from './providers/AuthContext'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,9 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 )
 
-interface ButtonAppBar {}
-
-export const ButtonAppBar = ({}: ButtonAppBar) => {
+export const ButtonAppBar = () => {
   const classes = useStyles()
 
   const handleLogout = () => {
@@ -38,6 +37,8 @@ export const ButtonAppBar = ({}: ButtonAppBar) => {
       },
     )
   }
+
+  const { user } = useAuth()
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -53,12 +54,15 @@ export const ButtonAppBar = ({}: ButtonAppBar) => {
           <Typography variant="h6" className={classes.title}>
             Tourney
           </Typography>
-          <Button color="inherit" component={Link} to="/login">
-            Login
-          </Button>
-          <Button color="inherit" onClick={handleLogout}>
-            Logout
-          </Button>
+          {user ? (
+            <Button color="inherit" onClick={handleLogout}>
+              Logout
+            </Button>
+          ) : (
+            <Button color="inherit" component={Link} to="/login">
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>

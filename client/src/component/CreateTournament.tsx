@@ -16,6 +16,7 @@ import DateFnsUtils from '@date-io/date-fns'
 import { useFormik } from 'formik'
 import { createTournament } from '../api/createTournament'
 import { Alert } from '@material-ui/lab'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,7 +38,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export function Tournament() {
+export function CreateTournament() {
+  const history = useHistory()
+
   const formik = useFormik({
     initialValues: {
       selectedDate: '2021-08-18T21:11:54',
@@ -47,8 +50,9 @@ export function Tournament() {
       // clear any previous errors
       setServerError('')
       return createTournament(values).then(
-        () => {
-          // window.location.href = '/'
+        ({ success, tournament }) => {
+          // check that success is true
+          history.push(`/tournaments/${tournament.id}`)
           console.log('created tournament')
         },
         () => {
@@ -60,26 +64,7 @@ export function Tournament() {
 
   const [serverError, setServerError] = useState('')
 
-  console.log('formik.values', formik.values)
-
   const classes = useStyles()
-
-  // const [selectedDate, setSelectedDate] = useState<Date | null>(
-  //   new Date('2021-08-18T21:11:54'),
-  // )
-  // const [location, setLocation] = useState('')
-
-  // const handleDateChange = (date: Date | null) => {
-  //   setSelectedDate(date)
-  // }
-  // const handleLocation = (event) => {
-  //   setLocation(event.target.value)
-  // }
-
-  // const handleSubmit = () => {}
-
-  // console.log(`location`, location)
-  // console.log(`selectedDate`, selectedDate)
 
   return (
     <Container component="main" maxWidth="xs">

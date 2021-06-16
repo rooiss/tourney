@@ -2,11 +2,14 @@
 
 ## Tournament Component
 
-- [ ] hmmmmmm
+- [ ] view page for single tournament details
+  - [ ] see who else is signed up for that tournament
+- [ ] protectedRoute
+- [ ] tournament context
 
 ## Misc
 
-- [ ] conditional rendering on navbar for logout/login
+- [ ] error handling for a lot of various things
 
 # Nice to haves
 

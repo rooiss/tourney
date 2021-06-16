@@ -3,9 +3,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { User } from './User'
+import { TournamentUser } from './TournamentUser'
 
 @Entity()
 export class Tournament {
@@ -17,6 +19,12 @@ export class Tournament {
 
   @Column('varchar')
   location: string
+
+  @OneToMany(
+    () => TournamentUser,
+    (tournamentUsers) => tournamentUsers.tournament,
+  )
+  tournamentUsers: TournamentUser[]
 
   @ManyToOne(() => User, (user) => user.tournaments)
   @JoinColumn()
