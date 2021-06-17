@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 
@@ -20,8 +21,12 @@ export class TournamentUser {
   @Column('boolean')
   paid: boolean
 
-  @ManyToOne(() => User, (user) => user.tournaments)
+  @ManyToOne(() => User, (user) => user.tournamentUsers)
+  user: User
+
+  @ManyToOne(() => Tournament, (tournament) => tournament.tournamentUsers)
+  tournament: Tournament
+
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date
-  creator: User
 }

@@ -6,6 +6,7 @@ import { useAuth } from './providers/AuthContext'
 
 import { Landing } from './Landing'
 import Search from './Search'
+import { Tournaments } from './Tournaments'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,16 +28,14 @@ export const Home = () => {
     <Container component="main" maxWidth="xs">
       {user ? (
         <div className={classes.paper}>
-          <Typography component="h1" variant="h6">
-            {user?.username}
-          </Typography>
           <Typography component="h1" variant="h5">
             Add your league, team, and players
           </Typography>
           <Search />
+          <Tournaments />
           <Button
             component={Link}
-            to={'/newtournament'}
+            to={'/newTournament'}
             color={'primary'}
             variant={'contained'}
             className={classes.submit}

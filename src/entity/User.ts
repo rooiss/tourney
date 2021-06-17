@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { Follow } from './Follow'
 import { Tournament } from './Tournament'
+import { TournamentUser } from './TournamentUser'
 
 @Entity()
 export class User {
@@ -21,6 +22,9 @@ export class User {
 
   @Column('text')
   password: string
+
+  @OneToMany(() => TournamentUser, (tournamentUsers) => tournamentUsers.user)
+  tournamentUsers: TournamentUser[]
 
   @OneToMany(() => Tournament, (tournament) => tournament.creator)
   tournaments: Tournament[]

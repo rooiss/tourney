@@ -52,14 +52,12 @@ export default function Search() {
 
   // need to move this to the home component
   // what does this useEffect depend on
-  console.log(`following`, following)
   // following getting updated twice once on home render and then again on search render
   useEffect(() => {
     fetch('/api/follows/')
       .then((res) => res.json())
       .then((data) => {
         // setFollowing(data.followedUsers.map((user) => user.id))
-        console.log('data', data.followedUsers)
         const followSet = new Set<string>(
           data.followedUsers.map((user) => user.id),
         )
@@ -91,7 +89,6 @@ export default function Search() {
                   disabled={following.has(option.id)}
                 >
                   <PersonAddIcon />
-                  {console.log('following????', option.id)}
                   {following.has(option.id) ? 'following' : 'follow'}
                 </Button>
               </div>

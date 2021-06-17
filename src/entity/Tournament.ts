@@ -8,6 +8,7 @@ import {
 } from 'typeorm'
 import { User } from './User'
 import { TournamentUser } from './TournamentUser'
+// import { Divisions, Format } from '../types/tournament'
 
 @Entity()
 export class Tournament {
@@ -20,9 +21,18 @@ export class Tournament {
   @Column('varchar')
   location: string
 
+  // @Column('money')
+  // price: string
+
+  // @Column('enum')
+  // divisions: Divisions[]
+
+  // @Column('enum')
+  // format: Format[]
+
   @OneToMany(
     () => TournamentUser,
-    (tournamentUsers) => tournamentUsers.tournament,
+    (tournamentUser) => tournamentUser.tournament,
   )
   tournamentUsers: TournamentUser[]
 

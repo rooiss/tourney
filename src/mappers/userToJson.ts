@@ -11,3 +11,5 @@ export function userEntityToSearchResult(
     username: userEntity.username,
   }
 }
+
+// export function userEntityToFollowingTournamentResult(userEntity: UserEntity,): UserTo

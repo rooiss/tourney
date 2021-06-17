@@ -8,7 +8,6 @@ const router = Router()
 router.post(
   '/',
   asyncHandler(async (req: any, res) => {
-    // call followUser
     const personToFollow = await getUserById(req.body.id)
     const personFollowing = await getUserById(req.session.user.id)
 
@@ -24,7 +23,6 @@ router.get(
     const personFollowing = await getUserById(req.session.user.id)
     const followedUsers = await getFollowedUsers(personFollowing)
     // always return json from a get request
-    console.log('followedUsers', followedUsers)
     return res.json({
       followedUsers: followedUsers.map(({ personToFollow }) =>
         userEntityToSearchResult(personToFollow),

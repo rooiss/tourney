@@ -28,9 +28,12 @@ export default function App() {
         <Router>
           <ButtonAppBar />
           <Switch>
-            <Route path="/newtournament" exact>
+            <Route path="/newTournament" exact>
               <CreateTournament />
             </Route>
+            {/* <Route path="/registertournament" exact>
+              <PlayerRegisterTournament />
+            </Route> */}
             <Route path="/login" exact>
               <Login />
             </Route>
@@ -39,10 +42,6 @@ export default function App() {
             </Route>
             <Route path="/" exact>
               <Home />
-            </Route>
-
-            <Route path="/tournaments" exact>
-              {/* <Tournaments /> */}
             </Route>
             <Route path="/tournaments/:tournamentId" exact>
               <TournamentProvider>

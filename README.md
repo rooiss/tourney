@@ -5,7 +5,7 @@
 - [ ] view page for single tournament details
   - [ ] see who else is signed up for that tournament
 - [ ] protectedRoute
-- [ ] tournament context
+- [x] tournament context
 
 ## Misc
 
@@ -14,3 +14,5 @@
 # Nice to haves
 
 - [ ] create tournament location, google maps API lookup
+- [ ] PayPal integration for payment
+- [ ] waiver form when registering / DocuSign API

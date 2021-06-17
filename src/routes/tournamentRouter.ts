@@ -1,6 +1,10 @@
 import { Router } from 'express'
-import { getUserById } from '../stores/users'
-import { getTournamentById, newTournament } from '../stores/tournaments'
+import { getFollowedUsers, getUserById } from '../stores/users'
+import {
+  getTournamentById,
+  getTournamentsFromAllUsersFollowing,
+  newTournament,
+} from '../stores/tournaments'
 import asyncHandler from '../utils/asyncHandler'
 import { tournamentEntityToJson } from '../mappers/tournamentEntityToJson'
 
@@ -30,7 +34,18 @@ router.get(
   '/',
   asyncHandler(async (req: any, res) => {
     // return json
-    return res.json()
+    const user = await getUserById(req.session.user.id)
+    const usersFollowing = await getFollowedUsers(user)
+
+    // this returns a new array of just usernames that the user is following
+    const userIdsOfFollowing = usersFollowing.map(
+      (user) => user.personToFollow.id,
+    )
+
+    const tournaments = await getTournamentsFromAllUsersFollowing(
+      userIdsOfFollowing,
+    )
+    return res.json({ tournaments })
   }),
 )
 
