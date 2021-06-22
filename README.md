@@ -6,6 +6,10 @@
   - [ ] see who else is signed up for that tournament
 - [ ] protectedRoute
 - [x] tournament context
+- [ ] Grid for home component
+- [ ] following component in home component
+- [ ] username as other column for tournament
+- [ ] add tournament user context for tournaments component, conditionally render register button if not registered
 
 ## Misc
 

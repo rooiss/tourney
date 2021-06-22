@@ -7,10 +7,16 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { useState } from 'react'
+import TournamentAppBar from './TournamentAppBar'
 
 const useStyles = makeStyles({
   root: {
     minWidth: 500,
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  card: {
+    textAlign: 'left',
   },
   title: {
     fontSize: 14,
@@ -37,7 +43,7 @@ export const Tournaments = () => {
   const allTournaments = tournaments.map((tournament: any) => {
     return (
       <Card className={classes.root} variant="outlined" key={tournament.id}>
-        <CardContent>
+        <CardContent className={classes.card}>
           <Typography
             className={classes.title}
             color="textSecondary"
@@ -50,10 +56,15 @@ export const Tournaments = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Button size="small">Register</Button>
         </CardActions>
       </Card>
     )
   })
-  return <div>{allTournaments}</div>
+  return (
+    <div>
+      <TournamentAppBar />
+      {allTournaments}
+    </div>
+  )
 }

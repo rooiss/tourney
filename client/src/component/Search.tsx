@@ -19,6 +19,9 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'flex-end',
   },
+  searchBox: {
+    width: '100%',
+  },
 })
 
 export default function Search() {
@@ -68,7 +71,7 @@ export default function Search() {
   // disable the add button and replace with "following" text
 
   return (
-    <div style={{ width: 350 }}>
+    <div className={classes.searchBox}>
       <Autocomplete
         id="free-solo-demo"
         // getOptionLabel is what the search input is looking up by

@@ -1,22 +1,19 @@
-import { Button, Container, Typography } from '@material-ui/core'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { useAuth } from './providers/AuthContext'
-
+import Grid from '@material-ui/core/Grid'
 import { Landing } from './Landing'
-import Search from './Search'
 import { Tournaments } from './Tournaments'
+import { Following } from './Following'
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+  root: {
+    flexGrow: 1,
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
+  grid: {
+    marginTop: theme.spacing(3),
+    padding: theme.spacing(4),
+    textAlign: 'center',
   },
 }))
 
@@ -25,27 +22,19 @@ export const Home = () => {
   const { user } = useAuth()
 
   return (
-    <Container component="main" maxWidth="xs">
+    <div className={classes.root}>
       {user ? (
-        <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Add your league, team, and players
-          </Typography>
-          <Search />
-          <Tournaments />
-          <Button
-            component={Link}
-            to={'/newTournament'}
-            color={'primary'}
-            variant={'contained'}
-            className={classes.submit}
-          >
-            Create Tournament
-          </Button>
-        </div>
+        <Grid container spacing={3}>
+          <Grid item xs={7} className={classes.grid}>
+            <Tournaments />
+          </Grid>
+          <Grid item xs={4} className={classes.grid}>
+            <Following />
+          </Grid>
+        </Grid>
       ) : (
         <Landing />
       )}
-    </Container>
+    </div>
   )
 }

@@ -11,6 +11,7 @@ import { Login } from './component/Login'
 import { CreateTournament } from './component/CreateTournament'
 import { TournamentDetails } from './component/TournamentDetails'
 import { TournamentProvider } from './component/providers/TournamentContext'
+import { Container } from '@material-ui/core'
 
 export default function App() {
   const theme = createMuiTheme({
@@ -27,28 +28,30 @@ export default function App() {
       <AuthProvider>
         <Router>
           <ButtonAppBar />
-          <Switch>
-            <Route path="/newTournament" exact>
-              <CreateTournament />
-            </Route>
-            {/* <Route path="/registertournament" exact>
+          <Container>
+            <Switch>
+              <Route path="/newTournament" exact>
+                <CreateTournament />
+              </Route>
+              {/* <Route path="/registertournament" exact>
               <PlayerRegisterTournament />
             </Route> */}
-            <Route path="/login" exact>
-              <Login />
-            </Route>
-            <Route path="/signup" exact>
-              <Signup />
-            </Route>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route path="/tournaments/:tournamentId" exact>
-              <TournamentProvider>
-                <TournamentDetails />
-              </TournamentProvider>
-            </Route>
-          </Switch>
+              <Route path="/login" exact>
+                <Login />
+              </Route>
+              <Route path="/signup" exact>
+                <Signup />
+              </Route>
+              <Route path="/" exact>
+                <Home />
+              </Route>
+              <Route path="/tournaments/:tournamentId" exact>
+                <TournamentProvider>
+                  <TournamentDetails />
+                </TournamentProvider>
+              </Route>
+            </Switch>
+          </Container>
         </Router>
       </AuthProvider>
     </ThemeProvider>
