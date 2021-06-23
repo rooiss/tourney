@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
 import { logout } from '../api/logout'
 import { useAuth } from './providers/AuthContext'
+import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,17 +44,17 @@ export const ButtonAppBar = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
           >
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Tourney
-          </Typography>
+          </IconButton> */}
+          <Link to={'/'} className={classes.title}>
+            <SportsVolleyballIcon color={'secondary'} fontSize={'large'} />
+          </Link>
           {user ? (
             <Button color="inherit" onClick={handleLogout}>
               Logout
