@@ -1,4 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Column,
+  Entity,
+  Generated,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
 import { Follow } from './Follow'
 import { Tournament } from './Tournament'
 import { TournamentUser } from './TournamentUser'
@@ -22,6 +28,13 @@ export class User {
 
   @Column('text')
   password: string
+
+  @Column()
+  @Generated('uuid')
+  verifyCode: string
+
+  @Column({ default: false })
+  verified: boolean
 
   @OneToMany(() => TournamentUser, (tournamentUsers) => tournamentUsers.user)
   tournamentUsers: TournamentUser[]

@@ -7,6 +7,7 @@ interface IAuthContext {
     firstName: string
     username: string
     email: string
+    verified: boolean
   }
 }
 

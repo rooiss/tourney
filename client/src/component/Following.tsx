@@ -2,8 +2,6 @@ import {
   Card,
   CardContent,
   createStyles,
-  List,
-  ListItem,
   makeStyles,
   Typography,
 } from '@material-ui/core'
@@ -18,11 +16,7 @@ export const Following = () => {
 
   const useStyles = makeStyles((theme) =>
     createStyles({
-      root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-      },
+      root: {},
     }),
   )
   useEffect(() => {
@@ -31,10 +25,10 @@ export const Following = () => {
       .then((data) => setFollowing(data.followedUsers))
   }, [following])
 
-  const classes = useStyles()
+  // const classes = useStyles()
   const allFollowing = following.map((u: any) => {
     return (
-      <Card>
+      <Card key={u.id}>
         <CardContent>
           <Typography gutterBottom variant="h5">
             {u.username}

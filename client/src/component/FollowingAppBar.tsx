@@ -8,18 +8,15 @@ import Search from './Search'
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
+      // flexGrow: 1,
     },
     title: {
       flexGrow: 1,
-      display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block',
-      },
+      textAlign: 'left',
     },
     search: {
       position: 'relative',
-      borderRadius: theme.shape.borderRadius,
+      // borderRadius: theme.shape.borderRadius,
       marginLeft: 0,
       width: '75%',
     },

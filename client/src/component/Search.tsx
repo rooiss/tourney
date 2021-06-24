@@ -20,7 +20,8 @@ const useStyles = makeStyles({
     justifyContent: 'flex-end',
   },
   searchBox: {
-    width: '100%',
+    // width: '100%',
+    // height: '50%',
   },
 })
 
@@ -71,47 +72,46 @@ export default function Search() {
   // disable the add button and replace with "following" text
 
   return (
-    <div className={classes.searchBox}>
-      <Autocomplete
-        id="free-solo-demo"
-        // getOptionLabel is what the search input is looking up by
-        // if its option.firstName then it only takes first name as the input
-        getOptionLabel={(option: Option) => option.username}
-        // renderOption is what is displayed from the input
-        // renderOption also requires getOptionLabel
-        renderOption={(option: Option) => {
-          return (
-            <div className={classes.optionBox}>
-              <div>
-                <h2>{`${option.firstName} ${option.lastNameLetter}.`}</h2>
-                <h3>@{`${option.username}`}</h3>
-              </div>
-              <div>
-                <Button
-                  onClick={onFollow(option.id)}
-                  disabled={following.has(option.id)}
-                >
-                  <PersonAddIcon />
-                  {following.has(option.id) ? 'following' : 'follow'}
-                </Button>
-              </div>
+    <Autocomplete
+      className={classes.searchBox}
+      id="free-solo-demo"
+      // getOptionLabel is what the search input is looking up by
+      // if its option.firstName then it only takes first name as the input
+      getOptionLabel={(option: Option) => option.username}
+      // renderOption is what is displayed from the input
+      // renderOption also requires getOptionLabel
+      renderOption={(option: Option) => {
+        return (
+          <div className={classes.optionBox}>
+            <div>
+              <h2>{`${option.firstName} ${option.lastNameLetter}.`}</h2>
+              <h3>@{`${option.username}`}</h3>
             </div>
-          )
-        }}
-        freeSolo
-        options={options}
-        filterOptions={(options) => options}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Name | @username | email"
-            margin="normal"
-            variant="outlined"
-            name="term"
-            onChange={handleChange}
-          />
-        )}
-      />
-    </div>
+            <div>
+              <Button
+                onClick={onFollow(option.id)}
+                disabled={following.has(option.id)}
+              >
+                <PersonAddIcon />
+                {following.has(option.id) ? 'following' : 'follow'}
+              </Button>
+            </div>
+          </div>
+        )
+      }}
+      freeSolo
+      options={options}
+      filterOptions={(options) => options}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Name | @username | email"
+          margin="normal"
+          variant="outlined"
+          name="term"
+          onChange={handleChange}
+        />
+      )}
+    />
   )
 }

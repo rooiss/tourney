@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
+      textAlign: 'left',
     },
   }),
 )
@@ -33,7 +34,7 @@ export default function TournamentAppBar() {
           <Button
             component={Link}
             to={'/newTournament'}
-            color={'primary'}
+            color={'secondary'}
             variant={'contained'}
           >
             Create Tournament

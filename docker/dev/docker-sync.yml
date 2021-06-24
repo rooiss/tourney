@@ -3,7 +3,7 @@ syncs:
   # name of mount
   tourney_app-sync:
     src: '.'
-    sync_strategy: unison
+    sync_strategy: native_osx
     sync_excludes:
       - .git
       - node_modules

@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { useState } from 'react'
 import TournamentAppBar from './TournamentAppBar'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
@@ -56,7 +57,13 @@ export const Tournaments = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Register</Button>
+          <Button
+            component={Link}
+            to={`/tournaments/${tournament.id}`}
+            size="small"
+          >
+            Register
+          </Button>
         </CardActions>
       </Card>
     )

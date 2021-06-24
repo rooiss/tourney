@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { verifyUser } from '../stores/verify'
 import { setUserToSession } from '../stores/sessions'
 import { createUser, getUserByEmail, searchUsersByAll } from '../stores/users'
 import asyncHandler from '../utils/asyncHandler'
@@ -45,6 +46,7 @@ router.post(
 router.get(
   '/whoami',
   asyncHandler(async (req: any, res) => {
+    console.log('HELLOOOO')
     return res.json({ user: req.session.user })
   }),
 )
@@ -56,6 +58,20 @@ router.get('/logout', (req: any, res) => {
   }
   return res.json({ success: true })
 })
+
+router.get(
+  '/verifyme',
+  asyncHandler(async (req: any, res) => {
+    // const user = await (req.session.user.id)
+    try {
+      verifyUser(req.session.user.id)
+      return res.json({ success: true })
+    } catch (e) {
+      console.log('verification failed')
+      res.status(500).json({ success: false })
+    }
+  }),
+)
 
 router.get(
   '/search',

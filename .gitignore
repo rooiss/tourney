@@ -3,3 +3,5 @@ coverage
 .env
 .docker-sync
 .sessionsData
+.dbData
+.mailData
