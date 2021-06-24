@@ -5,3 +5,4 @@ coverage
 .sessionsData
 .dbData
 .mailData
+mailserver.env
