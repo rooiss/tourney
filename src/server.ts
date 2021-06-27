@@ -5,6 +5,7 @@ import validateRouter from './routes/validateRouter'
 import userRouter from './routes/userRouter'
 import followsRouter from './routes/followsRouter'
 import tournamentRouter from './routes/tournamentRouter'
+import verificationRouter from './routes/verificationRouter'
 
 const redis = require('redis')
 const session = require('express-session')
@@ -34,6 +35,7 @@ app.use('/api/validate', validateRouter)
 app.use('/api/users', userRouter)
 app.use('/api/follows', followsRouter)
 app.use('/api/tournaments', tournamentRouter)
+app.use('/api/verify', verificationRouter)
 
 app.listen(5000, () => {
   console.log('server listening on port 5000')

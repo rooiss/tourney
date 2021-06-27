@@ -14,7 +14,7 @@ import { useFormik } from 'formik'
 import { Alert } from '@material-ui/lab'
 import { LoginUser } from '../types/users'
 import { login } from '../api/login'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useHistory } from 'react-router-dom'
 import { Link } from '@material-ui/core'
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,6 +49,9 @@ const validationSchema = yup.object({
 })
 
 export const Login = () => {
+  const { location } = useHistory()
+  const params = new URLSearchParams(location.search)
+  const redirectTo = params.get('redirectTo')
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -61,7 +64,7 @@ export const Login = () => {
       setServerError('')
       return login(values).then(({ body, status }) => {
         if (status === 200) {
-          window.location.href = '/'
+          window.location.href = redirectTo || '/'
           return
         }
         if (status === 400) {

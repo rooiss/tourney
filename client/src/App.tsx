@@ -12,6 +12,7 @@ import { CreateTournament } from './component/CreateTournament'
 import { TournamentDetails } from './component/TournamentDetails'
 import { TournamentProvider } from './component/providers/TournamentContext'
 import { Container } from '@material-ui/core'
+import { Verification } from './component/Verification'
 
 export default function App() {
   const theme = createMuiTheme({
@@ -27,31 +28,43 @@ export default function App() {
       <CssBaseline />
       <AuthProvider>
         <Router>
-          <ButtonAppBar />
-          <Container>
-            <Switch>
-              <Route path="/newTournament" exact>
+          <Switch>
+            <Route path="/verifyme/:verifyCode" exact>
+              <Verification />
+            </Route>
+            <Route path="/newTournament" exact>
+              <ButtonAppBar />
+              <Container>
                 <CreateTournament />
-              </Route>
-              {/* <Route path="/registertournament" exact>
-              <PlayerRegisterTournament />
-            </Route> */}
-              <Route path="/login" exact>
+              </Container>
+            </Route>
+            <Route path="/login">
+              <ButtonAppBar />
+              <Container>
                 <Login />
-              </Route>
-              <Route path="/signup" exact>
+              </Container>
+            </Route>
+            <Route path="/signup" exact>
+              <ButtonAppBar />
+              <Container>
                 <Signup />
-              </Route>
-              <Route path="/" exact>
+              </Container>
+            </Route>
+            <Route path="/" exact>
+              <ButtonAppBar />
+              <Container>
                 <Home />
-              </Route>
-              <Route path="/tournaments/:tournamentId" exact>
+              </Container>
+            </Route>
+            <Route path="/tournaments/:tournamentId" exact>
+              <ButtonAppBar />
+              <Container>
                 <TournamentProvider>
                   <TournamentDetails />
                 </TournamentProvider>
-              </Route>
-            </Switch>
-          </Container>
+              </Container>
+            </Route>
+          </Switch>
         </Router>
       </AuthProvider>
     </ThemeProvider>

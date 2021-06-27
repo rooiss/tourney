@@ -8,6 +8,7 @@ interface IAuthContext {
     username: string
     email: string
     verified: boolean
+    verifyCode: string
   }
 }
 

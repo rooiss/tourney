@@ -14,11 +14,13 @@
 ## NodeMailer verification
 
 - [x] user entity generated uuid
-- [ ] endpoint for verifyme
-- [ ] store function verifyme
-  - [ ] save user with updated verified status
+- [x] endpoint for verifyme
+- [x] store function verifyme
+  - [x] save user with updated verified status
+- [x] make Verify component
+- [x] put nodemailer logic in route
 - [ ] something for isVerified, check user.verified === false
-- [ ] make Verify component
+- [ ] once user clicks link for verify take params and use that to verify account
 
 ## Misc
 

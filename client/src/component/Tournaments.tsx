@@ -35,7 +35,7 @@ export const Tournaments = () => {
     fetch('/api/tournaments/')
       .then((res) => res.json())
       .then((data) => setTournaments(data.tournaments))
-  }, [tournaments])
+  }, [])
 
   // display username, date of tournament, location,
 

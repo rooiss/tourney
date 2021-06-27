@@ -34,6 +34,7 @@ router.get(
   '/',
   asyncHandler(async (req: any, res) => {
     // return json
+    // saying this is is returning undefined look into this
     const user = await getUserById(req.session.user.id)
     const usersFollowing = await getFollowedUsers(user)
 

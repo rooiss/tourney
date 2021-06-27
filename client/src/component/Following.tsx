@@ -23,7 +23,7 @@ export const Following = () => {
     fetch('/api/follows/')
       .then((res) => res.json())
       .then((data) => setFollowing(data.followedUsers))
-  }, [following])
+  }, [])
 
   // const classes = useStyles()
   const allFollowing = following.map((u: any) => {
