@@ -11,6 +11,13 @@
 - [ ] username as other column for tournament
 - [ ] add tournament user context for tournaments component, conditionally render register button if not registered
 
+## TeamRegister Component
+
+- [ ] breadcrumbs
+- [ ] search for team members
+- [ ] form for adding team members
+- [ ] validation for team name, no dupes, no empty string
+
 ## NodeMailer verification
 
 - [x] user entity generated uuid
@@ -19,13 +26,12 @@
   - [x] save user with updated verified status
 - [x] make Verify component
 - [x] put nodemailer logic in route
-- [ ] something for isVerified, check user.verified === false
-- [ ] once user clicks link for verify take params and use that to verify account
+- [x] something for isVerified, check user.verified === false
 
 ## Misc
 
 - [ ] error handling for a lot of various things
-- [ ] fix ugly ass following component
+- [ ] format date to something readable
 
 # Nice to haves
 

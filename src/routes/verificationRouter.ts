@@ -31,6 +31,7 @@ router.get(
     if (req.session) {
       const user = req.session.user.id
       await verifyUser(user)
+      // update session as well since verifyUser is only updating store
       req.session.user.verified = true
       res.json({ success: true })
       return

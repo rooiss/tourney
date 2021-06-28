@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles, Typography } from '@material-ui/core'
 import { useTournament } from './providers/TournamentContext'
+import { TeamRegister } from './TeamRegister'
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -39,6 +40,7 @@ export const TournamentDetails = () => {
       <Typography variant="h5" className={classes.titleContainer}>
         <span className={classes.title}>{tournament.location}</span>
       </Typography>
+      <TeamRegister />
     </div>
   )
 }
