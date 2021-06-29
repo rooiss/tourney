@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { Button, makeStyles } from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
-import { UserToSearchResult } from '../types/users'
 
 interface Option {
   firstName: string
@@ -54,9 +53,6 @@ export default function Search() {
     })
   }
 
-  // need to move this to the home component
-  // what does this useEffect depend on
-  // following getting updated twice once on home render and then again on search render
   useEffect(() => {
     fetch('/api/follows/')
       .then((res) => res.json())

@@ -13,9 +13,8 @@
 
 ## TeamRegister Component
 
-- [ ] breadcrumbs
-- [ ] search for team members
-- [ ] form for adding team members
+- [x] breadcrumbs
+- [x] search for team members
 - [ ] validation for team name, no dupes, no empty string
 
 ## NodeMailer verification

@@ -5,6 +5,9 @@ import { useFormik } from 'formik'
 import { TeamBreadcrumbs } from './TeamBreadcrumbs'
 import { TextField, Typography } from '@material-ui/core'
 import { teamNameNotTaken } from '../validations/teamName'
+import { useTournament } from './providers/TournamentContext'
+import { useAuth } from './providers/AuthContext'
+import { TeammateSearch } from './TeammateSearch'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -48,8 +51,13 @@ const validationSchema = yup.object({
 })
 
 export const TeamRegister = () => {
+  const { tournament } = useTournament()
+  const { user } = useAuth()
+
   const classes = useStyles()
   const [serverError, setServerError] = useState('')
+  const [teammates, setTeammates] = useState([])
+  const [captainEmail, setCaptainEmail] = useState(user?.email)
 
   const formik = useFormik({
     initialValues: {
@@ -73,7 +81,7 @@ export const TeamRegister = () => {
   return (
     <div className={classes.paper}>
       <TeamBreadcrumbs />
-      <Typography>Register your team</Typography>
+      <Typography variant="h2">Register your team</Typography>
       <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
         <TextField
           name="teamName"
@@ -87,6 +95,11 @@ export const TeamRegister = () => {
           error={formik.touched.teamName && Boolean(formik.errors.teamName)}
           helperText={formik.touched.teamName && formik.errors.teamName}
           autoFocus
+        />
+        <TeammateSearch
+          tournamentId={tournament.id}
+          teammates={teammates}
+          setTeammates={setTeammates}
         />
       </form>
     </div>
