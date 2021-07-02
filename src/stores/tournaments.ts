@@ -1,7 +1,6 @@
 import { Tournament } from '../entity/Tournament'
 import { getManager, In } from 'typeorm'
 import { User } from '../entity/User'
-import { Follow } from '../entity/Follow'
 
 export const newTournament = async (tourneyInfo, creator: User) => {
   const entityManager = getManager()

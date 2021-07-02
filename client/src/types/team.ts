@@ -1,5 +1,6 @@
 export interface Teammate {
   email: string
   firstName?: string
-  lastName?: string
+  lastNameLetter?: string
+  id?: string
 }

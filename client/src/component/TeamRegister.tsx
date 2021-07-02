@@ -3,11 +3,12 @@ import * as yup from 'yup'
 import { makeStyles } from '@material-ui/core/styles'
 import { useFormik } from 'formik'
 import { TeamBreadcrumbs } from './TeamBreadcrumbs'
-import { TextField, Typography } from '@material-ui/core'
+import { Button, TextField, Typography } from '@material-ui/core'
 import { teamNameNotTaken } from '../validations/teamName'
 import { useTournament } from './providers/TournamentContext'
 import { useAuth } from './providers/AuthContext'
 import { TeammateSearch } from './TeammateSearch'
+import { Teammates } from './Teammates'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -42,6 +43,7 @@ const useStyles = makeStyles(
 const validationSchema = yup.object({
   teamName: yup
     .string()
+    .min(1, 'Team name cant be empty')
     .required('Team name is required')
     .test(
       'is-teamName-taken',
@@ -54,10 +56,10 @@ export const TeamRegister = () => {
   const { tournament } = useTournament()
   const { user } = useAuth()
 
-  const classes = useStyles()
   const [serverError, setServerError] = useState('')
-  const [teammates, setTeammates] = useState([])
-  const [captainEmail, setCaptainEmail] = useState(user?.email)
+  const [teammates, setTeammates] = useState([user])
+
+  const classes = useStyles()
 
   const formik = useFormik({
     initialValues: {
@@ -81,7 +83,7 @@ export const TeamRegister = () => {
   return (
     <div className={classes.paper}>
       <TeamBreadcrumbs />
-      <Typography variant="h2">Register your team</Typography>
+      <Typography variant="h3">Assemble your squad</Typography>
       <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
         <TextField
           name="teamName"
@@ -101,6 +103,16 @@ export const TeamRegister = () => {
           teammates={teammates}
           setTeammates={setTeammates}
         />
+        <Teammates teammates={teammates} />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          Register
+        </Button>
       </form>
     </div>
   )

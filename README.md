@@ -13,8 +13,15 @@
 
 ## TeamRegister Component
 
+# front end
+
 - [x] breadcrumbs
 - [x] search for team members
+- [x] condtionally render add button if user doesn't exist
+- [ ] add a remove teammate from the setTeammate state
+
+# back end
+
 - [ ] validation for team name, no dupes, no empty string
 
 ## NodeMailer verification
@@ -27,10 +34,14 @@
 - [x] put nodemailer logic in route
 - [x] something for isVerified, check user.verified === false
 
-## Misc
+## Follow up
 
+- [ ] email obfuscation
+- [ ] format and divisions for tournament entity and create tournament page
+  - [ ] title of tournament is `${username}'s ${tournament.format} on ${tournament.date}`
 - [ ] error handling for a lot of various things
 - [ ] format date to something readable
+- [ ] add division to tournament entity
 
 # Nice to haves
 

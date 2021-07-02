@@ -16,6 +16,7 @@ router.post(
     })
   }),
 )
+
 router.post(
   '/username',
   asyncHandler(async (req, res) => {
@@ -23,6 +24,19 @@ router.post(
     const user = await getUserByUsername(req.body.username)
     res.json({
       valid: user === undefined,
+    })
+  }),
+)
+
+router.post(
+  '/teamname',
+  asyncHandler(async (req, res) => {
+    // get team by tournament
+    console.log(req.params)
+    // const tournament =
+    const team = await getTeamByTournament(req.body.teamName)
+    res.json({
+      valid: team === undefined,
     })
   }),
 )

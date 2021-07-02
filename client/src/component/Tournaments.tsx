@@ -62,7 +62,7 @@ export const Tournaments = () => {
             to={`/tournaments/${tournament.id}`}
             size="small"
           >
-            Register
+            View
           </Button>
         </CardActions>
       </Card>
