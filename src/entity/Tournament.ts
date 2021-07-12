@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { User } from './User'
-import { TournamentUser } from './TournamentUser'
+import { TournamentTeam } from './TournamentTeam'
 // import { Divisions, Format } from '../types/tournament'
 
 @Entity()
@@ -31,10 +31,10 @@ export class Tournament {
   // format: Format[]
 
   @OneToMany(
-    () => TournamentUser,
-    (tournamentUser) => tournamentUser.tournament,
+    () => TournamentTeam,
+    (tournamentTeam) => tournamentTeam.tournament,
   )
-  tournamentUsers: TournamentUser[]
+  tournamentTeam: TournamentTeam[]
 
   @ManyToOne(() => User, (user) => user.tournaments)
   @JoinColumn()

@@ -9,7 +9,7 @@
 - [x] Grid for home component
 - [x] following component in home component
 - [ ] username as other column for tournament
-- [ ] add tournament user context for tournaments component, conditionally render register button if not registered
+- [ ] add tournament user context for tournaments component
 
 ## TeamRegister Component
 
@@ -19,10 +19,15 @@
 - [x] search for team members
 - [x] condtionally render add button if user doesn't exist
 - [ ] add a remove teammate from the setTeammate state
+- [ ] get the values from the teammates state somehow...
 
 # back end
 
 - [ ] validation for team name, no dupes, no empty string
+- [ ] team router
+  - [ ] post for creating new team
+- [ ] team store
+  - [ ] store function that creates new team
 
 ## NodeMailer verification
 

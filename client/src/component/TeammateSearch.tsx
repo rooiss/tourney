@@ -96,6 +96,7 @@ export const TeammateSearch = ({ tournamentId, teammates, setTeammates }) => {
             margin="normal"
             variant="outlined"
             name="term"
+            defaultValue=""
             onChange={handleChange}
           />
         )}

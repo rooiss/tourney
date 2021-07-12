@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 export const TournamentDetails = () => {
   const classes = useStyles()
 
-  // this is pulling the state from the context
   const { tournament } = useTournament()
 
   // if the creator of the tournament is viewing, edit button should be available

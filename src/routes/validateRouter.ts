@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { getTeamByTournament } from '../stores/team'
 import { getUserByEmail, getUserByUsername } from '../stores/users'
 import asyncHandler from '../utils/asyncHandler'
 
@@ -29,14 +30,14 @@ router.post(
 )
 
 router.post(
-  '/teamname',
+  '/:tournamentId/teamname',
   asyncHandler(async (req, res) => {
-    // get team by tournament
-    console.log(req.params)
-    // const tournament =
-    const team = await getTeamByTournament(req.body.teamName)
+    const teamName = req.body.teamName
+    const tournamentId = req.params.tournamentId
+
+    const tournament = await getTeamByTournament(tournamentId, teamName)
     res.json({
-      valid: team === undefined,
+      // valid: teamName === undefined,
     })
   }),
 )

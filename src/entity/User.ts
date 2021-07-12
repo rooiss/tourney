@@ -6,8 +6,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { Follow } from './Follow'
+import { TeamUser } from './TeamUser'
 import { Tournament } from './Tournament'
-import { TournamentUser } from './TournamentUser'
 
 @Entity()
 export class User {
@@ -36,12 +36,12 @@ export class User {
   @Column({ default: false })
   verified: boolean
 
-  @OneToMany(() => TournamentUser, (tournamentUsers) => tournamentUsers.user)
-  tournamentUsers: TournamentUser[]
-
   @OneToMany(() => Tournament, (tournament) => tournament.creator)
   tournaments: Tournament[]
 
   @OneToMany(() => Follow, (follow) => follow.personFollowing)
   follows: Follow[]
+
+  @OneToMany(() => TeamUser, (teamUser) => teamUser.user)
+  teamUsers: TeamUser[]
 }
