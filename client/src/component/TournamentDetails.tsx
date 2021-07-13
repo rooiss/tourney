@@ -1,7 +1,8 @@
 import React from 'react'
 import { makeStyles, Typography } from '@material-ui/core'
 import { useTournament } from './providers/TournamentContext'
-import { TeamRegister } from './TeamRegister'
+import EventIcon from '@material-ui/icons/Event'
+import LocationOnIcon from '@material-ui/icons/LocationOn'
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -14,13 +15,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'left',
   },
   title: {
     marginRight: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
   },
 }))
 
@@ -29,17 +27,23 @@ export const TournamentDetails = () => {
 
   const { tournament } = useTournament()
 
-  // if the creator of the tournament is viewing, edit button should be available
-
   return (
     <div className={classes.paper}>
+      <Typography variant="h3" className={classes.titleContainer}>
+        <span className={classes.title}>
+          Volleyboo tournament{/*{tournament.selectedDate} */}
+        </span>
+      </Typography>
       <Typography variant="h4" className={classes.titleContainer}>
-        <span className={classes.title}>{tournament.selectedDate}</span>
+        <span className={classes.title}>
+          <EventIcon /> August 12 2021 {/*{tournament.selectedDate} */}
+        </span>
       </Typography>
       <Typography variant="h5" className={classes.titleContainer}>
-        <span className={classes.title}>{tournament.location}</span>
+        <span className={classes.title}>
+          <LocationOnIcon /> {tournament.location}
+        </span>
       </Typography>
-      <TeamRegister />
     </div>
   )
 }

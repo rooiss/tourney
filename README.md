@@ -1,4 +1,4 @@
-### TODO
+# TODO
 
 ## Tournament Component
 
@@ -13,7 +13,7 @@
 
 ## TeamRegister Component
 
-# front end
+### front end
 
 - [x] breadcrumbs
 - [x] search for team members
@@ -21,7 +21,7 @@
 - [ ] add a remove teammate from the setTeammate state
 - [ ] get the values from the teammates state somehow...
 
-# back end
+### back end
 
 - [ ] validation for team name, no dupes, no empty string
 - [ ] team router
@@ -48,7 +48,7 @@
 - [ ] format date to something readable
 - [ ] add division to tournament entity
 
-# Nice to haves
+## Nice to haves
 
 - [ ] create tournament location, google maps API lookup
 - [ ] PayPal / stripe integration for payment

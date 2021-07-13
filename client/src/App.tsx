@@ -9,7 +9,7 @@ import { Home } from './component/Home'
 import { Signup } from './component/Signup'
 import { Login } from './component/Login'
 import { CreateTournament } from './component/CreateTournament'
-import { TournamentDetails } from './component/TournamentDetails'
+import { Tournament } from './component/Tournament'
 import { TournamentProvider } from './component/providers/TournamentContext'
 import { Container } from '@material-ui/core'
 import { Verification } from './component/Verification'
@@ -60,7 +60,7 @@ export default function App() {
               <ButtonAppBar />
               <Container>
                 <TournamentProvider>
-                  <TournamentDetails />
+                  <Tournament />
                 </TournamentProvider>
               </Container>
             </Route>

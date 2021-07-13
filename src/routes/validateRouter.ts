@@ -35,9 +35,9 @@ router.post(
     const teamName = req.body.teamName
     const tournamentId = req.params.tournamentId
 
-    const tournament = await getTeamByTournament(tournamentId, teamName)
+    const team = await getTeamByTournament(tournamentId, teamName)
     res.json({
-      // valid: teamName === undefined,
+      valid: team === undefined,
     })
   }),
 )

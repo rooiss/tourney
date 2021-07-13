@@ -12,8 +12,8 @@ export const TournamentContext = createContext<ITournamentContext>(
 export const TournamentProvider = ({ children }: any) => {
   const [tournament, setTournament] = useState({})
   const [loading, setLoading] = useState(true)
-  const [state, setState] = useState<ITournamentContext>()
-  const [error, setError] = useState('')
+  // const [state, setState] = useState<ITournamentContext>()
+  // const [error, setError] = useState('')
   const { tournamentId } = useParams<{ tournamentId: string }>()
 
   useEffect(() => {

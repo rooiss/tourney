@@ -16,7 +16,7 @@ const useStyles = makeStyles(
       alignItems: 'center',
     },
     form: {
-      width: '100%', // Fix IE 11 issue.
+      width: '100%',
       marginTop: theme.spacing(3),
     },
     submit: {
@@ -57,7 +57,7 @@ export const TeamRegister = () => {
       body: JSON.stringify({ teamName }),
     })
       .then((res) => res.json())
-      .then((data) => data)
+      .then((data) => console.log(data))
   }
   return (
     <div className={classes.paper}>
