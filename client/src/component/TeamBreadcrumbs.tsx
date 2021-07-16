@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import { Breadcrumbs, Link, Typography } from '@material-ui/core'
+import { Breadcrumbs, Link } from '@material-ui/core'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import { useTournament } from './providers/TournamentContext'
 
@@ -28,7 +28,6 @@ export const TeamBreadcrumbs = () => {
         <Link component={RouterLink} to={`/tournaments/${tournament.id}`}>
           {tournament.selectedDate}
         </Link>
-        <Typography>Register your team</Typography>
       </Breadcrumbs>
     </div>
   )

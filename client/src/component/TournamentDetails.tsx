@@ -3,6 +3,7 @@ import { makeStyles, Typography } from '@material-ui/core'
 import { useTournament } from './providers/TournamentContext'
 import EventIcon from '@material-ui/icons/Event'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
+import { Map } from './Map'
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -44,6 +45,7 @@ export const TournamentDetails = () => {
           <LocationOnIcon /> {tournament.location}
         </span>
       </Typography>
+      <Map />
     </div>
   )
 }

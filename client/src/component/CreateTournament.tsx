@@ -17,6 +17,7 @@ import { useFormik } from 'formik'
 import { createTournament } from '../api/createTournament'
 import { Alert } from '@material-ui/lab'
 import { useHistory } from 'react-router-dom'
+import { TournamentLocationSearch } from './TournamentLocationSearch'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -116,7 +117,7 @@ export function CreateTournament() {
               </MuiPickersUtilsProvider>
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              {/* <TextField
                 variant="outlined"
                 required
                 fullWidth
@@ -126,7 +127,8 @@ export function CreateTournament() {
                 autoComplete="location"
                 value={formik.values.location}
                 onChange={formik.handleChange}
-              />
+              /> */}
+              <TournamentLocationSearch />
             </Grid>
           </Grid>
           <Button

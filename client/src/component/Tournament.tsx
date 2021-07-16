@@ -2,19 +2,21 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core'
 import { TournamentDetails } from './TournamentDetails'
 import { TeamInvites } from './TeamInvites'
+import { TeamBreadcrumbs } from './TeamBreadcrumbs'
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   paper: {
     marginTop: theme.spacing(4),
-    display: 'flex',
     alignItems: 'center',
+  },
+  innerPaper: {
+    display: 'flex',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
-  },
-  title: {
-    marginRight: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
   },
 }))
 
@@ -22,9 +24,15 @@ export const Tournament = () => {
   const classes = useStyles()
 
   return (
-    <div className={classes.paper}>
-      <TournamentDetails />
-      <TeamInvites />
+    <div className={classes.root}>
+      <div className={classes.paper}>
+        <TeamBreadcrumbs />
+        <div className={classes.innerPaper}>
+          <TournamentDetails />
+          <TeamInvites />
+          {/* <RegisteredTeam /> */}
+        </div>
+      </div>
     </div>
   )
 }

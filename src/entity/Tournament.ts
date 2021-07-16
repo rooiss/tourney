@@ -8,6 +8,7 @@ import {
 } from 'typeorm'
 import { User } from './User'
 import { TournamentTeam } from './TournamentTeam'
+import { TourneyLocation } from 'tournament'
 // import { Divisions, Format } from '../types/tournament'
 
 @Entity()
@@ -18,11 +19,11 @@ export class Tournament {
   @Column('varchar')
   selectedDate: string
 
-  @Column('varchar')
-  location: string
+  @Column('json')
+  location: TourneyLocation
 
   // @Column('money')
-  // price: string
+  // cost: string
 
   // @Column('enum')
   // divisions: Divisions[]

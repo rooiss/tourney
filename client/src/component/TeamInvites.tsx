@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import { useTournament } from './providers/TournamentContext'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -27,6 +28,8 @@ const useStyles = makeStyles(
 export const TeamInvites = () => {
   const classes = useStyles()
 
+  const { tournament } = useTournament()
+
   // const [invites, setInvites] = useState([])
 
   // useEffect(() => {
@@ -44,13 +47,13 @@ export const TeamInvites = () => {
         <CardContent>
           <Typography variant="h5">Louis K</Typography>
           <span>
-            <Typography>invites you to be on their team</Typography>
+            <Typography>invited you to be on their team</Typography>
           </span>
         </CardContent>
         <CardActions>
           <Button
             component={Link}
-            to={`/`}
+            to={`/tournaments/${tournament.id}/createTeam`}
             size="small"
             color={'primary'}
             variant={'contained'}

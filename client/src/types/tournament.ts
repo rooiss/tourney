@@ -14,3 +14,10 @@ export interface Tournament {
 // }
 
 // export interface Format {}
+
+export interface TourneyLocation {
+  lat: number
+  lng: number
+  address: string
+  name: string
+}

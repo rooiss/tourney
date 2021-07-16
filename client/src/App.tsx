@@ -13,6 +13,8 @@ import { Tournament } from './component/Tournament'
 import { TournamentProvider } from './component/providers/TournamentContext'
 import { Container } from '@material-ui/core'
 import { Verification } from './component/Verification'
+import { TeamRegister } from './component/TeamRegister'
+import { GoogleProvider } from './component/providers/GoogleContext'
 
 export default function App() {
   const theme = createMuiTheme({
@@ -24,49 +26,58 @@ export default function App() {
     },
   })
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AuthProvider>
-        <Router>
-          <Switch>
-            <Route path="/verifyme/:verifyCode" exact>
-              <Verification />
-            </Route>
-            <Route path="/newTournament" exact>
-              <ButtonAppBar />
-              <Container>
-                <CreateTournament />
-              </Container>
-            </Route>
-            <Route path="/login">
-              <ButtonAppBar />
-              <Container>
-                <Login />
-              </Container>
-            </Route>
-            <Route path="/signup" exact>
-              <ButtonAppBar />
-              <Container>
-                <Signup />
-              </Container>
-            </Route>
-            <Route path="/" exact>
-              <ButtonAppBar />
-              <Container>
-                <Home />
-              </Container>
-            </Route>
-            <Route path="/tournaments/:tournamentId" exact>
-              <ButtonAppBar />
-              <Container>
-                <TournamentProvider>
-                  <Tournament />
-                </TournamentProvider>
-              </Container>
-            </Route>
-          </Switch>
-        </Router>
-      </AuthProvider>
-    </ThemeProvider>
+    <GoogleProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AuthProvider>
+          <Router>
+            <Switch>
+              <Route path="/verifyme/:verifyCode" exact>
+                <Verification />
+              </Route>
+              <Route path="/newTournament" exact>
+                <ButtonAppBar />
+                <Container>
+                  <CreateTournament />
+                </Container>
+              </Route>
+              <Route path="/login">
+                <ButtonAppBar />
+                <Container>
+                  <Login />
+                </Container>
+              </Route>
+              <Route path="/signup" exact>
+                <ButtonAppBar />
+                <Container>
+                  <Signup />
+                </Container>
+              </Route>
+              <Route path="/" exact>
+                <ButtonAppBar />
+                <Container>
+                  <Home />
+                </Container>
+              </Route>
+              <Route path="/tournaments/:tournamentId">
+                <ButtonAppBar />
+                <Container>
+                  <TournamentProvider>
+                    <Switch>
+                      <Route path="/tournaments/:tournamentId/createTeam" exact>
+                        <TeamRegister />
+                      </Route>
+                      <Route path="/tournaments/:tournamentId" exact>
+                        <Tournament />
+                      </Route>
+                    </Switch>
+                  </TournamentProvider>
+                </Container>
+              </Route>
+            </Switch>
+          </Router>
+        </AuthProvider>
+      </ThemeProvider>
+    </GoogleProvider>
   )
 }

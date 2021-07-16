@@ -30,7 +30,7 @@ export const TeamInvitesAppBar = () => {
           </Typography>
           <Button
             component={Link}
-            to={`/${tournament.id}/createTeam`}
+            to={`/tournaments/${tournament.id}/createTeam`}
             color={'secondary'}
             variant={'contained'}
           >

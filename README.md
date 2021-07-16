@@ -2,24 +2,13 @@
 
 ## Tournament Component
 
-- [ ] view page for single tournament details
-  - [ ] see who else is signed up for that tournament
-- [ ] protectedRoute
-- [x] tournament context
-- [x] Grid for home component
-- [x] following component in home component
-- [ ] username as other column for tournament
-- [ ] add tournament user context for tournaments component
+- [ ] replace location input with google places autocomplete
 
 ## TeamRegister Component
 
 ### front end
 
-- [x] breadcrumbs
-- [x] search for team members
-- [x] condtionally render add button if user doesn't exist
 - [ ] add a remove teammate from the setTeammate state
-- [ ] get the values from the teammates state somehow...
 
 ### back end
 
@@ -41,6 +30,8 @@
 
 ## Follow up
 
+- [ ] username as other column for tournament
+- [ ] protectedRoute
 - [ ] email obfuscation
 - [ ] format and divisions for tournament entity and create tournament page
   - [ ] title of tournament is `${username}'s ${tournament.format} on ${tournament.date}`
