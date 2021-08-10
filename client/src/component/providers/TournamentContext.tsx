@@ -34,7 +34,7 @@ export const TournamentProvider = ({ children }: any) => {
   )
   return (
     <TournamentContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </TournamentContext.Provider>
   )
 }

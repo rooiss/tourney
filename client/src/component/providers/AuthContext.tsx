@@ -1,15 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 
+export interface AuthUser {
+  firstName: string
+  username: string
+  email: string
+  verified: boolean
+  verifyCode: string
+  lastName: string
+  id: string
+}
+
 interface IAuthContext {
   isAuthenticated: boolean
   status: 'pending' | 'success' | 'error'
-  user: null | {
-    firstName: string
-    username: string
-    email: string
-    verified: boolean
-    verifyCode: string
-  }
+  user: null | AuthUser
 }
 
 export const AuthContext = createContext<IAuthContext>({

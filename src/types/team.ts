@@ -4,3 +4,14 @@ export interface Teammate {
   lastNameLetter?: string
   id?: string
 }
+
+export enum TeamRole {
+  CAPTAIN = 'captain',
+  PLAYER = 'player',
+}
+
+export enum TeamInviteStatus {
+  PENDING = 'pending',
+  ACCEPTED = 'accepted',
+  REJECTED = 'rejected',
+}

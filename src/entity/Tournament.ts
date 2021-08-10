@@ -8,8 +8,7 @@ import {
 } from 'typeorm'
 import { User } from './User'
 import { TournamentTeam } from './TournamentTeam'
-import { TourneyLocation } from 'tournament'
-// import { Divisions, Format } from '../types/tournament'
+import { TourneyLocation } from '../types/tournament'
 
 @Entity()
 export class Tournament {
@@ -21,15 +20,6 @@ export class Tournament {
 
   @Column('json')
   location: TourneyLocation
-
-  // @Column('money')
-  // cost: string
-
-  // @Column('enum')
-  // divisions: Divisions[]
-
-  // @Column('enum')
-  // format: Format[]
 
   @OneToMany(
     () => TournamentTeam,

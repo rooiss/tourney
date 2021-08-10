@@ -6,6 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
+import { TeamInvite } from './TeamInvite'
 import { TeamUser } from './TeamUser'
 import { Tournament } from './Tournament'
 
@@ -18,9 +19,12 @@ export class TournamentTeam {
   @Column('varchar')
   teamName: string
 
+  @OneToMany(() => TeamInvite, (invite) => invite.team)
+  invites: TeamInvite[]
+
   @ManyToOne(() => Tournament, (tournament) => tournament.tournamentTeam)
   tournament: Tournament
 
   @OneToMany(() => TeamUser, (teamUser) => teamUser.tournamentTeam)
-  teamUser: TeamUser
+  teamUser: TeamUser[]
 }

@@ -1,23 +1,21 @@
+import { User } from './users'
+
 export interface Tournament {
-  // divisions: Divisions[]
-  // format: Format[]
   id: string
+  selectedDate: string
+  tourneyLocation: TourneyLocation
+  creator: User
+  creatorUsername?: string
+  // teams:
 }
-
-// export enum Divisions {
-//   AAA = 'AAA',
-//   AA = 'AA',
-//   A = 'A',
-//   BB = 'BB',
-//   B = 'B',
-//   C = 'C',
-// }
-
-// export interface Format {}
 
 export interface TourneyLocation {
   lat: number
   lng: number
   address: string
-  name: string
+}
+
+export interface Team {
+  id: string
+  teamName: string
 }

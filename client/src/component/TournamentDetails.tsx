@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginRight: theme.spacing(1),
   },
+  map: {
+    marginTop: theme.spacing(3),
+  },
 }))
 
 export const TournamentDetails = () => {
@@ -31,21 +34,19 @@ export const TournamentDetails = () => {
   return (
     <div className={classes.paper}>
       <Typography variant="h3" className={classes.titleContainer}>
-        <span className={classes.title}>
-          Volleyboo tournament{/*{tournament.selectedDate} */}
-        </span>
+        <span className={classes.title}>Volleyboo tournament</span>
       </Typography>
       <Typography variant="h4" className={classes.titleContainer}>
         <span className={classes.title}>
-          <EventIcon /> August 12 2021 {/*{tournament.selectedDate} */}
+          <EventIcon /> {tournament.selectedDate}
         </span>
       </Typography>
       <Typography variant="h5" className={classes.titleContainer}>
         <span className={classes.title}>
-          <LocationOnIcon /> {tournament.location}
+          <LocationOnIcon /> {tournament.location.address}
         </span>
       </Typography>
-      <Map />
+      <Map tourneyLocation={tournament.location} />
     </div>
   )
 }

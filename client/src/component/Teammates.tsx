@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { MouseEvent } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -7,9 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-import { Checkbox } from '@material-ui/core'
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
+import { Checkbox, IconButton } from '@material-ui/core'
 import { Teammate } from '../types/team'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -23,9 +23,8 @@ const useStyles = makeStyles(
   { name: 'Teammates' },
 )
 
-export const Teammates = ({ teammates }) => {
+export const Teammates = ({ teammates, captain, setCaptain, setTeammates }) => {
   const classes = useStyles()
-  const [captain, setCaptain] = useState('')
 
   const handleCaptain = (teammate: Teammate) => (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -35,6 +34,12 @@ export const Teammates = ({ teammates }) => {
     } else {
       setCaptain('')
     }
+  }
+
+  const removeTeammate = (index) => (event: MouseEvent) => {
+    const newTeam = [...teammates]
+    newTeam.splice(index, 1)
+    setTeammates(newTeam)
   }
 
   return (
@@ -49,13 +54,13 @@ export const Teammates = ({ teammates }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {teammates.map((teammate) => {
+          {teammates.map((teammate, index) => {
             const checked = captain === (teammate.id || teammate.email)
             return (
               <TableRow key={teammate.id || teammate.email}>
                 <TableCell component="th" scope="row">
                   {teammate.firstName
-                    ? `${teammate.firstName} ${teammate.lastName}`
+                    ? `${teammate.firstName} ${teammate.lastNameLetter}`
                     : `${teammate.email}`}
                 </TableCell>
                 <TableCell align="right"></TableCell>
@@ -68,7 +73,9 @@ export const Teammates = ({ teammates }) => {
                   />
                 </TableCell>
                 <TableCell align="right">
-                  <DeleteOutlineIcon />
+                  <IconButton onClick={removeTeammate(index)}>
+                    <DeleteIcon />
+                  </IconButton>
                 </TableCell>
               </TableRow>
             )

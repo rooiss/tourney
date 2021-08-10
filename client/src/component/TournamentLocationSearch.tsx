@@ -4,6 +4,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete'
+import { TourneyLocation } from '../types/tournament'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -12,20 +13,27 @@ const useStyles = makeStyles(
   { name: 'TournamentLocationSearch' },
 )
 
-export const TournamentLocationSearch = () => {
-  const classes = useStyles()
-  const [address, setAddress] = useState('')
-  const [coordinates, setCoordinates] = useState({ lat: null, lng: null })
+interface TournamentLocationSearchProps {
+  tourneyLocation: TourneyLocation | null
+  onChange: (tourneyLocation: TourneyLocation) => void
+}
 
-  // const handleChange = ({ address }) => {
-  //   setAddress({ address })
-  // }
+export const TournamentLocationSearch = ({
+  tourneyLocation,
+  onChange,
+}: TournamentLocationSearchProps) => {
+  const classes = useStyles()
+
+  const [address, setAddress] = useState(tourneyLocation?.address || '')
 
   const handleSelect = async (address) => {
     const result = await geocodeByAddress(address)
     const latLng = await getLatLng(result[0])
-    setAddress(address)
-    // setCoordinates(latLng)
+    console.log(`result`, result)
+    onChange({
+      ...latLng,
+      address: address,
+    })
   }
 
   return (
@@ -45,8 +53,11 @@ export const TournamentLocationSearch = () => {
               }
               return (
                 <div
-                  // key={suggestion}
-                  {...getSuggestionItemProps(suggestion, { style })}
+                  {...{
+                    ...getSuggestionItemProps(suggestion, { style }),
+                    key: suggestion.placeId,
+                    // adding a key to this spreaded obj
+                  }}
                 >
                   {suggestion.description}
                 </div>

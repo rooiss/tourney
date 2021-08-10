@@ -33,8 +33,6 @@ router.post(
 router.get(
   '/',
   asyncHandler(async (req: any, res) => {
-    // return json
-    // saying this is is returning undefined look into this
     const user = await getUserById(req.session.user.id)
     const usersFollowing = await getFollowedUsers(user)
 
@@ -46,7 +44,10 @@ router.get(
     const tournaments = await getTournamentsFromAllUsersFollowing(
       userIdsOfFollowing,
     )
-    return res.json({ tournaments })
+    // const usernameOfCreator = await getUserById()
+    return res.json({
+      tournaments /* : tournaments.map(tournamentEntityToJson) */,
+    })
   }),
 )
 
@@ -56,7 +57,8 @@ router.get(
   asyncHandler(async (req: any, res) => {
     // return json
     const tournament = await getTournamentById(req.params.tournamentId)
-    return res.json({ tournament })
+    // console.log('tournament', tournament)
+    return res.json({ tournament /*: tournamentEntityToJson(tournament) */ })
   }),
 )
 
@@ -66,5 +68,12 @@ router.get(
 //   '/:tournamentId',
 //   asyncHandler(async (req, res) => {}),
 // )
+
+router.post(
+  '/:tournamentId/teams',
+  asyncHandler(async (req: any, res) => {
+    const tournament = await getTournamentById(req.params.tournamentId)
+  }),
+)
 
 export default router

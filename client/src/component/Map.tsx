@@ -1,39 +1,36 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { useLoadScript, GoogleMap, Marker } from '@react-google-maps/api'
+import { GoogleMap, Marker } from '@react-google-maps/api'
+import { mapStyles } from '../mapStyles/mapStyles'
 
 const useStyles = makeStyles(
   (theme) => ({
-    root: {},
+    root: {
+      marginTop: theme.spacing(2),
+    },
   }),
   { name: 'Map' },
 )
 
 const libraries = ['places' as const]
 
-const options = {
-  disableDefaultUI: true,
-}
+// const options = {
+//   styles: mapStyles,
+// }
 
-export const Map = () => {
+export const Map = ({ tourneyLocation }) => {
   const classes = useStyles()
 
   // const [tourneyMarker, setTourneyMarker] = useState({})
 
-  const center = {
-    lat: 37.3428,
-    lng: -122.0423,
-  }
-
   const containerStyle = {
-    width: '600px',
-    height: '400px',
+    width: '650px',
+    height: '450px',
   }
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_PLACES_API_KEY || '',
-    libraries,
-  })
-
+  const center = {
+    lat: tourneyLocation.lat,
+    lng: tourneyLocation.lng,
+  }
   return (
     <div className={classes.root}>
       <GoogleMap
@@ -42,7 +39,7 @@ export const Map = () => {
         mapContainerStyle={containerStyle}
         // options={options}
       >
-        <Marker position={{ lat: center.lat, lng: center.lng }} />
+        <Marker position={center} />
       </GoogleMap>
     </div>
   )

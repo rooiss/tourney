@@ -3,9 +3,11 @@ import { makeStyles } from '@material-ui/core/styles'
 import { TeamBreadcrumbs } from './TeamBreadcrumbs'
 import { Button, TextField, Typography } from '@material-ui/core'
 import { useTournament } from './providers/TournamentContext'
-import { useAuth } from './providers/AuthContext'
+import { AuthUser, useAuth } from './providers/AuthContext'
 import { TeammateSearch } from './TeammateSearch'
 import { Teammates } from './Teammates'
+import { Teammate } from '../types/team'
+import { createTeam } from '../api/createTeam'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -32,17 +34,28 @@ const useStyles = makeStyles(
   { name: 'TeamRegister' },
 )
 
+const userToTeammate = (user: AuthUser): Teammate => {
+  return {
+    email: user.email,
+    firstName: user.firstName,
+    lastNameLetter: user.lastName[0],
+    id: user.id,
+  }
+}
+
 export const TeamRegister = () => {
   const { tournament } = useTournament()
   const { user } = useAuth()
 
-  const [teammates, setTeammates] = useState([user])
+  const [teammates, setTeammates] = useState([userToTeammate(user!!)])
   const [teamNameError, setTeamNameError] = useState(false)
+  const [captain, setCaptain] = useState(user!!.id)
 
   const classes = useStyles()
 
   const handleSubmit = (e) => {
-    console.log('e', e)
+    e.preventDefault()
+    createTeam({ tournamentId: tournament.id, teammates, captain })
   }
 
   const handleChange = (e) => {
@@ -91,7 +104,12 @@ export const TeamRegister = () => {
           teammates={teammates}
           setTeammates={setTeammates}
         />
-        <Teammates teammates={teammates} />
+        <Teammates
+          teammates={teammates}
+          captain={captain}
+          setCaptain={setCaptain}
+          setTeammates={setTeammates}
+        />
         <Button
           type="submit"
           fullWidth
@@ -99,7 +117,7 @@ export const TeamRegister = () => {
           color="primary"
           className={classes.submit}
         >
-          Register
+          Send out invites
         </Button>
       </form>
     </div>

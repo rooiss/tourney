@@ -1,32 +1,21 @@
 # TODO
 
-## Tournament Component
+## Team Invite flow
 
-- [ ] replace location input with google places autocomplete
+- [ ] create team invite entity
+- [ ] on team creation adding the row
 
 ## TeamRegister Component
-
-### front end
-
-- [ ] add a remove teammate from the setTeammate state
 
 ### back end
 
 - [ ] validation for team name, no dupes, no empty string
 - [ ] team router
   - [ ] post for creating new team
-- [ ] team store
-  - [ ] store function that creates new team
 
 ## NodeMailer verification
 
-- [x] user entity generated uuid
-- [x] endpoint for verifyme
-- [x] store function verifyme
-  - [x] save user with updated verified status
-- [x] make Verify component
-- [x] put nodemailer logic in route
-- [x] something for isVerified, check user.verified === false
+- [ ] once register button is clicked send emails out to all players of the tournament to confirm
 
 ## Follow up
 

@@ -9,7 +9,6 @@ import Container from '@material-ui/core/Container'
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
-  KeyboardTimePicker,
 } from '@material-ui/pickers'
 import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
@@ -18,6 +17,8 @@ import { createTournament } from '../api/createTournament'
 import { Alert } from '@material-ui/lab'
 import { useHistory } from 'react-router-dom'
 import { TournamentLocationSearch } from './TournamentLocationSearch'
+import { TourneyLocation } from '../types/tournament'
+import { Map } from './Map'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -44,8 +45,8 @@ export function CreateTournament() {
 
   const formik = useFormik({
     initialValues: {
-      selectedDate: '2021-08-18T21:11:54',
-      location: '',
+      selectedDate: '11/15/2021',
+      location: null,
     },
     onSubmit: (values) => {
       // clear any previous errors
@@ -85,7 +86,7 @@ export function CreateTournament() {
           onSubmit={formik.handleSubmit}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   disableToolbar
@@ -102,7 +103,7 @@ export function CreateTournament() {
                 />
               </MuiPickersUtilsProvider>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardTimePicker
                   margin="normal"
@@ -115,7 +116,7 @@ export function CreateTournament() {
                   }}
                 />
               </MuiPickersUtilsProvider>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               {/* <TextField
                 variant="outlined"
@@ -128,7 +129,15 @@ export function CreateTournament() {
                 value={formik.values.location}
                 onChange={formik.handleChange}
               /> */}
-              <TournamentLocationSearch />
+              <TournamentLocationSearch
+                tourneyLocation={formik.values.location}
+                onChange={(tourneyLocation) =>
+                  formik.setFieldValue('location', tourneyLocation, false)
+                }
+              />
+              {formik.values.location && (
+                <Map tourneyLocation={formik.values.location} />
+              )}
             </Grid>
           </Grid>
           <Button

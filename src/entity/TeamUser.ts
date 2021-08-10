@@ -1,4 +1,5 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { TeamRole } from '../types/team'
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { TournamentTeam } from './TournamentTeam'
 import { User } from './User'
 
@@ -6,6 +7,9 @@ import { User } from './User'
 export class TeamUser {
   @PrimaryGeneratedColumn('increment')
   id: string
+
+  @Column({ type: 'enum', enum: TeamRole })
+  teamRole: TeamRole
 
   @ManyToOne(() => User, (user) => user.teamUsers)
   user: User

@@ -34,23 +34,28 @@ export const Tournaments = () => {
   useEffect(() => {
     fetch('/api/tournaments/')
       .then((res) => res.json())
-      .then((data) => setTournaments(data.tournaments))
+      .then((data) => {
+        // console.log(data.tournaments)
+        setTournaments(data.tournaments)
+      })
   }, [])
-
   // display username, date of tournament, location,
 
   const classes = useStyles()
-
   const allTournaments = tournaments.map((tournament: any) => {
+    // console.log('tournaments', tournaments)
     return (
       <Card className={classes.root} variant="outlined" key={tournament.id}>
         <CardContent className={classes.card}>
+          <Typography variant="h3" component="h2">
+            {/* put tournament creator here */}
+          </Typography>
           <Typography
             className={classes.title}
             color="textSecondary"
             gutterBottom
           >
-            {tournament.location}
+            {tournament.location.address}
           </Typography>
           <Typography variant="h5" component="h2">
             {tournament.selectedDate}
