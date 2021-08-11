@@ -50,26 +50,31 @@ export const TeamRegister = () => {
   const [teammates, setTeammates] = useState([userToTeammate(user!!)])
   const [teamNameError, setTeamNameError] = useState(false)
   const [captain, setCaptain] = useState(user!!.id)
+  const [teamName, setTeamName] = useState('')
 
   const classes = useStyles()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    createTeam({ tournamentId: tournament.id, teammates, captain })
+    createTeam({ tournamentId: tournament.id, teammates, captain, teamName })
   }
 
   const handleChange = (e) => {
-    const teamName = e.target.value
+    const teamname = e.target.value
     const tournamentId = tournament.id
     fetch(`/api/validate/${tournamentId}/teamname`, {
       headers: {
         'Content-Type': 'application/json',
       },
       method: 'POST',
-      body: JSON.stringify({ teamName }),
+      body: JSON.stringify({ teamname }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        if (data.valid) {
+          setTeamName(teamname)
+        }
+      })
   }
   return (
     <div className={classes.paper}>

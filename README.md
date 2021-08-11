@@ -1,30 +1,14 @@
 # TODO
 
-## Team Invite flow
-
-- [ ] create team invite entity
-- [ ] on team creation adding the row
-
-## TeamRegister Component
-
-### back end
-
-- [ ] validation for team name, no dupes, no empty string
-- [ ] team router
-  - [ ] post for creating new team
-
-## NodeMailer verification
-
-- [ ] once register button is clicked send emails out to all players of the tournament to confirm
-
-## Follow up
-
-- [ ] username as other column for tournament
+- [ ] put user who created team as captain by default
+- [ ] fix the last name undefined on team creation
 - [ ] protectedRoute
+- [ ] email validator for adding non registered users
+- [ ] once register button is clicked send emails out to all players of the tournament to confirm
+- [ ] username as other column for tournament
 - [ ] email obfuscation
 - [ ] format and divisions for tournament entity and create tournament page
   - [ ] title of tournament is `${username}'s ${tournament.format} on ${tournament.date}`
-- [ ] error handling for a lot of various things
 - [ ] format date to something readable
 - [ ] add division to tournament entity
 

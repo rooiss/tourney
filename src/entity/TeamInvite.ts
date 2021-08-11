@@ -13,6 +13,10 @@ export class TeamInvite {
   @Column('varchar')
   email: string
 
-  @Column({ type: 'enum', enum: TeamInviteStatus, default: 'pending' })
+  @Column({
+    type: 'enum',
+    enum: TeamInviteStatus,
+    default: TeamInviteStatus.PENDING,
+  })
   status: TeamInviteStatus
 }

@@ -14,6 +14,6 @@ export class TeamUser {
   @ManyToOne(() => User, (user) => user.teamUsers)
   user: User
 
-  @ManyToOne(() => TournamentTeam, (tournamentTeam) => tournamentTeam.teamUser)
+  @ManyToOne(() => TournamentTeam, (tournamentTeam) => tournamentTeam.teamUsers)
   tournamentTeam: TournamentTeam
 }

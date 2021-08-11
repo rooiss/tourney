@@ -26,5 +26,5 @@ export class TournamentTeam {
   tournament: Tournament
 
   @OneToMany(() => TeamUser, (teamUser) => teamUser.tournamentTeam)
-  teamUser: TeamUser[]
+  teamUsers: TeamUser[]
 }

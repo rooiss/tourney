@@ -1,5 +1,5 @@
 export interface Teammate {
-  email: string
+  email?: string
   firstName?: string
   lastNameLetter?: string
   id?: string
@@ -15,3 +15,5 @@ export enum TeamInviteStatus {
   ACCEPTED = 'accepted',
   REJECTED = 'rejected',
 }
+
+export type Teammates = Teammate[]
