@@ -1,12 +1,11 @@
 # TODO
 
-- [ ] put user who created team as captain by default
-- [ ] fix the last name undefined on team creation
+- [ ] once register button is clicked send emails out to all players of the tournament to confirm
 - [ ] protectedRoute
 - [ ] email validator for adding non registered users
-- [ ] once register button is clicked send emails out to all players of the tournament to confirm
 - [ ] username as other column for tournament
-- [ ] email obfuscation
+- [ ] change how follows works to either context or parent component that handles all following state (search component)
+- [ ] email obfuscation deter webscrape
 - [ ] format and divisions for tournament entity and create tournament page
   - [ ] title of tournament is `${username}'s ${tournament.format} on ${tournament.date}`
 - [ ] format date to something readable

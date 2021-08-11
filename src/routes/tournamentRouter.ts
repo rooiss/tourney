@@ -7,7 +7,7 @@ import {
 } from '../stores/tournaments'
 import asyncHandler from '../utils/asyncHandler'
 import { tournamentEntityToJson } from '../mappers/tournamentEntityToJson'
-import { newTeam } from '../stores/team'
+import { getTeamByTournament, newTeam } from '../stores/team'
 
 const router = Router()
 
@@ -73,14 +73,26 @@ router.get(
 router.post(
   '/:tournamentId/teams',
   asyncHandler(async (req: any, res) => {
-    // get tournament
+    // put req body in variable
     const tournamentId = req.params.tournamentId
-    // ensure tournament exists
     const teamName = req.body.teamName
     const captainId = req.body.captain
     const teammates = req.body.teammates
-    // put req body in variable
+    // ensure tournament exists
+    // get tournament
+    const tournament = await getTournamentById(tournamentId)
+    if (!tournament) {
+      res.status(400).json({ success: false })
+      console.log('tournament doesnt exist')
+      return
+    }
     // validate team name
+    const teamNameTaken = await getTeamByTournament(tournamentId, teamName)
+    if (teamNameTaken) {
+      res.status(400).json({ success: false })
+      console.log('team name already exists')
+      return
+    }
     // create the team
     newTeam({ tournamentId, teamName, captainId, teammates })
     // add current user to the team (create new teamuser)

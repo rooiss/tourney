@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 })
 
-export default function Search() {
+export default function Search(/* { onNewFollow} */) {
   const [term, setTerm] = useState('')
   const [options, setOptions] = useState<Option[]>([])
   const [following, setFollowing] = useState<Set<string>>(new Set())
@@ -50,6 +50,8 @@ export default function Search() {
       const newFollowing = new Set(following)
       newFollowing.add(id)
       setFollowing(newFollowing)
+      // instead of above, do this:
+      // onNewFollow(id)
     })
   }
 

@@ -36,15 +36,12 @@ export const newTeam = async ({
     tournamentTeam: team,
   })
   const currentTeammate = await entityManager.save(teammate)
-  // after saving teamuser, assign teammates to [<new team user>]
   team.teamUsers = [currentTeammate]
-  // create teamInvites from all other teammates, assigning new team to teamInvite.team
 
   const invites = await Promise.all(
     teammates
       .filter((teammate) => teammate.id !== captainId)
       .map((teammateUser) => {
-        // console.log('teammateUser', teammateUser)
         if (teammateUser.email) {
           // anon user
           return Promise.resolve(teammateUser.email)
@@ -52,30 +49,20 @@ export const newTeam = async ({
         return getUserById(teammateUser.id).then((user) => user.email)
       }),
   ).then((emails) => {
-    emails.map((email) => {
-      entityManager.create(TeamInvite, { team: team, email: email })
+    return emails.map((email) => {
+      return entityManager.create(TeamInvite, {
+        team: team,
+        email: email,
+      })
     })
   })
-
-  // console.log(invites)
-
-  // const registeredTeammateInvite = teammates
-  //   .slice(1)
-  //   .filter((teammate) => !teammate.email)
-  // console.log(registeredTeammateInvite)
-  // const teammateInvite = teammates.slice(1).map((teammate) => {
-  //   if (!teammate.email) {
-  //     const registeredTeammate = await getUserById(`${teammate.id}`)
-  //     entityManager.create(TeamInvite, {team: team, email: registeredTeammate.email})
-  //   }
-  //   entityManager.create(TeamInvite, {team: team, email: teammate.email})
-  //   return
-  //   }
-
-  // )
-  // get all registered users email
-  // save teamInvites
-  // save tournamnentTeam
+  team.invites = invites
+  await Promise.all(
+    invites.map((invite) => {
+      return entityManager.save(TeamInvite, invite)
+    }),
+  )
+  return await entityManager.save(TournamentTeam, team)
 }
 
 export const getTeamByTournament = async (
