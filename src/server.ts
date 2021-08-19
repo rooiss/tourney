@@ -37,7 +37,7 @@ app.use('/api/users', userRouter)
 app.use('/api/follows', followsRouter)
 app.use('/api/tournaments', tournamentRouter)
 app.use('/api/verify', verificationRouter)
-app.use('/api/team', teamRouter)
+app.use('/api/tournaments/:tournamentId', teamRouter)
 
 app.listen(5000, () => {
   console.log('server listening on port 5000')

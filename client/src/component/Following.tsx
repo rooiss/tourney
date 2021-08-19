@@ -11,7 +11,12 @@ export const Following = () => {
   useEffect(() => {
     fetch('/api/follows/')
       .then((res) => res.json())
-      .then((data) => setFollowing(data.followedUsers))
+      .then((data) => {
+        if (data.success) {
+          setFollowing(data.followedUsers)
+          return
+        }
+      })
   }, [])
 
   return (

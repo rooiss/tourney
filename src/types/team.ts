@@ -16,4 +16,16 @@ export enum TeamInviteStatus {
   REJECTED = 'rejected',
 }
 
+export interface TeamInvite {
+  id?: string
+  teamName: string
+  email: string
+  firstName?: string
+  lastNameLetter?: string
+  username?: string
+  userId?: string
+  status: TeamInviteStatus
+  tournamentId: string
+}
+
 export type Teammates = Teammate[]

@@ -36,14 +36,14 @@ export const TournamentDetails = () => {
       <Typography variant="h3" className={classes.titleContainer}>
         <span className={classes.title}>Volleyboo tournament</span>
       </Typography>
-      <Typography variant="h4" className={classes.titleContainer}>
-        <span className={classes.title}>
-          <EventIcon /> {tournament.selectedDate}
-        </span>
-      </Typography>
       <Typography variant="h5" className={classes.titleContainer}>
         <span className={classes.title}>
           <LocationOnIcon /> {tournament.location.address}
+        </span>
+      </Typography>
+      <Typography variant="h4" className={classes.titleContainer}>
+        <span className={classes.title}>
+          <EventIcon /> {tournament.selectedDate}
         </span>
       </Typography>
       <Map tourneyLocation={tournament.location} />

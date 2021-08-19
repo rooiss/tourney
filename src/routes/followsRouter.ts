@@ -12,7 +12,7 @@ router.post(
     const personFollowing = await getUserById(req.session.user.id)
 
     await followUser(personToFollow, personFollowing)
-    res.json({})
+    res.json({ success: true })
   }),
 )
 
@@ -25,6 +25,7 @@ router.get(
     const followedUsers = await getFollowedUsers(personFollowing)
     // always return json from a get request
     return res.json({
+      success: true,
       followedUsers: followedUsers.map(({ personToFollow }) =>
         userEntityToSearchResult(personToFollow),
       ),

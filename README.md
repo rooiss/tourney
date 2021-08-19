@@ -1,5 +1,7 @@
 # TODO
 
+- [ ] route for accepting or denying invite
+- [ ] send out emails for all teammates
 - [ ] once register button is clicked send emails out to all players of the tournament to confirm
 - [ ] protectedRoute
 - [ ] email validator for adding non registered users
@@ -15,4 +17,4 @@
 
 - [ ] create tournament location, google maps API lookup
 - [ ] PayPal / stripe integration for payment
-- [ ] waiver form when registering / DocuSign API
+- [ ] waiver form when registering / DocuSign / HelloSign API

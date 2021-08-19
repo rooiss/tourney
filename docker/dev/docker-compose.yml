@@ -1,50 +1,17 @@
-version: '3.1'
+version: '3'
 
 services:
   postgres:
     container_name: postgres
     image: postgres
-    restart: always
     volumes:
-      - $PWD/.dbData:/data/db
+      - my-db-data:/var/lib/postgresql/data
     networks:
       - skynet
     environment:
       POSTGRES_PASSWORD: realeyesrealizereallies
       POSTGRES_USER: localdev
       POSTGRES_DB: tourney
-  # mailserver:
-  #   image: docker.io/mailserver/docker-mailserver:latest
-  #   env_file: $PWD/mailserver.env
-  #   hostname: mailserver
-  #   domainname: example.com
-  #   container_name: mailserver
-  #   ports:
-  #     - "9925:25"
-  #     - "9143:143"
-  #     - "9587:587"
-  #     - "9993:993"
-  #   volumes:
-  #     - $PWD/.mailData/maildata:/var/mail
-  #     - $PWD/.mailData/mailstate:/var/mail-state
-  #     - $PWD/.mailData/maillogs:/var/log/mail
-  #     - /etc/localtime:/etc/localtime:ro
-  #     - ./config/:/tmp/docker-mailserver/
-  #   environment:
-  #     - ENABLE_SPAMASSASSIN=1
-  #     - SPAMASSASSIN_SPAM_TO_INBOX=1
-  #     - ENABLE_CLAMAV=1
-  #     - ENABLE_FAIL2BAN=1
-  #     - ENABLE_POSTGREY=1
-  #     - ENABLE_SASLAUTHD=0
-  #     - ONE_DIR=1
-  #     - DMS_DEBUG=0
-  #   cap_add:
-  #     - NET_ADMIN
-  #     - SYS_PTRACE
-  #   restart: always
-  #   networks: 
-      # - skynet
   adminer:
     image: adminer
     hostname: adminer
@@ -88,6 +55,7 @@ volumes:
   # This is for the docker-sync container that gets started
   tourney_app-sync:
     external: true
+  my-db-data:
 
 networks:
   skynet:

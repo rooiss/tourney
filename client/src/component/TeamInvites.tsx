@@ -1,25 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { TeamInvitesAppBar } from './TeamInvitesAppBar'
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-} from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { TeamInvite, TeamInviteStatus } from '../types/team'
 import { useTournament } from './providers/TournamentContext'
+import { PendingInvite } from './PendingInvite'
+import { RejectedInvite } from './RejectedInvite'
 
 const useStyles = makeStyles(
   (theme) => ({
     root: {
       minWidth: '33%',
       marginTop: theme.spacing(5),
-    },
-    card: {
-      display: 'flex',
-      justifyContent: 'space-between',
     },
   }),
   { name: 'TeamInvites' },
@@ -30,39 +21,38 @@ export const TeamInvites = () => {
 
   const { tournament } = useTournament()
 
-  // const [invites, setInvites] = useState([])
+  const [invites, setInvites] = useState<TeamInvite[]>([])
 
-  // useEffect(() => {
-  //   fetch('/api/teamInvites')
-  //   .then(res => res.json())
-  //   .then(data => setInvites(data.invites))
-  // }, [])
+  useEffect(() => {
+    fetch(`/api/tournaments/${tournament.id}/invites`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setInvites(data.teamInvites)
+          return
+        }
+        // have an error state, setError here
+        console.error('an error occurred getting invites')
+      })
+  }, [tournament?.id])
 
-  // const allInvites = invites.map() => {
-  // }
   return (
     <div className={classes.root}>
       <TeamInvitesAppBar />
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography variant="h5">Louis K</Typography>
-          <span>
-            <Typography>invited you to be on their team</Typography>
-          </span>
-        </CardContent>
-        <CardActions>
-          <Button
-            component={Link}
-            to={`/tournaments/${tournament.id}/createTeam`}
-            size="small"
-            color={'primary'}
-            variant={'contained'}
-          >
-            Accept
-          </Button>
-        </CardActions>
-      </Card>
-      {/* {allInvites} */}
+      {invites &&
+        invites.map((invite) => {
+          switch (invite.status) {
+            case TeamInviteStatus.PENDING: {
+              return <PendingInvite invite={invite} />
+            }
+            case TeamInviteStatus.REJECTED: {
+              return <RejectedInvite invite={invite} />
+            }
+            default: {
+              return null
+            }
+          }
+        })}
     </div>
   )
 }

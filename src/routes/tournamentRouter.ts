@@ -8,6 +8,7 @@ import {
 import asyncHandler from '../utils/asyncHandler'
 import { tournamentEntityToJson } from '../mappers/tournamentEntityToJson'
 import { getTeamByTournament, newTeam } from '../stores/team'
+import { getInvitesByTournamentAndEmail } from '../stores/teamInvite'
 
 const router = Router()
 
@@ -70,6 +71,7 @@ router.get(
 //   asyncHandler(async (req, res) => {}),
 // )
 
+// create all team invites
 router.post(
   '/:tournamentId/teams',
   asyncHandler(async (req: any, res) => {
@@ -98,8 +100,23 @@ router.post(
     // add current user to the team (create new teamuser)
     // for all other teammates create team invites
     // send out team invite emails
+
     // return with succ true
     return res.json({ success: true })
+  }),
+)
+
+// get all tournament team invites
+router.get(
+  '/:tournamentId/invites',
+  asyncHandler(async (req: any, res) => {
+    const tournamentId = req.params.tournamentId
+    const email = req.session.user.email
+    const teamInvites = await getInvitesByTournamentAndEmail(
+      tournamentId,
+      email,
+    )
+    return res.json({ success: true, teamInvites })
   }),
 )
 

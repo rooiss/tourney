@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useAuth } from './providers/AuthContext'
 import { Landing } from './Landing'
 import { Dashboard } from './Dashboard'
+import { Container } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,6 +16,14 @@ export const Home = () => {
   const { user } = useAuth()
 
   return (
-    <div className={classes.root}>{user ? <Dashboard /> : <Landing />}</div>
+    <div className={classes.root}>
+      {user ? (
+        <Container>
+          <Dashboard />
+        </Container>
+      ) : (
+        <Landing />
+      )}
+    </div>
   )
 }

@@ -25,10 +25,7 @@ export const newTeam = async ({
     teamName: teamName,
     tournament: tournament,
   })
-  // tournamentId.tournamentTeam = teamName
-  // team.teamName = teamName
   team = await entityManager.save(team)
-  // create teamuser for curr user, assign created team to  tournamentTeam field
   const currentUser = await getUserById(captainId)
   const teammate = entityManager.create(TeamUser, {
     teamRole: TeamRole.CAPTAIN,
