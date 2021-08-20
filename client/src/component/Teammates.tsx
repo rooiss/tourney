@@ -30,7 +30,7 @@ export const Teammates = ({ teammates, captain, setCaptain, setTeammates }) => {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     if (event.target.checked) {
-      setCaptain(teammate.id || teammate.email)
+      setCaptain(teammate.email)
     } else {
       setCaptain('')
     }
@@ -55,9 +55,9 @@ export const Teammates = ({ teammates, captain, setCaptain, setTeammates }) => {
         </TableHead>
         <TableBody>
           {teammates.map((teammate, index) => {
-            const checked = captain === (teammate.id || teammate.email)
+            const checked = captain === teammate.email
             return (
-              <TableRow key={teammate.id || teammate.email}>
+              <TableRow key={teammate.email}>
                 <TableCell component="th" scope="row">
                   {teammate.firstName
                     ? `${teammate.firstName} ${teammate.lastNameLetter}`
@@ -65,7 +65,6 @@ export const Teammates = ({ teammates, captain, setCaptain, setTeammates }) => {
                 </TableCell>
                 <TableCell align="right"></TableCell>
                 <TableCell align="right">
-                  {/* fix checkbox so it doesnt check every single one */}
                   <Checkbox
                     checked={checked}
                     onChange={handleCaptain(teammate)}

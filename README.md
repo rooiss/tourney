@@ -1,6 +1,10 @@
 # TODO
 
-- [ ] route for accepting or denying invite
+- [ ] add team to context
+- [ ] fetch team in the context
+- [ ] if team comes back set that value otherwise dont
+- [ ] reject all other invites
+- [ ] re-render component for team invites list when any invite status changes
 - [ ] send out emails for all teammates
 - [ ] once register button is clicked send emails out to all players of the tournament to confirm
 - [ ] protectedRoute

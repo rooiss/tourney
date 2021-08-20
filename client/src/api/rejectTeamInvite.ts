@@ -7,6 +7,3 @@ export async function rejectTeamInvite({ teamInviteId, tournamentId }) {
     body: JSON.stringify({ teamInviteId }),
   }).then((res) => res.json())
 }
-
-// change status of teaminvite
-//

@@ -7,11 +7,11 @@ import {
   CardContent,
   Typography,
 } from '@material-ui/core'
-import { Link } from 'react-router-dom'
 import { rejectTeamInvite } from '../api/rejectTeamInvite'
 import { acceptTeamInvite } from '../api/acceptTeamInvite'
 import { useTournament } from './providers/TournamentContext'
 import { TeamInvite } from '../types/team'
+import { useAuth } from './providers/AuthContext'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -30,6 +30,7 @@ export interface PendingInviteProps {
 export const PendingInvite = ({ invite }: PendingInviteProps) => {
   const classes = useStyles()
   const { tournament } = useTournament()
+  const { user } = useAuth()
   return (
     <Card variant="outlined" className={classes.root} key={invite.id}>
       <CardContent>
@@ -40,18 +41,21 @@ export const PendingInvite = ({ invite }: PendingInviteProps) => {
       </CardContent>
       <CardActions>
         <Button
-          component={Link}
-          to={`/tournaments/${tournament.id}/createTeam`}
           size="small"
           color="primary"
           variant="contained"
-          onClick={acceptTeamInvite}
+          onClick={() =>
+            acceptTeamInvite({
+              teamInviteId: invite.id,
+              tournamentId: tournament.id,
+              teamName: invite.teamName,
+              currentUser: user,
+            })
+          }
         >
           Accept
         </Button>
         <Button
-          // component={Link}
-          // to={`/tournaments/${tournament.id}/createTeam`}
           size="small"
           variant="text"
           onClick={() =>

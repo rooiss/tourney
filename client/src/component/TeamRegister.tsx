@@ -49,7 +49,7 @@ export const TeamRegister = () => {
 
   const [teammates, setTeammates] = useState([userToTeammate(user!!)])
   const [teamNameError, setTeamNameError] = useState(false)
-  const [captain, setCaptain] = useState(user!!.id)
+  const [captain, setCaptain] = useState(user!!.email)
   const [teamName, setTeamName] = useState('')
 
   const classes = useStyles()

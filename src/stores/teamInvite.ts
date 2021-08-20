@@ -2,6 +2,9 @@ import { getManager } from 'typeorm'
 import * as nodemailer from 'nodemailer'
 import { TeamInvite as TeamInviteJson, TeamInviteStatus } from '../types/team'
 import { TeamInvite } from '../entity/TeamInvite'
+import { TournamentTeam } from '../entity/TournamentTeam'
+import { TeamUser } from '../entity/TeamUser'
+import { User } from '../entity/User'
 
 export const getInvitesByTournamentAndEmail = async (
   tournamentId: string,
@@ -55,14 +58,31 @@ export const getInvitesByTournamentAndEmail = async (
   }))
 }
 
-export const acceptTeamInvite = async (teamInviteId: string) => {
+export const acceptTeamInviteStore = async (
+  teamInviteId: string,
+  teamName: string,
+  tournamentId: string,
+  currentUser: User,
+) => {
   const entityManager = getManager()
-  const teamInvite = await entityManager.findOne(TeamInvite, teamInviteId)
-  teamInvite.status === TeamInviteStatus.ACCEPTED
-  return await entityManager.save(teamInvite)
+  let teamInvite = await entityManager.findOne(TeamInvite, teamInviteId)
+  teamInvite.status = TeamInviteStatus.ACCEPTED
+  teamInvite = await entityManager.save(teamInvite)
+  console.log('changed status to accepted', teamInvite.status)
+  // add them as a teamuser to that team
+  const team = await entityManager.findOne(TournamentTeam, {
+    where: { teamName: teamName, tournament: tournamentId },
+  })
+  const teammate = entityManager.create(TeamUser, {
+    teamRole: teamInvite.teamRole,
+    user: currentUser,
+    tournamentTeam: team,
+  })
+  console.log('adding user to team', teammate)
+  return await entityManager.save(teammate)
 }
 
-export const rejectTeamInvite = async (teamInviteId: string) => {
+export const rejectTeamInviteStore = async (teamInviteId: string) => {
   console.log('rejecting invite')
   const entityManager = getManager()
   const teamInvite = await entityManager.findOne(TeamInvite, teamInviteId)

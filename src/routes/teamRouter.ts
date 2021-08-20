@@ -1,8 +1,9 @@
 import { Router } from 'express'
-import { getFollowedUsers, getUserById } from '../stores/users'
-import { getTournamentById } from '../stores/tournaments'
 import asyncHandler from '../utils/asyncHandler'
-import { rejectTeamInvite } from '../stores/teamInvite'
+import {
+  acceptTeamInviteStore,
+  rejectTeamInviteStore,
+} from '../stores/teamInvite'
 
 const router = Router({ mergeParams: true })
 
@@ -32,6 +33,29 @@ const router = Router({ mergeParams: true })
 // )
 
 // accept team invite
+router.post(
+  '/:teamInviteId/accept',
+  asyncHandler(async (req: any, res) => {
+    const tournamentId = req.params.tournamentId
+    const teamInviteId = req.params.teamInviteId
+    const teamName = req.body.teamName
+    const currentUser = req.body.currentUser
+    try {
+      await acceptTeamInviteStore(
+        teamInviteId,
+        teamName,
+        tournamentId,
+        currentUser,
+      )
+      res.json({
+        success: true,
+      })
+    } catch (e) {
+      console.error('teamRouter error:', e)
+      res.status(500).json({ success: false })
+    }
+  }),
+)
 
 // reject team invite
 router.post(
@@ -41,7 +65,7 @@ router.post(
     const teamInviteId = req.params.teamInviteId
 
     try {
-      await rejectTeamInvite(teamInviteId)
+      await rejectTeamInviteStore(teamInviteId)
       res.json({
         success: true,
       })

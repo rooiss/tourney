@@ -78,8 +78,9 @@ router.post(
     // put req body in variable
     const tournamentId = req.params.tournamentId
     const teamName = req.body.teamName
-    const captainId = req.body.captain
+    const captainEmailOrId = req.body.captain
     const teammates = req.body.teammates
+    const currentUser = await getUserById(req.session.user.id)
     // ensure tournament exists
     // get tournament
     const tournament = await getTournamentById(tournamentId)
@@ -96,12 +97,13 @@ router.post(
       return
     }
     // create the team
-    newTeam({ tournamentId, teamName, captainId, teammates })
-    // add current user to the team (create new teamuser)
-    // for all other teammates create team invites
-    // send out team invite emails
-
-    // return with succ true
+    await newTeam({
+      tournamentId,
+      teamName,
+      captainEmailOrId,
+      teammates,
+      currentUser,
+    })
     return res.json({ success: true })
   }),
 )

@@ -5,17 +5,20 @@ import { TeamUser } from '../entity/TeamUser'
 import { Teammate, TeamRole } from '../types/team'
 import { getUserById } from './users'
 import { TeamInvite } from '../entity/TeamInvite'
+import { User } from '../entity/User'
 
 export const newTeam = async ({
   tournamentId,
   teamName,
-  captainId,
+  captainEmailOrId,
   teammates,
+  currentUser,
 }: {
   tournamentId: string
   teamName: string
-  captainId: string
+  captainEmailOrId: string
   teammates: Teammate[]
+  currentUser: User
 }) => {
   const entityManager = getManager()
   // get tournament
@@ -26,21 +29,30 @@ export const newTeam = async ({
     tournament: tournament,
   })
   team = await entityManager.save(team)
-  const currentUser = await getUserById(captainId)
+
+  // taking current user adding to team and saving it
   const teammate = entityManager.create(TeamUser, {
-    teamRole: TeamRole.CAPTAIN,
+    // change to dynamic value
+    teamRole:
+      captainEmailOrId === currentUser.email ||
+      captainEmailOrId === currentUser.id
+        ? TeamRole.CAPTAIN
+        : TeamRole.PLAYER,
+
     user: currentUser,
     tournamentTeam: team,
   })
   const currentTeammate = await entityManager.save(teammate)
   team.teamUsers = [currentTeammate]
 
+  // creating invite entities for invited players
   const invites = await Promise.all(
     teammates
-      .filter((teammate) => teammate.id !== captainId)
+      // filtering out list for current user
+      .filter((teammate) => teammate.email !== currentUser.email)
       .map((teammateUser) => {
         if (teammateUser.email) {
-          // anon user
+          // non registered user
           return Promise.resolve(teammateUser.email)
         }
         return getUserById(teammateUser.id).then((user) => user.email)
@@ -50,10 +62,14 @@ export const newTeam = async ({
       return entityManager.create(TeamInvite, {
         team: team,
         email: email,
+        teamRole:
+          captainEmailOrId === email ? TeamRole.CAPTAIN : TeamRole.PLAYER,
       })
     })
   })
+  // assigning invites for the team
   team.invites = invites
+  // saving invite entities to database
   await Promise.all(
     invites.map((invite) => {
       return entityManager.save(TeamInvite, invite)

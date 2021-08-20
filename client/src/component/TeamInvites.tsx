@@ -19,28 +19,14 @@ const useStyles = makeStyles(
 export const TeamInvites = () => {
   const classes = useStyles()
 
-  const { tournament } = useTournament()
-
-  const [invites, setInvites] = useState<TeamInvite[]>([])
-
-  useEffect(() => {
-    fetch(`/api/tournaments/${tournament.id}/invites`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setInvites(data.teamInvites)
-          return
-        }
-        // have an error state, setError here
-        console.error('an error occurred getting invites')
-      })
-  }, [tournament?.id])
+  const { invites } = useTournament()
 
   return (
     <div className={classes.root}>
       <TeamInvitesAppBar />
       {invites &&
         invites.map((invite) => {
+          // console.log(invite)
           switch (invite.status) {
             case TeamInviteStatus.PENDING: {
               return <PendingInvite invite={invite} />
