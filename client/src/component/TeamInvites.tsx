@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { TeamInvitesAppBar } from './TeamInvitesAppBar'
-import { TeamInvite, TeamInviteStatus } from '../types/team'
+import { TeamInviteStatus } from '../types/team'
 import { useTournament } from './providers/TournamentContext'
 import { PendingInvite } from './PendingInvite'
 import { RejectedInvite } from './RejectedInvite'
@@ -26,7 +26,6 @@ export const TeamInvites = () => {
       <TeamInvitesAppBar />
       {invites &&
         invites.map((invite) => {
-          // console.log(invite)
           switch (invite.status) {
             case TeamInviteStatus.PENDING: {
               return <PendingInvite invite={invite} />

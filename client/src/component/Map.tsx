@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { GoogleMap, Marker } from '@react-google-maps/api'
-import { mapStyles } from '../mapStyles/mapStyles'
+// import { mapStyles } from '../mapStyles/mapStyles'
 
 const useStyles = makeStyles(
   (theme) => ({

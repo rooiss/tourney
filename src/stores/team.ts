@@ -91,3 +91,25 @@ export const getTeamByTournament = async (
     },
   })
 }
+
+export const getTournamentTeamByUserId = async (
+  userId: string,
+  tournamentId: string,
+) => {
+  const entityManager = getManager()
+  const result = await entityManager.query(
+    `SELECT
+    "TournamentTeam"."id" AS "tournamentTeamId"
+    FROM "team_user" "TeamUser"
+    LEFT JOIN
+    "tournament_team" "TournamentTeam"
+    ON
+    "TeamUser"."tournamentTeamId" = "TournamentTeam"."id"
+    WHERE "TeamUser"."userId" = $1
+    AND "TournamentTeam"."tournamentId" = $2
+    `,
+    [userId, tournamentId],
+  )
+
+  console.log('result', result)
+}

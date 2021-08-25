@@ -30,7 +30,6 @@ export const Tournament = () => {
         <div className={classes.innerPaper}>
           <TournamentDetails />
           <TeamInvites />
-          {/* <RegisteredTeam /> */}
         </div>
       </div>
     </div>
