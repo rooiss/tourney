@@ -5,6 +5,7 @@ import {
   rejectTeamInviteStore,
 } from '../stores/teamInvite'
 import { getTournamentTeamByUserId } from '../stores/team'
+import { teamEntityToJson } from '../mappers/teamEntityToJson'
 
 const router = Router({ mergeParams: true })
 
@@ -83,17 +84,12 @@ router.get(
   asyncHandler(async (req: any, res) => {
     const tournamentId = req.params.tournamentId
     const userId = req.session.user.id
-    try {
-      const team = await getTournamentTeamByUserId(userId, tournamentId)
-      // console.log(`ROUTER, team`, team)
-      res.json({
-        success: true,
-        team,
-      })
-    } catch (e) {
-      console.error('teamRouter error:', e)
-      res.status(500).json({ success: false })
-    }
+    const team = await getTournamentTeamByUserId(userId, tournamentId)
+    console.log(`ROUTER, team`, teamEntityToJson(team))
+    return res.json({
+      success: true,
+      // team: teamEntityToJson(team),
+    })
   }),
 )
 

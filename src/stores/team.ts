@@ -23,6 +23,7 @@ export const newTeam = async ({
   const entityManager = getManager()
   // get tournament
   const tournament = await getTournamentById(tournamentId)
+  // ensure current user doesn't belong to any other teams
   // create and save team
   let team = entityManager.create(TournamentTeam, {
     teamName: teamName,
@@ -110,6 +111,17 @@ export const getTournamentTeamByUserId = async (
     `,
     [userId, tournamentId],
   )
+  const currentTeamId = result[0]?.tournamentTeamId
+  if (!currentTeamId) {
+    return null
+  }
+  return await getTeamByTeamId(currentTeamId)
+}
 
-  console.log('result', result)
+export const getTeamByTeamId = async (teamId: string) => {
+  const entityManager = getManager()
+  return await entityManager.findOne(TournamentTeam, {
+    where: { id: teamId },
+    relations: ['teamUsers', 'teamUsers.user'],
+  })
 }

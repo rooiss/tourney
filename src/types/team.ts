@@ -2,6 +2,7 @@ export interface Teammate {
   email?: string
   firstName?: string
   lastNameLetter?: string
+  username?: string
   id?: string
 }
 
@@ -27,5 +28,17 @@ export interface TeamInvite {
   status: TeamInviteStatus
   tournamentId: string
 }
+
+export interface Team {
+  id: string
+  teamName: string
+  teamUsers: Teammate[]
+}
+
+// export interface TeamUserJson {
+//   id: string
+//   teamRole: TeamRole
+//   user: User
+// }
 
 export type Teammates = Teammate[]
