@@ -4,7 +4,10 @@ import {
   acceptTeamInviteStore,
   rejectTeamInviteStore,
 } from '../stores/teamInvite'
-import { getTournamentTeamByUserId } from '../stores/team'
+import {
+  getAllTeamsByTournamentId,
+  getTournamentTeamByUserId,
+} from '../stores/team'
 import { teamEntityToJson } from '../mappers/teamEntityToJson'
 
 const router = Router({ mergeParams: true })
@@ -85,10 +88,24 @@ router.get(
     const tournamentId = req.params.tournamentId
     const userId = req.session.user.id
     const team = await getTournamentTeamByUserId(userId, tournamentId)
-    console.log(`ROUTER, team`, teamEntityToJson(team))
+    console.log('route to current team')
     return res.json({
       success: true,
-      // team: teamEntityToJson(team),
+      team: teamEntityToJson(team),
+    })
+  }),
+)
+
+// get all teams from tournament
+router.get(
+  '/teams',
+  asyncHandler(async (req: any, res) => {
+    const tournamentId = req.params.tournamentId
+    const allTeams = await getAllTeamsByTournamentId(tournamentId)
+    console.log(`ROUTER all teams`, allTeams)
+    return res.json({
+      success: true,
+      allTeams: allTeams.map(teamEntityToJson),
     })
   }),
 )

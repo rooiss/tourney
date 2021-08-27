@@ -14,8 +14,3 @@ export interface TourneyLocation {
   lng: number
   address: string
 }
-
-export interface Team {
-  id: string
-  teamName: string
-}

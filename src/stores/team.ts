@@ -125,3 +125,12 @@ export const getTeamByTeamId = async (teamId: string) => {
     relations: ['teamUsers', 'teamUsers.user'],
   })
 }
+
+// get all teams from tournament
+export const getAllTeamsByTournamentId = async (tournamentId: string) => {
+  const entityManager = getManager()
+  return await entityManager.find(TournamentTeam, {
+    where: { tournament: tournamentId },
+    relations: ['teamUsers', 'teamUsers.user'],
+  })
+}

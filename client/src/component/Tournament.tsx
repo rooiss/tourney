@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core'
 import { TournamentDetails } from './TournamentDetails'
 import { TeamInvites } from './TeamInvites'
 import { TeamBreadcrumbs } from './TeamBreadcrumbs'
+import { useTournament } from './providers/TournamentContext'
+import { TeamCard } from './TeamCard'
+import { TournamentTeams } from './TournamentTeams'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Tournament = () => {
   const classes = useStyles()
+  const { team } = useTournament()
 
   return (
     <div className={classes.root}>
@@ -29,8 +33,9 @@ export const Tournament = () => {
         <TeamBreadcrumbs />
         <div className={classes.innerPaper}>
           <TournamentDetails />
-          <TeamInvites />
+          {team ? <TeamCard team={team} /> : <TeamInvites />}
         </div>
+        <TournamentTeams />
       </div>
     </div>
   )
