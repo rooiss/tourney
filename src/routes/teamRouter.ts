@@ -102,7 +102,7 @@ router.get(
   asyncHandler(async (req: any, res) => {
     const tournamentId = req.params.tournamentId
     const allTeams = await getAllTeamsByTournamentId(tournamentId)
-    console.log(`ROUTER all teams`, allTeams)
+    // console.log(`ROUTER all teams`, allTeams)
     return res.json({
       success: true,
       allTeams: allTeams.map(teamEntityToJson),
