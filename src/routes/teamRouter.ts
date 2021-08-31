@@ -12,46 +12,14 @@ import { teamEntityToJson } from '../mappers/teamEntityToJson'
 
 const router = Router({ mergeParams: true })
 
-// // create team by tournament
-// router.post(
-//   '/',
-//   asyncHandler(async (req: any, res) => {
-//     console.log('req.body', req.body)
-//     try {
-//       res.json({
-//         success: true,
-//       })
-//     } catch (e) {
-//       console.error('teamRouter error:', e)
-//       res.status(500).json({ success: false })
-//     }
-//   }),
-// )
-
-// // get all teams by tournament
-// router.get(
-//   '/',
-//   asyncHandler(async (req: any, res) => {
-//     // return json
-//     return res.json({})
-//   }),
-// )
-
 // accept team invite
 router.post(
   '/:teamInviteId/accept',
   asyncHandler(async (req: any, res) => {
-    const tournamentId = req.params.tournamentId
     const teamInviteId = req.params.teamInviteId
-    const teamName = req.body.teamName
-    const currentUser = req.body.currentUser
+    const currentUser = req.session.user
     try {
-      await acceptTeamInviteStore(
-        teamInviteId,
-        teamName,
-        tournamentId,
-        currentUser,
-      )
+      await acceptTeamInviteStore(teamInviteId, currentUser)
       res.json({
         success: true,
       })
@@ -66,9 +34,7 @@ router.post(
 router.post(
   '/:teamInviteId/reject',
   asyncHandler(async (req: any, res) => {
-    // const tournamentId = req.params.tournamentId
     const teamInviteId = req.params.teamInviteId
-
     try {
       await rejectTeamInviteStore(teamInviteId)
       res.json({
@@ -102,7 +68,6 @@ router.get(
   asyncHandler(async (req: any, res) => {
     const tournamentId = req.params.tournamentId
     const allTeams = await getAllTeamsByTournamentId(tournamentId)
-    // console.log(`ROUTER all teams`, allTeams)
     return res.json({
       success: true,
       allTeams: allTeams.map(teamEntityToJson),

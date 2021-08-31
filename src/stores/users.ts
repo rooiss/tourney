@@ -24,11 +24,6 @@ export const getUserById = async (id: string) => {
   return entityManager.findOne(User, id)
 }
 
-// export const getUsernamesById = async (id: string) => {
-//   const entityManager = getManager()
-
-// }
-
 export const searchUsersByAll = async (term: string): Promise<User[]> => {
   const entityManager = getManager()
   // separate out the search in here

@@ -36,7 +36,12 @@ router.post(
     const tournamentId = req.params.tournamentId
 
     const team = await getTeamByTournament(tournamentId, teamName)
-    res.json({
+    if (team) {
+      res.status(400).json({ success: false })
+      console.log('team name already exists')
+      return
+    }
+    return res.json({
       valid: team === undefined,
     })
   }),

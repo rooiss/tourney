@@ -81,20 +81,7 @@ export const TeamRegister = () => {
       <TeamBreadcrumbs />
       <Typography variant="h3">Assemble your squad</Typography>
       <form className={classes.form} onSubmit={handleSubmit}>
-        {/* <TextField
-          name="teamName"
-          variant="outlined"
-          required
-          fullWidth
-          id="teamName"
-          label="Team Name"
-          value={values.teamName}
-          onChange={handleChange}
-          helperText={touched.teamName && errors.teamName}
-          autoFocus
-        /> */}
         <TextField
-          // helperText=""
           name="teamName"
           id="teamName"
           className={classes.teamNameField}

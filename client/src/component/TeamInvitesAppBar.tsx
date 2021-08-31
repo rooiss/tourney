@@ -7,7 +7,9 @@ import { useTournament } from './providers/TournamentContext'
 
 const useStyles = makeStyles(
   (theme) => ({
-    root: {},
+    root: {
+      borderRadius: '4px',
+    },
     title: {
       flexGrow: 1,
       textAlign: 'left',
@@ -22,22 +24,20 @@ export const TeamInvitesAppBar = () => {
   const { tournament } = useTournament()
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Team Invites
-          </Typography>
-          <Button
-            component={Link}
-            to={`/tournaments/${tournament.id}/createTeam`}
-            color={'secondary'}
-            variant={'contained'}
-          >
-            Create team
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar position="static" className={classes.root}>
+      <Toolbar>
+        <Typography variant="h6" className={classes.title}>
+          Team Invites
+        </Typography>
+        <Button
+          component={Link}
+          to={`/tournaments/${tournament.id}/createTeam`}
+          color={'secondary'}
+          variant={'contained'}
+        >
+          Create team
+        </Button>
+      </Toolbar>
+    </AppBar>
   )
 }

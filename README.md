@@ -1,10 +1,9 @@
 # TODO
 
-- [ ] show teams and team in tourney details
+- [ ] follow provider
+- [ ] after sending invites redirect to tournament page
+- [ ] teaminvite router validation for accepting single invite
 - [ ] team validation for player creating multiple teams
-- [ ] add team to context
-- [ ] fetch team in the context
-- [ ] if team comes back set that value otherwise dont
 - [ ] reject all other invites when accepting an invite
 - [ ] re-render component for team invites list when any invite status changes
 - [ ] send out emails for all teammates
@@ -21,6 +20,5 @@
 
 ## Nice to haves
 
-- [ ] create tournament location, google maps API lookup
 - [ ] PayPal / stripe integration for payment
 - [ ] waiver form when registering / DocuSign / HelloSign API

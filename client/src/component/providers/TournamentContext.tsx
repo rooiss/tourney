@@ -8,9 +8,11 @@ export interface ITournamentContext {
   tournament: any
   invites: TeamInvite[]
   updateInvite: (invite: TeamInvite) => void
-  // fetchCurrentTeam: (team: Team) => void
+  fetchAllTeams: () => void
   team: Team | null
   allTeams: Team[] | null
+  acceptTeamInvite: ({ teamInviteId }: { teamInviteId: string }) => void
+  rejectTeamInvite: ({ teamInviteId }: { teamInviteId: string }) => void
 }
 
 export const TournamentContext = createContext<ITournamentContext>(
@@ -23,21 +25,72 @@ export const TournamentProvider = ({ children }: any) => {
   const [invites, setInvites] = useState<TeamInvite[]>([])
   const [team, setTeam] = useState<Team | null>(null)
   const [allTeams, setAllTeams] = useState<Team[] | null>(null)
+
   const { tournamentId } = useParams<{ tournamentId: string }>()
 
   const { user } = useAuth()
 
-  // const fetchCurrentTeam = useCallback(() => {
-  //   console.log('fetch current team running')
-  //   fetch(`/api/tournaments/${tournamentId}/currentTeam`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data.success) {
-  //         setTeam(data.team)
-  //         return data
-  //       }
-  //     })
-  // }, [tournamentId])
+  const updateInvite = useCallback(
+    (invite: TeamInvite) => {
+      const updatedInvites = invites.map((i) => {
+        if (i.id === invite.id) {
+          return invite
+        }
+        return i
+      })
+      setInvites(updatedInvites)
+    },
+    [invites],
+  )
+
+  const fetchAllTeams = useCallback(() => {
+    fetch(`/api/tournaments/${tournamentId}/teams`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setAllTeams(data.allTeams)
+          const currentTeam = data.allTeams.find((team: Team) =>
+            team.teamUsers.some(
+              (teammate) => teammate.username === user?.username,
+            ),
+          )
+          setTeam(currentTeam)
+          return data
+        }
+      })
+  }, [tournamentId, user])
+
+  const rejectTeamInvite = useCallback(
+    ({ teamInviteId }) => {
+      return fetch(`/api/tournaments/${tournamentId}/${teamInviteId}/reject`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ teamInviteId }),
+      }).then((res) => res.json())
+    },
+    [tournamentId],
+  )
+
+  const acceptTeamInvite = useCallback(
+    ({ teamInviteId }) => {
+      return fetch(`/api/tournaments/${tournamentId}/${teamInviteId}/accept`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ teamInviteId }),
+      })
+        .then((res) => res.json())
+        .then((body) => {
+          if (body.success) {
+            fetchAllTeams()
+          }
+        })
+    },
+    [tournamentId, fetchAllTeams],
+  )
 
   useEffect(() => {
     setLoading(true)
@@ -60,53 +113,30 @@ export const TournamentProvider = ({ children }: any) => {
         // have an error state, setError here
         console.error('an error occurred getting invites')
       })
-    // get all teams
-    fetch(`/api/tournaments/${tournamentId}/teams`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setAllTeams(data.allTeams)
-          // console.log('data.allTeams.teamUsers', data.allTeams[0].teamUsers)
-          // set the team state to the users team
-          const currentTeam = data.allTeams.find((team: Team) =>
-            team.teamUsers.some(
-              (teammate) => teammate.username === user?.username,
-            ),
-          )
-          setTeam(currentTeam)
-          // console.log('currentTeam', currentTeam)
-          return data
-        }
-      })
-    // see if user is on a team
-    // fetchCurrentTeam()
-  }, [tournamentId, user])
-  // }, [tournamentId, fetchCurrentTeam])
-
-  const updateInvite = useCallback(
-    (invite: TeamInvite) => {
-      const updatedInvites = invites.map((i) => {
-        if (i.id === invite.id) {
-          return invite
-        }
-        return i
-      })
-      setInvites(updatedInvites)
-    },
-    [invites],
-  )
+    fetchAllTeams()
+  }, [tournamentId, user, fetchAllTeams])
 
   const value: ITournamentContext = useMemo(
     () => ({
       tournament,
       invites,
       updateInvite,
-      // fetchCurrentTeam,
+      fetchAllTeams,
+      acceptTeamInvite,
+      rejectTeamInvite,
       team,
       allTeams,
     }),
-    [tournament, updateInvite, invites, allTeams, team],
-    // [tournament, updateInvite, invites, fetchCurrentTeam, team],
+    [
+      tournament,
+      updateInvite,
+      invites,
+      allTeams,
+      team,
+      fetchAllTeams,
+      acceptTeamInvite,
+      rejectTeamInvite,
+    ],
   )
   return (
     <TournamentContext.Provider value={value}>

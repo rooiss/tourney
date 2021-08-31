@@ -10,17 +10,13 @@ export interface AuthUser {
   id: string
 }
 
-interface IAuthContext {
-  isAuthenticated: boolean
-  status: 'pending' | 'success' | 'error'
-  user: null | AuthUser
+export interface IAuthContext {
+  isAuthenticated?: boolean
+  status?: 'pending' | 'success' | 'error'
+  user?: null | AuthUser
 }
 
-export const AuthContext = createContext<IAuthContext>({
-  isAuthenticated: false,
-  status: 'pending',
-  user: null,
-})
+export const AuthContext = createContext<IAuthContext>({})
 
 export const AuthProvider = ({ children }: any) => {
   const [state, setState] = useState<IAuthContext>({

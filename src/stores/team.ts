@@ -24,6 +24,7 @@ export const newTeam = async ({
   // get tournament
   const tournament = await getTournamentById(tournamentId)
   // ensure current user doesn't belong to any other teams
+
   // create and save team
   let team = entityManager.create(TournamentTeam, {
     teamName: teamName,

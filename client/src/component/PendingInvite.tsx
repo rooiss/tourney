@@ -7,11 +7,8 @@ import {
   CardContent,
   Typography,
 } from '@material-ui/core'
-import { rejectTeamInvite } from '../api/rejectTeamInvite'
-import { acceptTeamInvite } from '../api/acceptTeamInvite'
 import { useTournament } from './providers/TournamentContext'
 import { TeamInvite } from '../types/team'
-import { useAuth } from './providers/AuthContext'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -29,8 +26,8 @@ export interface PendingInviteProps {
 
 export const PendingInvite = ({ invite }: PendingInviteProps) => {
   const classes = useStyles()
-  const { tournament } = useTournament()
-  const { user } = useAuth()
+  const { acceptTeamInvite, rejectTeamInvite } = useTournament()
+
   return (
     <Card variant="outlined" className={classes.root} key={invite.id}>
       <CardContent>
@@ -47,9 +44,6 @@ export const PendingInvite = ({ invite }: PendingInviteProps) => {
           onClick={() =>
             acceptTeamInvite({
               teamInviteId: invite.id,
-              tournamentId: tournament.id,
-              teamName: invite.teamName,
-              currentUser: user,
             })
           }
         >
@@ -61,7 +55,6 @@ export const PendingInvite = ({ invite }: PendingInviteProps) => {
           onClick={() =>
             rejectTeamInvite({
               teamInviteId: invite.id,
-              tournamentId: tournament.id,
             })
           }
         >

@@ -34,7 +34,6 @@ export const Dashboard = () => {
     if (reason === 'clickaway') {
       return
     }
-
     setOpen(false)
   }
 

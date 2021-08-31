@@ -18,7 +18,7 @@ export enum TeamInviteStatus {
 }
 
 export interface TeamInvite {
-  id?: string
+  id: string
   teamName: string
   email: string
   firstName?: string

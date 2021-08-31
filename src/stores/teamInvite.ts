@@ -45,7 +45,6 @@ export const getInvitesByTournamentAndEmail = async (
     AND "TeamInvite__team__tournament"."id" = $2`,
     [email, tournamentId],
   )
-
   return result.map((row) => ({
     id: row.id,
     teamName: row.teamName,
@@ -60,23 +59,27 @@ export const getInvitesByTournamentAndEmail = async (
 
 export const acceptTeamInviteStore = async (
   teamInviteId: string,
-  teamName: string,
-  tournamentId: string,
   currentUser: User,
 ) => {
   const entityManager = getManager()
-  let teamInvite = await entityManager.findOne(TeamInvite, teamInviteId)
+  let teamInvite = await entityManager.findOne(TeamInvite, {
+    where: { id: teamInviteId, email: currentUser.email },
+    relations: ['team'],
+  })
+  // ensure that the invite is for this user
+  if (!teamInvite) {
+    throw new Error(`inviteid ${teamInviteId} doesnt exist for current user`)
+  }
+  // ensure that user isnt already on another team
+  // const allTeams = getInvitesByTournamentAndEmail()
   teamInvite.status = TeamInviteStatus.ACCEPTED
   teamInvite = await entityManager.save(teamInvite)
   console.log('changed status to accepted', teamInvite.status)
   // add them as a teamuser to that team
-  const team = await entityManager.findOne(TournamentTeam, {
-    where: { teamName: teamName, tournament: tournamentId },
-  })
   const teammate = entityManager.create(TeamUser, {
     teamRole: teamInvite.teamRole,
     user: currentUser,
-    tournamentTeam: team,
+    tournamentTeam: teamInvite.team,
   })
   console.log('adding user to team', teammate)
   return await entityManager.save(teammate)
