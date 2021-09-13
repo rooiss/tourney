@@ -8,17 +8,19 @@ export const Following = () => {
   return (
     <div>
       <FollowingAppBar />
-      {following.map((u: any) => {
-        return (
-          <Card key={u.id}>
-            <CardContent>
-              <Typography gutterBottom variant="h5">
-                {u.username}
-              </Typography>
-            </CardContent>
-          </Card>
-        )
-      })}
+      {console.log(following)}
+      {following &&
+        following.map((u: any) => {
+          return (
+            <Card key={u.id}>
+              <CardContent>
+                <Typography gutterBottom variant="h5">
+                  {u.username}
+                </Typography>
+              </CardContent>
+            </Card>
+          )
+        })}
     </div>
   )
 }

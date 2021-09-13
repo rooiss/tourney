@@ -21,9 +21,10 @@ export interface LoginUser {
 }
 
 export interface UserToSearchResult {
-  email: string
   username: string
   id: string
+  firstName: string
+  lastNameLetter: string
 }
 
 export interface UserToCreator {

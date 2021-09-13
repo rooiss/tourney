@@ -14,31 +14,45 @@ export interface FollowingProviderProps {}
 export interface FollowingContext {
   refetch: () => void
   following: Following[]
-  setFollowing: React.Dispatch<React.SetStateAction<any>>
+  setFollowing: (Following: Following[]) => void
 }
 
 export const followingContext = createContext<FollowingContext>(
   {} as FollowingContext,
 )
 
+async function fetchFollowers() {
+  return fetch('/api/follows').then((res) => res.json())
+}
+
 export const FollowingProvider = ({ children }: { children: ReactNode }) => {
   const [following, setFollowing] = useState<Following[]>([])
   // const [loading, setLoading] = useState(true)
 
-  const refetch = useCallback(() => {
-    fetch('/api/follows/')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setFollowing(data.followedUsers)
+  const refetch = useCallback(async () => {
+    return (
+      fetchFollowers()
+        // .then((res) => res.json())
+        .then((data) => {
+          if (data.success === true) {
+            setFollowing(data.followedUsers)
+            return
+          }
+          console.log('error in refetch on FollowingProvider')
           return
-        }
-      })
+        })
+    )
   }, [])
 
   useEffect(() => {
-    refetch()
-  }, [refetch])
+    fetchFollowers().then((res) => {
+      if (res.success === true) {
+        setFollowing(res.followedUsers)
+        return
+      }
+      console.log('error in useEffect on FollowingProvider')
+    })
+  }, [])
 
   const value: FollowingContext = useMemo(
     () => ({

@@ -1,7 +1,7 @@
-import { User } from './users'
+import { UserToSearchResult } from './users'
 
 export interface Following {
   id: string
-  personFollowing: User
-  personToFollow: User
+  personFollowing: UserToSearchResult
+  personToFollow: UserToSearchResult
 }

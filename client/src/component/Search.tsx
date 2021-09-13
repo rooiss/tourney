@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { Button, makeStyles } from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
+import { useFollowing } from './providers/FollowingProvider'
 
 interface Option {
   firstName: string
@@ -27,8 +28,10 @@ const useStyles = makeStyles({
 export default function Search(/* { onNewFollow} */) {
   const [term, setTerm] = useState('')
   const [options, setOptions] = useState<Option[]>([])
-  const [following, setFollowing] = useState<Set<string>>(new Set())
+  // const [following, setFollowing] = useState<Set<string>>(new Set())
   const classes = useStyles()
+
+  const { following, setFollowing, refetch } = useFollowing()
 
   const handleChange = (e: any) => {
     setTerm(e.target.value)
@@ -36,6 +39,7 @@ export default function Search(/* { onNewFollow} */) {
       .then((res) => res.json())
       .then((data) => {
         setOptions(data.results)
+        console.log('options', options)
       })
   }
 
@@ -46,26 +50,34 @@ export default function Search(/* { onNewFollow} */) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id }),
-    }).then(() => {
-      const newFollowing = new Set(following)
-      newFollowing.add(id)
-      setFollowing(newFollowing)
-      // instead of above, do this:
-      // onNewFollow(id)
     })
-  }
-
-  useEffect(() => {
-    fetch('/api/follows/')
       .then((res) => res.json())
       .then((data) => {
-        // setFollowing(data.followedUsers.map((user) => user.id))
-        const followSet = new Set<string>(
-          data.followedUsers.map((user) => user.id),
-        )
-        setFollowing(followSet)
+        setFollowing([...following, data.newFollow])
+        // console.log('following', following)
+        refetch()
       })
-  }, [])
+  }
+  // const newFollowing = new Set(following)
+  // newFollowing.add(id)
+  // setFollowing(newFollowing)
+  // instead of above, do this:
+  // onNewFollow(id)
+  // setFollowing([...following, newFollow])
+
+  // useEffect(() => {
+  // fetch('/api/follows/')
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     // setFollowing(data.followedUsers.map((user) => user.id))
+  //     // const followSet = new Set<string>(
+  //     //   data.followedUsers.map((user) => user.id),
+  //     // )
+  //     if (data.success) {
+  //       setFollowing(data.followUsers)
+  //     }
+  //   })
+  // }, [])
   // if the id matches the ones in the option list then
   // disable the add button and replace with "following" text
 
@@ -88,10 +100,10 @@ export default function Search(/* { onNewFollow} */) {
             <div>
               <Button
                 onClick={onFollow(option.id)}
-                disabled={following.has(option.id)}
+                disabled={following.some((option) => option.id)}
               >
                 <PersonAddIcon />
-                {following.has(option.id) ? 'following' : 'follow'}
+                {following.some((option) => option.id) ? 'following' : 'follow'}
               </Button>
             </div>
           </div>
@@ -103,7 +115,7 @@ export default function Search(/* { onNewFollow} */) {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Name | @username | email"
+          label="name | @username | email"
           margin="normal"
           variant="outlined"
           name="term"

@@ -6,9 +6,10 @@ export function userEntityToSearchResult(
 ): UserToSearchResult {
   // take user entity and convert it to json
   return {
-    email: userEntity.email,
     id: userEntity.id,
     username: userEntity.username,
+    firstName: userEntity.firstName,
+    lastNameLetter: userEntity.lastName[0],
   }
 }
 
