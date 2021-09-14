@@ -8,14 +8,13 @@ export const Following = () => {
   return (
     <div>
       <FollowingAppBar />
-      {console.log(following)}
       {following &&
         following.map((u: any) => {
           return (
-            <Card key={u.id}>
+            <Card variant="outlined" key={u.id}>
               <CardContent>
-                <Typography gutterBottom variant="h5">
-                  {u.username}
+                <Typography variant="h6">
+                  {u.firstName} {u.lastNameLetter}. {u.username}
                 </Typography>
               </CardContent>
             </Card>

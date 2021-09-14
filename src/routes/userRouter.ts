@@ -61,7 +61,6 @@ router.get(
   '/search',
   asyncHandler(async (req, res) => {
     // get term from req.query
-
     let results = await searchUsersByAll(req.query.term as string)
     return res.json({
       results: results.map((u) => ({

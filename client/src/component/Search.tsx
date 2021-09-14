@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { Button, makeStyles } from '@material-ui/core'
@@ -19,16 +19,11 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'flex-end',
   },
-  searchBox: {
-    // width: '100%',
-    // height: '50%',
-  },
 })
 
-export default function Search(/* { onNewFollow} */) {
+export default function Search() {
   const [term, setTerm] = useState('')
   const [options, setOptions] = useState<Option[]>([])
-  // const [following, setFollowing] = useState<Set<string>>(new Set())
   const classes = useStyles()
 
   const { following, setFollowing, refetch } = useFollowing()
@@ -39,7 +34,8 @@ export default function Search(/* { onNewFollow} */) {
       .then((res) => res.json())
       .then((data) => {
         setOptions(data.results)
-        console.log('options', options)
+        // console.log('options', options)
+        // console.log('following', following)
       })
   }
 
@@ -54,36 +50,15 @@ export default function Search(/* { onNewFollow} */) {
       .then((res) => res.json())
       .then((data) => {
         setFollowing([...following, data.newFollow])
-        // console.log('following', following)
         refetch()
       })
   }
-  // const newFollowing = new Set(following)
-  // newFollowing.add(id)
-  // setFollowing(newFollowing)
-  // instead of above, do this:
-  // onNewFollow(id)
-  // setFollowing([...following, newFollow])
 
-  // useEffect(() => {
-  // fetch('/api/follows/')
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     // setFollowing(data.followedUsers.map((user) => user.id))
-  //     // const followSet = new Set<string>(
-  //     //   data.followedUsers.map((user) => user.id),
-  //     // )
-  //     if (data.success) {
-  //       setFollowing(data.followUsers)
-  //     }
-  //   })
-  // }, [])
   // if the id matches the ones in the option list then
   // disable the add button and replace with "following" text
 
   return (
     <Autocomplete
-      className={classes.searchBox}
       id="free-solo-demo"
       // getOptionLabel is what the search input is looking up by
       // if its option.firstName then it only takes first name as the input
@@ -100,10 +75,12 @@ export default function Search(/* { onNewFollow} */) {
             <div>
               <Button
                 onClick={onFollow(option.id)}
-                disabled={following.some((option) => option.id)}
+                disabled={following.some((f) => f.id === option.id)}
               >
                 <PersonAddIcon />
-                {following.some((option) => option.id) ? 'following' : 'follow'}
+                {following.some((f) => f.id === option.id)
+                  ? 'following'
+                  : 'follow'}
               </Button>
             </div>
           </div>
