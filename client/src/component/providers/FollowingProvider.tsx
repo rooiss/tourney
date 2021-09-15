@@ -30,18 +30,14 @@ export const FollowingProvider = ({ children }: { children: ReactNode }) => {
   // const [loading, setLoading] = useState(true)
 
   const refetch = useCallback(async () => {
-    return (
-      fetchFollowers()
-        // .then((res) => res.json())
-        .then((data) => {
-          if (data.success === true) {
-            setFollowing(data.followedUsers)
-            return
-          }
-          console.log('error in refetch on FollowingProvider')
-          return
-        })
-    )
+    return fetchFollowers().then((data) => {
+      if (data.success === true) {
+        setFollowing(data.followedUsers)
+        return
+      }
+      console.log('error in refetch on FollowingProvider')
+      return
+    })
   }, [])
 
   useEffect(() => {

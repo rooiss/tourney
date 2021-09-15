@@ -1,14 +1,13 @@
 import React from 'react'
-import { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import { useState } from 'react'
 import TournamentsAppBar from './TournamentsAppBar'
 import { Link } from 'react-router-dom'
+import { useTournaments } from './providers/TournamentsProvider'
 
 const useStyles = makeStyles({
   root: {
@@ -29,16 +28,16 @@ const useStyles = makeStyles({
 
 export const Tournaments = () => {
   // getting all tournaments from users being followed
-  const [tournaments, setTournaments] = useState([])
+  const { tournaments } = useTournaments()
 
-  useEffect(() => {
-    fetch('/api/tournaments/')
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data.tournaments)
-        setTournaments(data.tournaments)
-      })
-  }, [])
+  // useEffect(() => {
+  //   fetch('/api/tournaments/')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setTournaments(data.tournaments)
+  //     })
+  // }, [])
+
   // display username, date of tournament, location,
 
   const classes = useStyles()

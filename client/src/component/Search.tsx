@@ -5,6 +5,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete'
 import { Button, makeStyles } from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import { useFollowing } from './providers/FollowingProvider'
+import { useTournaments } from './providers/TournamentsProvider'
 
 interface Option {
   firstName: string
@@ -27,6 +28,7 @@ export default function Search() {
   const classes = useStyles()
 
   const { following, setFollowing, refetch } = useFollowing()
+  const { refetchTournaments } = useTournaments()
 
   const handleChange = (e: any) => {
     setTerm(e.target.value)
@@ -34,8 +36,6 @@ export default function Search() {
       .then((res) => res.json())
       .then((data) => {
         setOptions(data.results)
-        // console.log('options', options)
-        // console.log('following', following)
       })
   }
 
@@ -51,6 +51,8 @@ export default function Search() {
       .then((data) => {
         setFollowing([...following, data.newFollow])
         refetch()
+        // console.log(`refetchTournament()`, refetchTournament)
+        refetchTournaments()
       })
   }
 

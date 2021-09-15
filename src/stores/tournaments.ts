@@ -22,3 +22,8 @@ export const getTournamentsFromAllUsersFollowing = async (
     where: { creator: In(userIdsOfFollowing) },
   })
 }
+
+// export const getAllTournaments = async () => {
+//   const entityManager = getManager()
+//   return entityManager.find(Tournament)
+// }

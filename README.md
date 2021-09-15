@@ -1,6 +1,7 @@
 # TODO
 
-- [ ] follow provider
+- [x] follow provider
+- [ ] have refetch for tournament provider
 - [ ] after sending invites redirect to tournament page
 - [ ] teaminvite router validation for accepting single invite
 - [ ] team validation for player creating multiple teams

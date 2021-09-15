@@ -31,14 +31,17 @@ router.post(
   }),
 )
 
-// get all tournaments
+// get all tournaments from following users
 router.get(
   '/',
   asyncHandler(async (req: any, res) => {
+    if (!req.session) {
+      return
+    }
     const user = await getUserById(req.session.user.id)
     const usersFollowing = await getFollowedUsers(user)
 
-    // this returns a new array of just usernames that the user is following
+    // this returns a new array of just userIds that the user is following
     const userIdsOfFollowing = usersFollowing.map(
       (user) => user.personToFollow.id,
     )

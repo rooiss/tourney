@@ -6,7 +6,6 @@ export interface Tournament {
   tourneyLocation: TourneyLocation
   creator: User
   creatorUsername?: string
-  // teams:
 }
 
 export interface TourneyLocation {
