@@ -49,9 +49,8 @@ router.get(
     const tournaments = await getTournamentsFromAllUsersFollowing(
       userIdsOfFollowing,
     )
-    // const usernameOfCreator = await getUserById()
     return res.json({
-      tournaments /* : tournaments.map(tournamentEntityToJson) */,
+      tournaments /*tournaments.map(tournamentEntityToJson), */,
     })
   }),
 )
@@ -62,7 +61,6 @@ router.get(
   asyncHandler(async (req: any, res) => {
     // return json
     const tournament = await getTournamentById(req.params.tournamentId)
-    // console.log('tournament', tournament)
     return res.json({ tournament /*: tournamentEntityToJson(tournament) */ })
   }),
 )

@@ -27,22 +27,10 @@ const useStyles = makeStyles({
 })
 
 export const Tournaments = () => {
-  // getting all tournaments from users being followed
   const { tournaments } = useTournaments()
-
-  // useEffect(() => {
-  //   fetch('/api/tournaments/')
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setTournaments(data.tournaments)
-  //     })
-  // }, [])
-
-  // display username, date of tournament, location,
 
   const classes = useStyles()
   const allTournaments = tournaments.map((tournament: any) => {
-    // console.log('tournaments', tournaments)
     return (
       <Card className={classes.root} variant="outlined" key={tournament.id}>
         <CardContent className={classes.card}>

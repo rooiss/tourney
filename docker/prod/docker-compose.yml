@@ -1,0 +1,39 @@
+version: '3'
+services:
+  redis:
+    image: redis:alpine
+    hostname: redis
+    command: redis-server
+    volumes:
+      - $PWD/.redis-data:/var/lib/redis
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    networks:
+      - poundtown
+  postgres:
+    image: postgres
+    hostname: postgres
+    volumes:
+      - $PWD/.postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: realeyesrealizereallies
+      POSTGRES_USER: localdev
+      POSTGRES_DB: tourney
+    networks:
+      - poundtown
+  app:
+    container_name: app
+    env_file: ../../.env
+    environment:
+      - NODE_ENV=production
+    tty: true
+    stdin_open: true
+    # image name for circleci "dockerhubname/repo:tag"
+    image: rooiss/tourney:latest
+    networks:
+      - poundtown
+    ports:
+      - '4000:4000'
+
+networks:
+  poundtown:

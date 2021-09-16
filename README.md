@@ -1,7 +1,6 @@
 # TODO
 
-- [x] follow provider
-- [ ] have refetch for tournament provider
+- [ ] validations for creating tournament
 - [ ] after sending invites redirect to tournament page
 - [ ] teaminvite router validation for accepting single invite
 - [ ] team validation for player creating multiple teams
@@ -18,6 +17,7 @@
   - [ ] title of tournament is `${username}'s ${tournament.format} on ${tournament.date}`
 - [ ] format date to something readable
 - [ ] add division to tournament entity
+- [ ] route to delete tournament
 
 ## Nice to haves
 
