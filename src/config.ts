@@ -22,7 +22,6 @@ const devConfig = {
   //   cookieKey: 'got any good sassaparilla?',
   // },
 }
-console.log('devconfig pw *****', devConfig.dbConfig.password)
 
 const prodConfig = {
   // hostName: 'https://stonksgame.xyz',
@@ -33,7 +32,7 @@ const prodConfig = {
     username: 'localdev',
     // ensures that the inferred type is string, not string | undefined
     password: process.env.DB_PASSWORD || '',
-    database: 'stonks',
+    database: 'tourney',
     entities: ['build/entity/**/*.js'],
     migrations: ['build/migration/**/*.js'],
     subscribers: ['build/subscriber/**/*.js'],

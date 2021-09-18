@@ -6,3 +6,4 @@ coverage
 .dbData
 .mailData
 mailserver.env
+build/

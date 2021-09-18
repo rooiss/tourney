@@ -7,7 +7,10 @@
     "start": "NODE_ENV=development ts-node-dev src/server.ts",
     "stop": "docker-compose -f ./docker/dev/docker-compose.yml down",
     "copy:types": "cp -rf ./src/types/* ./client/src/types/",
-    "watch:types": "npm-watch copy:types"
+    "watch:types": "npm-watch copy:types",
+    "start:prod": "NODE_ENV=production nodemon build/server.js",
+    "build": "tsc && npm run copy:non-ts",
+    "copy:non-ts": "copyfiles -u 1 -e \"**/*.tsx?\" \"./src/**/*\" ./build/"
   },
   "watch": {
     "copy:types": {

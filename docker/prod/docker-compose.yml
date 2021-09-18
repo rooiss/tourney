@@ -33,7 +33,7 @@ services:
     networks:
       - poundtown
     ports:
-      - '4000:4000'
+      - '5000:5000'
 
 networks:
   poundtown:
