@@ -14,7 +14,8 @@ jobs:
       - docker/build:
           # references the image name defined in docker/prod/docker-compose
           image: rooiss/tourney
-          dockerfile: ./docker/prod/Dockerfile
+          dockerfile: Dockerfile
+          path: ./docker/prod/
           tag: latest
       - docker/push:
           # the dockerhub repository to push to
