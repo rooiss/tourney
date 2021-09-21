@@ -25,7 +25,7 @@ jobs:
     docker:
       - image: node:14
     steps:
-      - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP "~/deploy.sh"
+      - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP "~/tourney/deploy.sh"
 
 workflows:
   build-test-deploy:
