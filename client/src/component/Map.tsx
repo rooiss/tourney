@@ -1,7 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { GoogleMap, Marker } from '@react-google-maps/api'
-// import { mapStyles } from '../mapStyles/mapStyles'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -14,14 +13,8 @@ const useStyles = makeStyles(
 
 const libraries = ['places' as const]
 
-// const options = {
-//   styles: mapStyles,
-// }
-
 export const Map = ({ tourneyLocation }) => {
   const classes = useStyles()
-
-  // const [tourneyMarker, setTourneyMarker] = useState({})
 
   const containerStyle = {
     width: '650px',
@@ -33,12 +26,7 @@ export const Map = ({ tourneyLocation }) => {
   }
   return (
     <div className={classes.root}>
-      <GoogleMap
-        zoom={16}
-        center={center}
-        mapContainerStyle={containerStyle}
-        // options={options}
-      >
+      <GoogleMap zoom={16} center={center} mapContainerStyle={containerStyle}>
         <Marker position={center} />
       </GoogleMap>
     </div>

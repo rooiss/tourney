@@ -29,7 +29,6 @@ export const TournamentLocationSearch = ({
   const handleSelect = async (address) => {
     const result = await geocodeByAddress(address)
     const latLng = await getLatLng(result[0])
-    console.log(`result`, result)
     onChange({
       ...latLng,
       address: address,
