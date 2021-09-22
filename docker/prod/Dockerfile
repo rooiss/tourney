@@ -49,6 +49,9 @@ COPY --from=build /app/build ./build
 # Copy over the built client
 COPY --from=build /app/client/build /app/client/build
 
+# Copy the env file
+COPY --from=build /app/client/.env /app/client/.env 
+
 # Expose the port
 EXPOSE 5000
 
