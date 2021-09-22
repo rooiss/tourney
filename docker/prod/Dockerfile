@@ -1,4 +1,8 @@
+ARG GOOGLE_PLACES_API_KEY
+
 FROM node:alpine as build
+
+ENV GOOGLE_PLACES_API_KEY=$GOOGLE_PLACES_API_KEY
 
 # Set working directory of app in image
 WORKDIR /app
@@ -11,6 +15,8 @@ RUN npm install
 
 # Change to the client directory
 WORKDIR /app/client
+
+RUN echo 'REACT_APP_GOOGLE_PLACES_API_KEY=$GOOGLE_PLACES_API_KEY' > ./.env
 
 # Install the client's build dependencies
 RUN npm install
