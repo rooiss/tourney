@@ -7,6 +7,7 @@ import followsRouter from './routes/followsRouter'
 import tournamentRouter from './routes/tournamentRouter'
 import verificationRouter from './routes/verificationRouter'
 import teamRouter from './routes/teamRouter'
+import uiRouter from './routes/uiRouter'
 import { staticMiddleware } from './middleware/staticMiddleware'
 
 const redis = require('redis')
@@ -39,6 +40,7 @@ app.use('/api/follows', followsRouter)
 app.use('/api/tournaments', tournamentRouter)
 app.use('/api/verify', verificationRouter)
 app.use('/api/tournaments/:tournamentId', teamRouter)
+app.use('/api/uiconfig', uiRouter)
 
 // Static routes (for serving built UI)
 app.use(staticMiddleware({}))

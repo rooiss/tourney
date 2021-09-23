@@ -1,6 +1,7 @@
 import React, { createContext, useMemo } from 'react'
 import { useContext } from 'react'
 import { useLoadScript } from '@react-google-maps/api'
+import { useUiConfigProvider } from './UiConfigProvider'
 
 interface GoogleContext {
   isLoaded: boolean
@@ -14,8 +15,10 @@ export const googleContext = createContext<GoogleContext>({
 const libraries = ['places' as const]
 
 export const GoogleProvider = ({ children }: any) => {
+  const { googleKey } = useUiConfigProvider()
+
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_PLACES_API_KEY || '',
+    googleMapsApiKey: googleKey || '',
     libraries,
   })
   const value = useMemo(() => ({ isLoaded, loadError }), [isLoaded, loadError])
