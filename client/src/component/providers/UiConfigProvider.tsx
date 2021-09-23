@@ -18,8 +18,10 @@ export const UiConfigProvider = ({ children }: any) => {
     fetch('/api/uiconfig/')
       .then((res) => res.json())
       .then((data) => {
-        setGoogleKey(data.GOOGLE_PLACES_API_KEY)
-        setLoading(false)
+        if (data.GOOGLE_PLACES_API_KEY) {
+          setGoogleKey(data.GOOGLE_PLACES_API_KEY)
+          setLoading(false)
+        }
       })
   }, [])
 
