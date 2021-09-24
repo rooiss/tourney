@@ -45,7 +45,7 @@ const userToTeammate = (user: AuthUser): Teammate => {
 }
 
 export const TeamRegister = () => {
-  const { tournament, refetchTournament } = useTournament()
+  const { tournament, fetchAllTeams } = useTournament()
   const { user } = useAuth()
   let history = useHistory()
 
@@ -59,7 +59,8 @@ export const TeamRegister = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     createTeam({ tournamentId: tournament.id, teammates, captain, teamName })
-    refetchTournament()
+    // refetchTournament()
+    fetchAllTeams()
     history.push(`/tournaments/${tournament.id}`)
   }
 
