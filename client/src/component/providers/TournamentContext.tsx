@@ -14,6 +14,7 @@ export interface ITournamentContext {
   acceptTeamInvite: ({ teamInviteId }: { teamInviteId: string }) => void
   rejectTeamInvite: ({ teamInviteId }: { teamInviteId: string }) => void
   refetchTournament: () => void
+  refetchTournamentInvites: () => void
 }
 
 export const TournamentContext = createContext<ITournamentContext>(
@@ -105,6 +106,19 @@ export const TournamentProvider = ({ children }: any) => {
       })
   }, [tournamentId])
 
+  const refetchTournamentInvites = useCallback(async () => {
+    return fetch(`/api/tournaments/${tournamentId}/invites`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setInvites(data.teamInvites)
+          return
+        }
+        // have an error state, setError here
+        console.error('an error occurred getting invites')
+      })
+  }, [tournamentId])
+
   useEffect(() => {
     setLoading(true)
     // fetch the tournament object
@@ -140,6 +154,7 @@ export const TournamentProvider = ({ children }: any) => {
       team,
       allTeams,
       refetchTournament,
+      refetchTournamentInvites,
     }),
     [
       tournament,
@@ -151,6 +166,7 @@ export const TournamentProvider = ({ children }: any) => {
       acceptTeamInvite,
       rejectTeamInvite,
       refetchTournament,
+      refetchTournamentInvites,
     ],
   )
   return (

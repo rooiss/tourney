@@ -8,6 +8,7 @@ import { TeammateSearch } from './TeammateSearch'
 import { Teammates } from './Teammates'
 import { Teammate } from '../types/team'
 import { createTeam } from '../api/createTeam'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -46,6 +47,7 @@ const userToTeammate = (user: AuthUser): Teammate => {
 export const TeamRegister = () => {
   const { tournament } = useTournament()
   const { user } = useAuth()
+  let history = useHistory()
 
   const [teammates, setTeammates] = useState([userToTeammate(user!!)])
   const [teamNameError, setTeamNameError] = useState(false)
@@ -57,6 +59,7 @@ export const TeamRegister = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     createTeam({ tournamentId: tournament.id, teammates, captain, teamName })
+    history.push(`/tournaments/${tournament.id}`)
   }
 
   const handleChange = (e) => {
@@ -73,6 +76,9 @@ export const TeamRegister = () => {
       .then((data) => {
         if (data.valid) {
           setTeamName(teamname)
+        }
+        if (data.success === false) {
+          setTeamNameError(true)
         }
       })
   }

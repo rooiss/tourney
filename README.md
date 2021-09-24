@@ -1,6 +1,8 @@
 # TODO
 
+- [ ] redirect on send out invites
 - [ ] validations for creating tournament
+- [ ] refetch tournament invites
 - [ ] after sending invites redirect to tournament page
 - [ ] teaminvite router validation for accepting single invite
 - [ ] team validation for player creating multiple teams
