@@ -56,11 +56,16 @@ export const TeamRegister = () => {
 
   const classes = useStyles()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    createTeam({ tournamentId: tournament.id, teammates, captain, teamName })
+    await createTeam({
+      tournamentId: tournament.id,
+      teammates,
+      captain,
+      teamName,
+    })
     // refetchTournament()
-    fetchAllTeams()
+    await fetchAllTeams()
     history.push(`/tournaments/${tournament.id}`)
   }
 
