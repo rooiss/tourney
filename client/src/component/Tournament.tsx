@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core'
 import { TournamentDetails } from './TournamentDetails'
 import { TeamInvites } from './TeamInvites'
@@ -25,11 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Tournament = () => {
   const classes = useStyles()
-  const { team, refetchTournamentInvites } = useTournament()
-
-  useEffect(() => {
-    refetchTournamentInvites()
-  }, [refetchTournamentInvites])
+  const { team } = useTournament()
 
   return (
     <div className={classes.root}>
