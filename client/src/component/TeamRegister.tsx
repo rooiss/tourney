@@ -59,8 +59,8 @@ export const TeamRegister = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     createTeam({ tournamentId: tournament.id, teammates, captain, teamName })
-    history.push(`/tournaments/${tournament.id}`)
     refetchTournament()
+    history.push(`/tournaments/${tournament.id}`)
   }
 
   const handleChange = (e) => {

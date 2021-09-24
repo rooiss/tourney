@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 export const Tournament = () => {
   const classes = useStyles()
   const { team } = useTournament()
-
   return (
     <div className={classes.root}>
       <div className={classes.paper}>
