@@ -1,6 +1,15 @@
 import { User } from '../entity/User'
 import { getManager } from 'typeorm'
+import { google } from 'googleapis'
 import * as nodemailer from 'nodemailer'
+
+const OAuth2 = google.auth.OAuth2
+
+const oauth2Client = new OAuth2(
+  process.env.OAUTH_CLIENTID,
+  process.env.OAUTH_CLIENT_SECRET,
+  'https://developers.google.com/oauthplayground', // Redirect URL
+)
 
 export const verifyUser = async (id: string) => {
   const entityManager = getManager()
@@ -9,6 +18,10 @@ export const verifyUser = async (id: string) => {
 }
 
 export const sendVerificationEmail = async (verifyCode, email) => {
+  oauth2Client.setCredentials({
+    refresh_token: process.env.OAUTH_REFRESH_TOKEN,
+  })
+  const accessToken = oauth2Client.getAccessToken()
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -18,6 +31,7 @@ export const sendVerificationEmail = async (verifyCode, email) => {
       clientId: process.env.OAUTH_CLIENTID,
       clientSecret: process.env.OAUTH_CLIENT_SECRET,
       refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+      accessToken: accessToken,
     },
   } as any)
 
@@ -37,5 +51,6 @@ export const sendVerificationEmail = async (verifyCode, email) => {
     } else {
       console.log('Email sent successfully')
     }
+    transporter.close()
   })
 }

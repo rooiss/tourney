@@ -61,9 +61,7 @@ export default function App() {
                     </Route>
                     <Route path="/" exact>
                       <ButtonAppBar />
-                      {/* <Container> */}
                       <Home />
-                      {/* </Container> */}
                     </Route>
                     <Route path="/tournaments/:tournamentId">
                       <ButtonAppBar />

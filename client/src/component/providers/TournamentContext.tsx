@@ -46,7 +46,7 @@ export const TournamentProvider = ({ children }: any) => {
   )
 
   const fetchAllTeams = useCallback(() => {
-    fetch(`/api/tournaments/${tournamentId}/teams`)
+    return fetch(`/api/tournaments/${tournamentId}/teams`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

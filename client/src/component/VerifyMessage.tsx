@@ -1,17 +1,8 @@
 import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import { Alert } from '@material-ui/lab'
 import { Button } from '@material-ui/core'
 
-const useStyles = makeStyles(
-  (theme) => ({
-    root: {},
-  }),
-  { name: 'VerifyMessage' },
-)
-
 export const VerifyMessage = () => {
-  const classes = useStyles()
   const [emailSent, setEmailSent] = useState(false)
 
   const verifyEmail = () => {

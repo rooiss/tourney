@@ -64,7 +64,6 @@ export const TeamRegister = () => {
       captain,
       teamName,
     })
-    // refetchTournament()
     await fetchAllTeams()
     history.push(`/tournaments/${tournament.id}`)
   }
