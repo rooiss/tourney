@@ -44,7 +44,6 @@ export const sendVerificationEmail = async (verifyCode, email) => {
     html: `<a href="${process.env.HOSTNAME}/verifyme/${verifyCode}">click to verify your account</a>`,
   }
 
-  console.log('transporter sending mail')
   transporter.sendMail(message, function (err, data) {
     if (err) {
       console.log('Error ' + err)
