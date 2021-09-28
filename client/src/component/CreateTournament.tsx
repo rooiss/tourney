@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container'
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
+  DatePicker,
 } from '@material-ui/pickers'
 import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
@@ -86,7 +87,7 @@ export function CreateTournament() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
+                {/* <KeyboardDatePicker
                   disableToolbar
                   variant="inline"
                   format="MM/dd/yyyy"
@@ -98,6 +99,12 @@ export function CreateTournament() {
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
                   }}
+                /> */}
+                <DatePicker
+                  label="date picker"
+                  value={formik.values.selectedDate}
+                  onChange={formik.handleChange}
+                  animateYearScrolling
                 />
               </MuiPickersUtilsProvider>
             </Grid>
