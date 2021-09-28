@@ -43,7 +43,7 @@ export function CreateTournament() {
 
   const formik = useFormik({
     initialValues: {
-      selectedDate: '11/15/2021',
+      selectedDate: null,
       location: null,
     },
     onSubmit: (values) => {
@@ -101,32 +101,7 @@ export function CreateTournament() {
                 />
               </MuiPickersUtilsProvider>
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardTimePicker
-                  margin="normal"
-                  id="time-picker"
-                  label="Start time"
-                  value={formik.values.selectedDate}
-                  onChange={formik.handleChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change time',
-                  }}
-                />
-              </MuiPickersUtilsProvider>
-            </Grid> */}
             <Grid item xs={12}>
-              {/* <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="location"
-                label="Location"
-                name="location"
-                autoComplete="location"
-                value={formik.values.location}
-                onChange={formik.handleChange}
-              /> */}
               <TournamentLocationSearch
                 tourneyLocation={formik.values.location}
                 onChange={(tourneyLocation) =>
