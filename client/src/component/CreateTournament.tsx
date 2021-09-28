@@ -89,19 +89,6 @@ export function CreateTournament() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                {/* <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="MM/dd/yyyy"
-                  margin="normal"
-                  id="date-picker-inline"
-                  label="Tournament Date"
-                  value={formik.values.selectedDate}
-                  onChange={formik.handleChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                /> */}
                 <DatePicker
                   label="date picker"
                   value={formik.values.selectedDate}

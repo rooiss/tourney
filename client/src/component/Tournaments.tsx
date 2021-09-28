@@ -29,6 +29,11 @@ const useStyles = makeStyles({
 export const Tournaments = () => {
   const { tournaments } = useTournaments()
 
+  const formatDate = (date) => {
+    const newDate = date.split('T')[0].split('-')
+    return `${newDate[1]}/${newDate[2]}/${newDate[0]}`
+  }
+
   const classes = useStyles()
   const allTournaments = tournaments.map((tournament: any) => {
     return (
@@ -45,7 +50,7 @@ export const Tournaments = () => {
             {tournament.location.address}
           </Typography>
           <Typography variant="h5" component="h2">
-            {tournament.selectedDate}
+            {formatDate(tournament.selectedDate)}
           </Typography>
         </CardContent>
         <CardActions>
