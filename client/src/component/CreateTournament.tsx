@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Grid from '@material-ui/core/Grid'
@@ -63,6 +63,8 @@ export function CreateTournament() {
     },
   })
 
+  // const handleDateChange = useCallback(() => {}, [])
+
   const [serverError, setServerError] = useState('')
 
   const classes = useStyles()
@@ -103,7 +105,9 @@ export function CreateTournament() {
                 <DatePicker
                   label="date picker"
                   value={formik.values.selectedDate}
-                  onChange={formik.handleChange}
+                  onChange={(date) => {
+                    formik.setFieldValue('selectedDate', date, false)
+                  }}
                   animateYearScrolling
                 />
               </MuiPickersUtilsProvider>
