@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import TournamentsAppBar from './TournamentsAppBar'
 import { Link } from 'react-router-dom'
 import { useTournaments } from './providers/TournamentsProvider'
+// import { useAuth } from './providers/AuthContext'
 
 const useStyles = makeStyles({
   root: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles({
 
 export const Tournaments = () => {
   const { tournaments } = useTournaments()
+  // const { user } = useAuth()
 
   const formatDate = (date) => {
     const newDate = date.split('T')[0].split('-')
@@ -61,6 +63,16 @@ export const Tournaments = () => {
           >
             View
           </Button>
+          {/* {tournament.creator.id === user!!.id ? (
+            <Button
+              component={Link}
+              to={`/tournaments/${tournament.id}/delete`}
+              size="small"
+              color="secondary"
+            >
+              Delete
+            </Button>
+          ) : null} */}
         </CardActions>
       </Card>
     )

@@ -65,8 +65,6 @@ router.get(
   }),
 )
 
-// TODO
-// delete a tournament
 // router.delete(
 //   '/:tournamentId',
 //   asyncHandler(async (req, res) => {}),

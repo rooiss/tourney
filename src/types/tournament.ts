@@ -1,10 +1,10 @@
-import { User } from './users'
+import { User, UserToCreator } from './users'
 
 export interface Tournament {
   id: string
   selectedDate: string
   tourneyLocation: TourneyLocation
-  creator: User
+  creator: UserToCreator
   creatorUsername?: string
 }
 

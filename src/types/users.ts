@@ -29,4 +29,5 @@ export interface UserToSearchResult {
 
 export interface UserToCreator {
   id: string
+  username: string
 }

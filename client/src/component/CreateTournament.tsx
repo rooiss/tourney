@@ -1,15 +1,11 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-  DatePicker,
-} from '@material-ui/pickers'
+import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers'
 import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
 import { useFormik } from 'formik'

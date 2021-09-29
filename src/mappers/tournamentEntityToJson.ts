@@ -1,12 +1,12 @@
 import { Tournament } from '../entity/Tournament'
 import { Tournament as TournamentJson } from '../types/tournament'
+import { userEntityToTournament } from '../mappers/userToJson'
 
 export function tournamentEntityToJson(tournament: Tournament): TournamentJson {
-  // console.log('tournament', tournament)
   return {
     id: tournament.id,
     tourneyLocation: tournament.location,
-    creator: tournament.creator,
+    creator: userEntityToTournament(tournament.creator),
     selectedDate: tournament.selectedDate,
   }
 }

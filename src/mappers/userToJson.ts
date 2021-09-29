@@ -13,4 +13,11 @@ export function userEntityToSearchResult(
   }
 }
 
+export function userEntityToTournament(userEntity) {
+  return {
+    id: userEntity.id,
+    username: userEntity.username,
+  }
+}
+
 // export function userEntityToFollowingTournamentResult(userEntity: UserEntity,): UserTo
