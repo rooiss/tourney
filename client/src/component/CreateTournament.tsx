@@ -86,7 +86,7 @@ export function CreateTournament() {
             <Grid item xs={12}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DatePicker
-                  label="date picker"
+                  label="Tournament Date"
                   value={formik.values.selectedDate}
                   onChange={(date) => {
                     formik.setFieldValue('selectedDate', date, false)

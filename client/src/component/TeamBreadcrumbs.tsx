@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Breadcrumbs, Link } from '@material-ui/core'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import { useTournament } from './providers/TournamentContext'
+import { formatDate } from './Tournaments'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -26,7 +27,7 @@ export const TeamBreadcrumbs = () => {
           Dashboard
         </Link>
         <Link component={RouterLink} to={`/tournaments/${tournament.id}`}>
-          {tournament.selectedDate}
+          {formatDate(tournament.selectedDate)}
         </Link>
       </Breadcrumbs>
     </div>

@@ -27,14 +27,14 @@ const useStyles = makeStyles({
   },
 })
 
+export const formatDate = (date) => {
+  const newDate = date.split('T')[0].split('-')
+  return `${newDate[1]}/${newDate[2]}/${newDate[0]}`
+}
+
 export const Tournaments = () => {
   const { tournaments } = useTournaments()
   // const { user } = useAuth()
-
-  const formatDate = (date) => {
-    const newDate = date.split('T')[0].split('-')
-    return `${newDate[1]}/${newDate[2]}/${newDate[0]}`
-  }
 
   const classes = useStyles()
   const allTournaments = tournaments.map((tournament: any) => {

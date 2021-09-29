@@ -30,7 +30,8 @@ export const Teammates = ({ teammates, captain, setCaptain, setTeammates }) => {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     if (event.target.checked) {
-      setCaptain(teammate.email)
+      console.log(`teammate.email`, teammate.email)
+      setCaptain(teammate.id || teammate.email)
     } else {
       setCaptain('')
     }
@@ -55,7 +56,8 @@ export const Teammates = ({ teammates, captain, setCaptain, setTeammates }) => {
         </TableHead>
         <TableBody>
           {teammates.map((teammate, index) => {
-            const checked = captain === teammate.email
+            const checked =
+              captain === teammate.email || captain === teammate.id
             return (
               <TableRow key={teammate.email}>
                 <TableCell component="th" scope="row">

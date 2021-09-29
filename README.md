@@ -1,5 +1,6 @@
 # TODO
 
+- [ ] debounce all search inputs
 - [ ] validations for creating tournament
 - [ ] teaminvite router validation for accepting single invite
 - [ ] team validation for player creating multiple teams

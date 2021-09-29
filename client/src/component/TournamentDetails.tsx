@@ -4,6 +4,7 @@ import { useTournament } from './providers/TournamentContext'
 import EventIcon from '@material-ui/icons/Event'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import { Map } from './Map'
+import { formatDate } from './Tournaments'
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -34,7 +35,7 @@ export const TournamentDetails = () => {
   return (
     <div className={classes.paper}>
       <Typography variant="h3" className={classes.titleContainer}>
-        <span className={classes.title}>Volleyboo tournament</span>
+        <span className={classes.title}>Volleyball tournament</span>
       </Typography>
       <Typography variant="h5" className={classes.titleContainer}>
         <span className={classes.title}>
@@ -43,7 +44,7 @@ export const TournamentDetails = () => {
       </Typography>
       <Typography variant="h4" className={classes.titleContainer}>
         <span className={classes.title}>
-          <EventIcon /> {tournament.selectedDate}
+          <EventIcon /> {formatDate(tournament.selectedDate)}
         </span>
       </Typography>
       <Map tourneyLocation={tournament.location} />
