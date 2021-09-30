@@ -14,9 +14,7 @@
 - [ ] email obfuscation deter webscrape
 - [ ] format and divisions for tournament entity and create tournament page
   - [ ] title of tournament is `${username}'s ${tournament.format} on ${tournament.date}`
-- [ ] format date to something readable
 - [ ] add division to tournament entity
-- [ ] route to delete tournament
 
 ## Nice to haves
 
