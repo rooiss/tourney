@@ -22,7 +22,9 @@ export class TournamentTeam {
   @OneToMany(() => TeamInvite, (invite) => invite.team)
   invites: TeamInvite[]
 
-  @ManyToOne(() => Tournament, (tournament) => tournament.tournamentTeam)
+  @ManyToOne(() => Tournament, (tournament) => tournament.tournamentTeam, {
+    onDelete: 'CASCADE',
+  })
   tournament: Tournament
 
   @OneToMany(() => TeamUser, (teamUser) => teamUser.tournamentTeam)

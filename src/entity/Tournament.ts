@@ -24,6 +24,7 @@ export class Tournament {
   @OneToMany(
     () => TournamentTeam,
     (tournamentTeam) => tournamentTeam.tournament,
+    { onDelete: 'CASCADE' },
   )
   tournamentTeam: TournamentTeam[]
 

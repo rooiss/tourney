@@ -30,7 +30,6 @@ export const Teammates = ({ teammates, captain, setCaptain, setTeammates }) => {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     if (event.target.checked) {
-      console.log(`teammate.email`, teammate.email)
       setCaptain(teammate.id || teammate.email)
     } else {
       setCaptain('')

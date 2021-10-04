@@ -20,7 +20,13 @@ export const getTournamentsFromAllUsersFollowing = async (
   const entityManager = getManager()
   return entityManager.find(Tournament, {
     where: { creator: In(userIdsOfFollowing) },
+    relations: ['creator'],
   })
+}
+
+export const deleteTournamentById = async (tournamentId: string) => {
+  const entityManager = getManager()
+  return entityManager.delete(Tournament, tournamentId)
 }
 
 // export const getAllTournaments = async () => {

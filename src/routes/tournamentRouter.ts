@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { getFollowedUsers, getUserById } from '../stores/users'
 import {
+  deleteTournamentById,
   getTournamentById,
   getTournamentsFromAllUsersFollowing,
   newTournament,
@@ -49,8 +50,9 @@ router.get(
     const tournaments = await getTournamentsFromAllUsersFollowing(
       userIdsOfFollowing,
     )
+    console.log('tournaments from router', tournaments)
     return res.json({
-      tournaments /*tournaments.map(tournamentEntityToJson), */,
+      tournaments: tournaments.map(tournamentEntityToJson),
     })
   }),
 )
@@ -65,10 +67,29 @@ router.get(
   }),
 )
 
-// router.delete(
-//   '/:tournamentId',
-//   asyncHandler(async (req, res) => {}),
-// )
+router.delete(
+  '/:tournamentId',
+  asyncHandler(async (req, res) => {
+    try {
+      // check to see if tournament exists
+      const tournament = getTournamentById(req.params.tournamentId)
+      if (!tournament) {
+        const response = {
+          success: false,
+          error: 'tournament not found',
+        }
+        return res.status(404).json(response)
+      }
+
+      // call delete store function
+      await deleteTournamentById(req.params.tournamentId)
+      return res.json({ success: true })
+    } catch (e) {
+      console.error('tournament router error:', e)
+      return res.status(500).json({ success: false })
+    }
+  }),
+)
 
 // create all team invites
 router.post(

@@ -8,7 +8,8 @@ import Typography from '@material-ui/core/Typography'
 import TournamentsAppBar from './TournamentsAppBar'
 import { Link } from 'react-router-dom'
 import { useTournaments } from './providers/TournamentsProvider'
-// import { useAuth } from './providers/AuthContext'
+import { formatDate } from '../utils/formatDate'
+import { useAuth } from './providers/AuthContext'
 
 const useStyles = makeStyles({
   root: {
@@ -27,29 +28,41 @@ const useStyles = makeStyles({
   },
 })
 
-export const formatDate = (date) => {
-  const newDate = date.split('T')[0].split('-')
-  return `${newDate[1]}/${newDate[2]}/${newDate[0]}`
-}
-
 export const Tournaments = () => {
-  const { tournaments } = useTournaments()
-  // const { user } = useAuth()
+  const { tournaments, refetchTournaments } = useTournaments()
+  const { user } = useAuth()
 
   const classes = useStyles()
+
+  const deleteTournament = (tournamentId) => () => {
+    fetch(`/api/tournaments/${tournamentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: null,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success === true) {
+          refetchTournaments()
+        }
+      })
+  }
+
   const allTournaments = tournaments.map((tournament: any) => {
     return (
       <Card className={classes.root} variant="outlined" key={tournament.id}>
         <CardContent className={classes.card}>
-          <Typography variant="h3" component="h2">
-            {/* put tournament creator here */}
+          <Typography variant="h4" component="h2">
+            {tournament.creator.username}'s volleyball tournament
           </Typography>
           <Typography
             className={classes.title}
             color="textSecondary"
             gutterBottom
           >
-            {tournament.location.address}
+            {tournament.tourneyLocation.address}
           </Typography>
           <Typography variant="h5" component="h2">
             {formatDate(tournament.selectedDate)}
@@ -63,16 +76,17 @@ export const Tournaments = () => {
           >
             View
           </Button>
-          {/* {tournament.creator.id === user!!.id ? (
+          {tournament.creator.id === user!!.id ? (
             <Button
-              component={Link}
-              to={`/tournaments/${tournament.id}/delete`}
+              // component={Link}
+              // to={`/tournaments/${tournament.id}`}
               size="small"
               color="secondary"
+              onClick={deleteTournament(tournament.id)}
             >
               Delete
             </Button>
-          ) : null} */}
+          ) : null}
         </CardActions>
       </Card>
     )

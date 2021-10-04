@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Breadcrumbs, Link } from '@material-ui/core'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import { useTournament } from './providers/TournamentContext'
-import { formatDate } from './Tournaments'
+import { formatDate } from '../utils/formatDate'
 
 const useStyles = makeStyles(
   (theme) => ({

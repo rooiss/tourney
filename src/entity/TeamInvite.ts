@@ -7,7 +7,9 @@ export class TeamInvite {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @ManyToOne(() => TournamentTeam, (team) => team.invites)
+  @ManyToOne(() => TournamentTeam, (team) => team.invites, {
+    onDelete: 'CASCADE',
+  })
   team: TournamentTeam
 
   @Column('varchar')

@@ -4,7 +4,7 @@ import { useTournament } from './providers/TournamentContext'
 import EventIcon from '@material-ui/icons/Event'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import { Map } from './Map'
-import { formatDate } from './Tournaments'
+import { formatDate } from '../utils/formatDate'
 
 const useStyles = makeStyles((theme) => ({
   root: {},

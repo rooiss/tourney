@@ -24,7 +24,7 @@ const devConfig = {
 }
 
 const prodConfig = {
-  // hostName: 'https://stonksgame.xyz',
+  hostName: process.env.HOSTNAME,
   dbConfig: {
     type: 'postgres',
     host: 'postgres',
