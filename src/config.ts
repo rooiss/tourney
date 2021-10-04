@@ -24,7 +24,7 @@ const devConfig = {
 }
 
 const prodConfig = {
-  hostName: process.env.HOSTNAME,
+  // hostName: process.env.HOSTNAME,
   dbConfig: {
     type: 'postgres',
     host: 'postgres',
