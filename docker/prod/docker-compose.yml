@@ -11,7 +11,7 @@ services:
     networks:
       - poundtown
   postgres:
-    image: postgres
+    image: postgres:13.4
     hostname: postgres
     volumes:
       - $PWD/.postgres-data:/var/lib/postgresql/data
