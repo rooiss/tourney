@@ -6,7 +6,7 @@
 
 A Volleyball tournament management app that allows tournament organizers to create tournaments and for players to create teams and invite teammates to join their teams.
 
-[landing](Landing.png)
+![landing](Landing.png)
 
 ## Technologies
 
