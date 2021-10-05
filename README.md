@@ -23,7 +23,7 @@ The Volleyball Tournament Management App was built with a Express framework, uti
 
 As a tournament organizer/director you're able to create a tournament using the google maps API and the Google Places autocomplete feature
 
-!(create a tournament)(createTournament.gif)
+![create a tournament](createTournament.gif)
 
 ### Find tournaments
 
