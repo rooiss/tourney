@@ -1,35 +1,27 @@
 # Volleyball Tournament Management App
 
----
-
 ## Overview
 
----
-
-[Live Site][https://volleyballtournaments.xyz]
+[Live Site](https://volleyballtournaments.xyz)
 
 A Volleyball tournament management app that allows tournament organizers to create tournaments and for players to create teams and invite teammates to join their teams.
 
 ## Technologies
 
----
-
 - Frontend: React, hooks/contextAPI, TypeScript, JSS, Material UI,
 - Backend: docker, docker-compose, docker-sync, Nginx, PostgreSQL, redis, Node.js, express, TypeORM, circleci
 - Google Maps API, Gmail Oauth
-- [nodemailer][https://nodemailer.com/about/]
+- [nodemailer](https://nodemailer.com/about/)
 
 The Volleyball Tournament Management App was built with a Express framework, utilizing PostgresSQL for organized data storage, redis for fast session storage, and the React hooks and contextAPI libraries for dynamic frontend, single-page app navigation and interactivity.
 
 ## Features
 
----
-
 ### Create a tournament
 
 As a tournament organizer/director you're able to create a tournament using the google maps API and the Google Places autocomplete feature
 
-![create a tournament](createTournament.gif)
+!(create a tournament)(createTournament.gif)
 
 ### Find tournaments
 
@@ -51,8 +43,6 @@ As a player you can join a team that has sent you an invite
 
 ## Running this project locally
 
----
-
 1. Clone this project locally
 2. Download docker for desktop
 3. Start docker for desktop
@@ -60,8 +50,6 @@ As a player you can join a team that has sent you an invite
 5. In the client folder run the npm start command
 
 ## To Do
-
----
 
 - [ ] debounce all search inputs
 - [ ] validations for creating tournament
