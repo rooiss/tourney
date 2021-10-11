@@ -26,7 +26,7 @@ export const sendVerificationEmail = async (verifyCode, email) => {
   console.log('accessToken from verfication email =====', accessToken)
 
   let transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'Gmail',
     auth: {
       type: 'OAuth2',
       user: process.env.MAIL_USERNAME,
@@ -34,7 +34,7 @@ export const sendVerificationEmail = async (verifyCode, email) => {
       clientId: process.env.OAUTH_CLIENTID,
       clientSecret: process.env.OAUTH_CLIENT_SECRET,
       refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-      accessToken: accessToken,
+      accessToken: accessToken.token,
     },
     tls: {
       rejectUnauthorized: false,
