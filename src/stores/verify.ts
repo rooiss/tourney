@@ -3,14 +3,6 @@ import { getManager } from 'typeorm'
 import { google } from 'googleapis'
 import * as nodemailer from 'nodemailer'
 
-const OAuth2 = google.auth.OAuth2
-
-const oauth2Client = new OAuth2(
-  process.env.OAUTH_CLIENTID,
-  process.env.OAUTH_CLIENT_SECRET,
-  'https://developers.google.com/oauthplayground', // Redirect URL
-)
-
 export const verifyUser = async (id: string) => {
   const entityManager = getManager()
   console.log('updating user.verified to be true')
@@ -18,10 +10,21 @@ export const verifyUser = async (id: string) => {
 }
 
 export const sendVerificationEmail = async (verifyCode, email) => {
+  const OAuth2 = google.auth.OAuth2
+
+  const oauth2Client = new OAuth2(
+    process.env.OAUTH_CLIENTID,
+    process.env.OAUTH_CLIENT_SECRET,
+    'https://developers.google.com/oauthplayground', // Redirect URL
+  )
+
   oauth2Client.setCredentials({
     refresh_token: process.env.OAUTH_REFRESH_TOKEN,
   })
-  const accessToken = oauth2Client.getAccessToken()
+
+  const accessToken = await oauth2Client.getAccessToken()
+  console.log('accessToken from verfication email =====', accessToken)
+
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -32,6 +35,9 @@ export const sendVerificationEmail = async (verifyCode, email) => {
       clientSecret: process.env.OAUTH_CLIENT_SECRET,
       refreshToken: process.env.OAUTH_REFRESH_TOKEN,
       accessToken: accessToken,
+    },
+    tls: {
+      rejectUnauthorized: false,
     },
   } as any)
 

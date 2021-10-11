@@ -16,8 +16,6 @@ RUN npm install
 # Change to the client directory
 WORKDIR /app/client
 
-RUN echo 'REACT_APP_GOOGLE_PLACES_API_KEY=$GOOGLE_PLACES_API_KEY' > ./.env
-
 # Install the client's build dependencies
 RUN npm install
 
@@ -48,9 +46,6 @@ COPY --from=build /app/build ./build
 
 # Copy over the built client
 COPY --from=build /app/client/build /app/client/build
-
-# Copy the env file
-COPY --from=build /app/client/.env /app/client/.env 
 
 # Expose the port
 EXPOSE 5000

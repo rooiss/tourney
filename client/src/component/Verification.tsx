@@ -1,21 +1,12 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import { useAuth } from './providers/AuthContext'
 import { Redirect, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-const useStyles = makeStyles(
-  (theme) => ({
-    root: {},
-  }),
-  { name: 'Verification' },
-)
-
 export const Verification = () => {
   const { user } = useAuth()
   const { verifyCode } = useParams<{ verifyCode: string }>()
-  const classes = useStyles()
 
   useEffect(() => {
     if (!user) {
@@ -42,7 +33,7 @@ export const Verification = () => {
     )
   }
   return (
-    <div className={classes.root}>
+    <div>
       <CircularProgress />
     </div>
   )
