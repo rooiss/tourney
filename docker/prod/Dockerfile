@@ -3,6 +3,7 @@ ARG GOOGLE_PLACES_API_KEY
 FROM node:alpine as build
 
 ENV GOOGLE_PLACES_API_KEY=$GOOGLE_PLACES_API_KEY
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 # Set working directory of app in image
 WORKDIR /app
