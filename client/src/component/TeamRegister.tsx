@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { TeamBreadcrumbs } from './TeamBreadcrumbs'
-import { Button, TextField, Typography } from '@material-ui/core'
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from '@material-ui/core'
 import { useTournament } from './providers/TournamentContext'
 import { AuthUser, useAuth } from './providers/AuthContext'
 import { TeammateSearch } from './TeammateSearch'
@@ -9,6 +17,7 @@ import { Teammates } from './Teammates'
 import { Teammate } from '../types/team'
 import { createTeam } from '../api/createTeam'
 import { useHistory } from 'react-router-dom'
+import { useDivisions } from './providers/DivisionsProvider'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -48,6 +57,7 @@ export const TeamRegister = () => {
   const { tournament, fetchAllTeams } = useTournament()
   const { user } = useAuth()
   let history = useHistory()
+  const { divisions } = useDivisions()
 
   const [teammates, setTeammates] = useState([userToTeammate(user!!)])
   const [teamNameError, setTeamNameError] = useState(false)
@@ -88,6 +98,9 @@ export const TeamRegister = () => {
         }
       })
   }
+
+  const handleDivision = (e) => {}
+
   return (
     <div className={classes.paper}>
       <TeamBreadcrumbs />
@@ -103,6 +116,23 @@ export const TeamRegister = () => {
           onChange={handleChange}
           autoFocus
         />
+        <FormControl fullWidth>
+          <InputLabel id="divisionSelect">Division</InputLabel>
+          <Select
+            labelId="divisionSelect"
+            id="divisionSelect"
+            value={divisions}
+            label="division"
+            onChange={handleDivision}
+            variant="outlined"
+          >
+            <MenuItem value={divisions['AA']}>AA</MenuItem>
+            {/* <MenuItem value={}>A</MenuItem>
+            <MenuItem value={}>BB</MenuItem>
+            <MenuItem value={}>B</MenuItem>
+            <MenuItem value={}>C</MenuItem> */}
+          </Select>
+        </FormControl>
         <TeammateSearch
           tournamentId={tournament.id}
           teammates={teammates}

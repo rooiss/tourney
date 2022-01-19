@@ -53,6 +53,7 @@ As a player you can join a team that has sent you an invite
 
 ## To Do
 
+- [ ] update css
 - [ ] debounce all search inputs
 - [ ] validations for creating tournament
 - [ ] teaminvite router validation for accepting single invite

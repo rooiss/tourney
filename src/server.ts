@@ -8,6 +8,7 @@ import tournamentRouter from './routes/tournamentRouter'
 import verificationRouter from './routes/verificationRouter'
 import teamRouter from './routes/teamRouter'
 import uiRouter from './routes/uiRouter'
+import divisionsRouter from './routes/divisionsRouter'
 import { staticMiddleware } from './middleware/staticMiddleware'
 
 const redis = require('redis')
@@ -41,9 +42,10 @@ app.use('/api/tournaments', tournamentRouter)
 app.use('/api/verify', verificationRouter)
 app.use('/api/tournaments/:tournamentId', teamRouter)
 app.use('/api/uiconfig', uiRouter)
+app.use('/api/divisions', divisionsRouter)
 
 // Static routes (for serving built UI)
-app.use(staticMiddleware({}))
+// app.use(staticMiddleware({}))
 
 app.listen(5000, () => {
   console.log('server listening on port 5000')

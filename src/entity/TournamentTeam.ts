@@ -2,10 +2,13 @@ import {
   Column,
   Entity,
   Index,
+  JoinColumn,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
+import { Division } from './Division'
 import { TeamInvite } from './TeamInvite'
 import { TeamUser } from './TeamUser'
 import { Tournament } from './Tournament'
@@ -29,4 +32,8 @@ export class TournamentTeam {
 
   @OneToMany(() => TeamUser, (teamUser) => teamUser.tournamentTeam)
   teamUsers: TeamUser[]
+
+  @OneToOne(() => Division)
+  @JoinColumn()
+  division: Division
 }

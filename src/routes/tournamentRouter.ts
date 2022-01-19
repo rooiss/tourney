@@ -100,6 +100,7 @@ router.post(
     const teamName = req.body.teamName
     const captainEmailOrId = req.body.captain
     const teammates = req.body.teammates
+    // 
     const currentUser = await getUserById(req.session.user.id)
     // ensure tournament exists
     // get tournament

@@ -44,7 +44,7 @@ export const sendVerificationEmail = async (verifyCode, email) => {
   let message = {
     from: 'volleyballtournamentapp@gmail.com',
     to: `${email}`,
-    subject: 'Complete registration to be apart of your team!',
+    subject: 'Complete registration to be a part of your team!',
     text: 'Plaintext version of the message',
     // build url with verifycode
     html: `<a href="${process.env.HOSTNAME}/verifyme/${verifyCode}">click to verify your account</a>`,
