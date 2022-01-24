@@ -17,7 +17,7 @@ router.get(
       }
     } catch (e) {
       console.error(
-        `divisionRoouter: an error occured while fetching divisions`,
+        `divisionRouter: an error occured while fetching divisions`,
         e,
       )
       response = {

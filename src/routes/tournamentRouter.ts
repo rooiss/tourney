@@ -36,9 +36,10 @@ router.post(
 router.get(
   '/',
   asyncHandler(async (req: any, res) => {
-    if (!req.session) {
+    if (!req.session.user) {
       return
     }
+    // console.log('req.session', req.session)
     const user = await getUserById(req.session.user.id)
     const usersFollowing = await getFollowedUsers(user)
 
@@ -100,7 +101,7 @@ router.post(
     const teamName = req.body.teamName
     const captainEmailOrId = req.body.captain
     const teammates = req.body.teammates
-    // 
+    //
     const currentUser = await getUserById(req.session.user.id)
     // ensure tournament exists
     // get tournament

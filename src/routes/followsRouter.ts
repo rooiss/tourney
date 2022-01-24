@@ -24,6 +24,9 @@ router.get(
   '/',
   asyncHandler(async (req: any, res) => {
     // get all users that req.session is following
+    if (!req.session.user) {
+      return
+    }
     const personFollowing = await getUserById(req.session.user.id)
     const followedUsers = await getFollowedUsers(personFollowing)
     // always return json from a get request

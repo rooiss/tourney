@@ -11,7 +11,6 @@ import {
 } from '@material-ui/core'
 import { CheckCircleOutline } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
-import cn from 'clsx'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
