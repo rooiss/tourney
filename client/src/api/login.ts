@@ -1,7 +1,6 @@
 import { LoginUser } from '../types/users'
 
 export async function login(values: LoginUser) {
-  // console.log('HITTING THE API IIIIIIIIIII')
   return fetch('/api/users/login', {
     method: 'POST',
     headers: {

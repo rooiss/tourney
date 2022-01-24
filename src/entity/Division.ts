@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryColumn } from 'typeorm'
 
 @Entity()
 export class Division {
-  @PrimaryColumn('string')
+  @PrimaryColumn('uuid')
   id: string
 
   @Column()
