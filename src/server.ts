@@ -45,7 +45,7 @@ app.use('/api/uiconfig', uiRouter)
 app.use('/api/divisions', divisionsRouter)
 
 // Static routes (for serving built UI)
-// app.use(staticMiddleware({}))
+app.use(staticMiddleware({}))
 
 app.listen(5000, () => {
   console.log('server listening on port 5000')
