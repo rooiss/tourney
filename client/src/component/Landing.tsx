@@ -223,7 +223,7 @@ export const Landing = () => {
             </List>
           </Grid>
           <Grid item xs={3} className={classes.gridItem}>
-            <img src="/images/Team.svg" alt="team" />
+            <img src="/images/team.svg" alt="team" />
           </Grid>
           <Grid item xs={5} className={classes.gridItem}>
             <img src="/images/Grades.svg" alt="Grades" />
