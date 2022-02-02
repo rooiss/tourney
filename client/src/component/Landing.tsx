@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'stretch',
-    backgroundImage: 'url(/vballpic.png)',
+    backgroundImage: 'url(/vballpic.webp)',
     backgroundRepeat: 'none',
     backgroundSize: 'cover',
     // minHeight: '575px',
