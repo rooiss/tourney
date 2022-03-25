@@ -17,7 +17,7 @@ export const Map = ({ tourneyLocation }) => {
   const classes = useStyles()
 
   const containerStyle = {
-    width: '650px',
+    width: '100%',
     height: '450px',
   }
   const center = {

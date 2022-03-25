@@ -5,6 +5,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete'
 import { TourneyLocation } from '../types/tournament'
+import { Input } from '@material-ui/core'
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -44,7 +45,7 @@ export const TournamentLocationSearch = ({
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
-            <input {...getInputProps({ placeholder: 'type address' })} />
+            <Input {...getInputProps({ placeholder: 'Location' })} />
             <div>{loading ? <div>...loading</div> : null}</div>
             {suggestions.map((suggestion) => {
               const style = {
