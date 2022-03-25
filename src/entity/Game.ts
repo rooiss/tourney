@@ -1,13 +1,12 @@
-import { Status } from '../types/game'
 import {
   Column,
   Entity,
   JoinColumn,
-  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
+import { Status } from '../types/game'
 import { TournamentTeam } from './TournamentTeam'
 import { GameScore } from './GameScore'
 
@@ -16,17 +15,17 @@ export class Game {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column()
+  @Column({ default: 'NOT_STARTED' })
   state: Status
 
   @OneToOne(() => TournamentTeam)
   @JoinColumn()
-  winner: TournamentTeam
+  winner?: TournamentTeam
 
   @OneToOne(() => TournamentTeam)
   @JoinColumn()
   refTeam: TournamentTeam
 
   @OneToMany(() => GameScore, (gameScore) => gameScore.game)
-  gameScores: GameScore
+  gameScores: GameScore[]
 }

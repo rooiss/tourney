@@ -14,7 +14,7 @@ export class GameScore {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column('int')
+  @Column('int', { default: 0 })
   score: number
 
   @OneToOne(() => TournamentTeam)
