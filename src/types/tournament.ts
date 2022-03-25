@@ -1,4 +1,4 @@
-import { User, UserToCreator } from './users'
+import { UserToCreator } from './users'
 
 export interface Tournament {
   id: string
