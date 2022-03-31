@@ -8,5 +8,6 @@ export function tournamentEntityToJson(tournament: Tournament): TournamentJson {
     tourneyLocation: tournament.location,
     creator: userEntityToTournament(tournament.creator),
     selectedDate: tournament.selectedDate,
+    courts: tournament.courts,
   }
 }

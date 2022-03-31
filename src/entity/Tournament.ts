@@ -18,6 +18,9 @@ export class Tournament {
   @Column('varchar')
   selectedDate: string
 
+  @Column('int')
+  courts: number
+
   @Column('json')
   location: TourneyLocation
 

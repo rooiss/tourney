@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
@@ -14,6 +13,7 @@ import { Alert } from '@material-ui/lab'
 import { useHistory } from 'react-router-dom'
 import { TournamentLocationSearch } from './TournamentLocationSearch'
 import { Map } from './Map'
+import { TextField } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   form: {
     width: '100%',
@@ -42,6 +43,7 @@ export function CreateTournament() {
     initialValues: {
       selectedDate: null,
       location: null,
+      courts: 0,
     },
     onSubmit: (values) => {
       // clear any previous errors
@@ -66,8 +68,7 @@ export function CreateTournament() {
   const classes = useStyles()
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Container component="main" maxWidth="md">
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
           Tournament details
@@ -83,7 +84,7 @@ export function CreateTournament() {
           onSubmit={formik.handleSubmit}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DatePicker
                   label="Tournament Date"
@@ -95,13 +96,25 @@ export function CreateTournament() {
                 />
               </MuiPickersUtilsProvider>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
+              <TextField
+                id="courts"
+                type="number"
+                label="Number of courts"
+                value={formik.values.courts}
+                size="small"
+                onChange={formik.handleChange}
+              />
+            </Grid>
+            <Grid item>
               <TournamentLocationSearch
                 tourneyLocation={formik.values.location}
                 onChange={(tourneyLocation) =>
                   formik.setFieldValue('location', tourneyLocation, false)
                 }
               />
+            </Grid>
+            <Grid item xs={12}>
               {formik.values.location && (
                 <Map tourneyLocation={formik.values.location} />
               )}

@@ -6,6 +6,7 @@ export interface Tournament {
   tourneyLocation: TourneyLocation
   creator: UserToCreator
   creatorUsername?: string
+  courts: number
 }
 
 export interface TourneyLocation {
