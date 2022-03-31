@@ -43,7 +43,7 @@ export function CreateTournament() {
     initialValues: {
       selectedDate: null,
       location: null,
-      courts: '',
+      courts: 0,
     },
     onSubmit: (values) => {
       // clear any previous errors
@@ -99,6 +99,7 @@ export function CreateTournament() {
             <Grid item xs={6}>
               <TextField
                 id="courts"
+                type="number"
                 label="Number of courts"
                 value={formik.values.courts}
                 size="small"
