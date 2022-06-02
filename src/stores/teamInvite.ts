@@ -1,8 +1,8 @@
 import { getManager } from 'typeorm'
-import * as nodemailer from 'nodemailer'
+// import * as nodemailer from 'nodemailer'
 import { TeamInvite as TeamInviteJson, TeamInviteStatus } from '../types/team'
 import { TeamInvite } from '../entity/TeamInvite'
-import { TournamentTeam } from '../entity/TournamentTeam'
+// import { TournamentTeam } from '../entity/TournamentTeam'
 import { TeamUser } from '../entity/TeamUser'
 import { User } from '../entity/User'
 
@@ -71,6 +71,9 @@ export const acceptTeamInviteStore = async (
     throw new Error(`inviteid ${teamInviteId} doesnt exist for current user`)
   }
   // ensure that user isnt already on another team
+  // let isOnTeam = await entityManager.findOne(TeamInvite, {
+  //   where: {email: currentUser.email, status: TeamInviteStatus.ACCEPTED}
+  // })
   // const allTeams = getInvitesByTournamentAndEmail()
   teamInvite.status = TeamInviteStatus.ACCEPTED
   teamInvite = await entityManager.save(teamInvite)
@@ -92,6 +95,24 @@ export const rejectTeamInviteStore = async (teamInviteId: string) => {
   teamInvite.status = TeamInviteStatus.REJECTED
   console.log('teamInvite', teamInvite)
   return await entityManager.save(teamInvite)
+}
+
+export const rejectAllTeamInviteStore = async (
+  tournamentId: string,
+  email: string,
+  ignoreId?: string,
+) => {
+  const entityManager = getManager()
+  let allTeamInvites = await getInvitesByTournamentAndEmail(tournamentId, email)
+  if (ignoreId) {
+    allTeamInvites = allTeamInvites.filter((invite) => {
+      invite.id !== ignoreId
+    })
+  }
+  const rejectedTeamInvites = allTeamInvites.map((teamInvite) => {
+    return { ...teamInvite, status: TeamInviteStatus.REJECTED }
+  })
+  return await entityManager.save(rejectedTeamInvites)
 }
 
 // export const sendTeamInvites = async (email, inviteId) => {
