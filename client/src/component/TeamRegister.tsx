@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { TeamBreadcrumbs } from './TeamBreadcrumbs'
 import {
   Button,
   FormControl,
@@ -10,13 +8,15 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles'
+import { TeamBreadcrumbs } from './TeamBreadcrumbs'
 import { useTournament } from './providers/TournamentContext'
 import { AuthUser, useAuth } from './providers/AuthContext'
 import { TeammateSearch } from './TeammateSearch'
 import { Teammates } from './Teammates'
 import { Teammate } from '../types/team'
 import { createTeam } from '../api/createTeam'
-import { useHistory } from 'react-router-dom'
 import { useDivisions } from './providers/DivisionsProvider'
 
 const useStyles = makeStyles(
