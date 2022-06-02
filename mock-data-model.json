@@ -1,0 +1,215 @@
+{
+  "users": [
+    {
+      "pseudoId": 1,
+      "password": "testtest",
+      "firstName": "User1",
+      "lastName": "Tester",
+      "email": "user1@tester.com",
+      "username": "user1",
+      "verified": true
+    },
+    {
+      "pseudoId": 2,
+      "password": "testtest",
+      "firstName": "User2",
+      "lastName": "Tester",
+      "email": "user2@tester.com",
+      "username": "user2",
+      "verified": true
+    },
+    {
+      "pseudoId": 3,
+      "password": "testtest",
+      "firstName": "Use",
+      "lastName": "Tester",
+      "email": "user3@tester.com",
+      "username": "user3",
+      "verified": true
+    },
+    {
+      "pseudoId": 4,
+      "password": "testtest",
+      "firstName": "User4",
+      "lastName": "Tester",
+      "email": "user4@tester.com",
+      "username": "user4",
+      "verified": true
+    },
+    {
+      "pseudoId": 5,
+      "password": "testtest",
+      "firstName": "User5",
+      "lastName": "Tester",
+      "email": "user5@tester.com",
+      "username": "user5",
+      "verified": true
+    },
+    {
+      "pseudoId": 6,
+      "password": "testtest",
+      "firstName": "User6",
+      "lastName": "Tester",
+      "email": "user6@tester.com",
+      "username": "user6",
+      "verified": true
+    },
+    {
+      "pseudoId": 7,
+      "password": "testtest",
+      "firstName": "User7",
+      "lastName": "Tester",
+      "email": "user7@tester.com",
+      "username": "user7",
+      "verified": true
+    },
+    {
+      "pseudoId": 8,
+      "password": "testtest",
+      "firstName": "User8",
+      "lastName": "Tester",
+      "email": "user8@tester.com",
+      "username": "user8",
+      "verified": true
+    },
+    {
+      "pseudoId": 9,
+      "password": "testtest",
+      "firstName": "User9",
+      "lastName": "Tester",
+      "email": "user9@tester.com",
+      "username": "user9",
+      "verified": true
+    },
+    {
+      "pseudoId": 10,
+      "password": "testtest",
+      "firstName": "User10",
+      "lastName": "Tester",
+      "email": "user10@tester.com",
+      "username": "user10",
+      "verified": true
+    },
+    {
+      "pseudoId": 11,
+      "password": "testtest",
+      "firstName": "User11",
+      "lastName": "Tester",
+      "email": "user11@tester.com",
+      "username": "user11",
+      "verified": true
+    },
+    {
+      "pseudoId": 12,
+      "password": "testtest",
+      "firstName": "User12",
+      "lastName": "Tester",
+      "email": "user12@tester.com",
+      "username": "user12",
+      "verified": true
+    }
+  ],
+  "tournaments": [
+    {
+      "pseudoId": 1,
+      "selectedDate": "Wed Jun 01 2022 20:47:29 GMT-0700 (Pacific Daylight Time)",
+      "courts": 4,
+      "location": {
+        "lat": 37.3631236,
+        "lng": -122.0353579,
+        "address": "850 Russet Dr, Sunnyvale, CA 94087"
+      },
+      "creatorId": 1,
+      "teams": [
+        {
+          "psuedoId": 1,
+          "teamName": "Team 1",
+          "divisionId": "aa",
+          "teamUsers": [
+            {
+              "teamRole": "captain",
+              "userId": 1
+            },
+            {
+              "teamRole": "player",
+              "userId": 5
+            }
+          ],
+          "teamInvites": [
+            {
+              "email": "user9@tester.com",
+              "status": "pending",
+              "teamRole": "player"
+            }
+          ]
+        },
+        {
+          "psuedoId": 1,
+          "teamName": "Team 2",
+          "divisionId": "aa",
+          "teamUsers": [
+            {
+              "teamRole": "captain",
+              "userId": 2
+            },
+            {
+              "teamRole": "player",
+              "userId": 6
+            }
+          ],
+          "teamInvites": [
+            {
+              "email": "user10@tester.com",
+              "status": "pending",
+              "teamRole": "player"
+            }
+          ]
+        },
+        {
+          "psuedoId": 1,
+          "teamName": "Team 3",
+          "divisionId": "aa",
+          "teamUsers": [
+            {
+              "teamRole": "captain",
+              "userId": 3
+            },
+            {
+              "teamRole": "player",
+              "userId": 7
+            }
+          ],
+          "teamInvites": [
+            {
+              "email": "user11@tester.com",
+              "status": "pending",
+              "teamRole": "player"
+            }
+          ]
+        },
+        {
+          "psuedoId": 1,
+          "teamName": "Team 4",
+          "divisionId": "aa",
+          "teamUsers": [
+            {
+              "teamRole": "captain",
+              "userId": 4
+            },
+            {
+              "teamRole": "player",
+              "userId": 8
+            }
+          ],
+          "teamInvites": [
+            {
+              "email": "user12@tester.com",
+              "status": "pending",
+              "teamRole": "player"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

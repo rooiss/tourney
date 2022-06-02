@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "mockdata": "ts-node ./generate-mock-data.ts",
     "start": "NODE_ENV=development ts-node-dev src/server.ts",
     "stop": "docker-compose -f ./docker/dev/docker-compose.yml down",
     "copy:types": "cp -rf ./src/types/* ./client/src/types/",
