@@ -1,0 +1,55 @@
+version: "3"
+services:
+  redis:
+    container_name: redis
+    image: redis:alpine
+    restart: always
+    volumes:
+      - $PWD/.sessionsData:/data
+    networks:
+      - skynet
+  postgres:
+    container_name: postgres
+    image: postgres
+    volumes:
+      - $PWD/.postgres-data:/var/lib/postgresql/data
+    networks:
+      - skynet
+    environment:
+      POSTGRES_PASSWORD: realeyesrealizereallies
+      POSTGRES_USER: localdev
+      POSTGRES_DB: tourney
+  adminer:
+    image: adminer
+    hostname: adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - skynet
+  app:
+    image: tourney_app:local
+    container_name: tourney_app
+    working_dir: /root/app
+    # tty: true
+    stdin_open: true
+    # this tells docker compose not to pull from dockerhub, but instead build the image from the given docker file below
+    build:
+      context: $PWD
+      dockerfile: $PWD/docker/dev/Dockerfile
+    volumes:
+      - $PWD:/root/app
+      # dirs to not sync over
+      # - /root/app/node_modules/
+      - /root/app/coverage/
+      - /root/app/build/
+    env_file: ../../.env
+    networks:
+      - skynet
+    ports:
+      - "5000:5000"
+      - "9229:9229"
+
+networks:
+  skynet:
