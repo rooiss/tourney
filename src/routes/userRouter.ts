@@ -10,13 +10,16 @@ router.post(
   asyncHandler(async (req: any, res) => {
     const user = req.body
     try {
-      const newUser = await createUser(user)
+      // const newUser = await createUser({ ...user, password: hashFunction(user.password) })
+      const newUser = await createUser({ ...user, password: user.password })
       setUserToSession(req, newUser)
       res.json({ success: true })
     } catch (e) {
-      // these errors would occur if the db connection was down
-      // or if the insert query failed
-      console.error('create user failed', e)
+      ;-(
+        // these errors would occur if the db connection was down
+        // or if the insert query failed
+        console.error('create user failed', e)
+      )
       // send error response back
       res.status(500).json({ success: false })
     }
@@ -33,6 +36,7 @@ router.post(
       // else it will keep running the code
       return res.status(400).json({ success: false })
     }
+    // if (hashFunction(user.password) !== userByEmail.password) {
     if (user.password !== userByEmail.password) {
       return res.status(400).json({ success: false })
     } else {

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development ts-node-dev src/server.ts",
+    "mockdata": "ts-node ./src/scripts/createMockData",
     "stop": "docker-compose -f ./docker/dev/docker-compose.yml down",
     "copy:types": "cp -rf ./src/types/* ./client/src/types/",
     "watch:types": "npm-watch copy:types",

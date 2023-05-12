@@ -28,7 +28,8 @@ export const UiConfigProvider = ({ children }: any) => {
   const value = useMemo(() => ({ googleKey }), [googleKey])
   return (
     <uiConfigContext.Provider value={value}>
-      {loading ? 'some icon here for loading' : children}
+      {/* {loading ? 'some icon here for loading' : children} */}
+      {children}
     </uiConfigContext.Provider>
   )
 }

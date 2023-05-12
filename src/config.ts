@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const devConfig = {
-  hostName: 'http://localhost:5000',
+  hostName: 'http://localhost:5001',
   dbConfig: {
     type: 'postgres',
     host: 'postgres',
@@ -18,7 +18,7 @@ const devConfig = {
   // redis: {
   //   password: process.env.REDIS_PASSWORD || '',
   // },
-  // session: {
+  // session: { 
   //   cookieKey: 'got any good sassaparilla?',
   // },
 }

@@ -14,39 +14,43 @@ import { staticMiddleware } from './middleware/staticMiddleware'
 const redis = require('redis')
 const session = require('express-session')
 
-let RedisStore = require('connect-redis')(session)
-let redisClient = redis.createClient({ host: 'redis' })
-redisClient.on('connect', () =>
-  console.log('Redis connection intialized======='),
-)
+async function main() {
+  let RedisStore = require('connect-redis')(session)
+  let redisClient = redis.createClient({ host: 'redis' })
+  redisClient.on('connect', () =>
+    console.log('Redis connection intialized======='),
+  )
+  await setupDB()
 
-const app = express()
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
+  const app = express()
+  app.use(express.urlencoded({ extended: false }))
+  app.use(express.json())
 
-setupDB()
+  app.use(
+    session({
+      store: new RedisStore({ client: redisClient }),
+      saveUninitialized: false,
+      secret: 'keyboard cat',
+      resave: false,
+    }),
+  )
 
-app.use(
-  session({
-    store: new RedisStore({ client: redisClient }),
-    saveUninitialized: false,
-    secret: 'keyboard cat',
-    resave: false,
-  }),
-)
+  app.use('/api/validate', validateRouter)
+  app.use('/api/users', userRouter)
+  app.use('/api/follows', followsRouter)
+  app.use('/api/tournaments', tournamentRouter)
+  app.use('/api/verify', verificationRouter)
+  app.use('/api/tournaments/:tournamentId', teamRouter)
+  app.use('/api/uiconfig', uiRouter)
+  app.use('/api/divisions', divisionsRouter)
 
-app.use('/api/validate', validateRouter)
-app.use('/api/users', userRouter)
-app.use('/api/follows', followsRouter)
-app.use('/api/tournaments', tournamentRouter)
-app.use('/api/verify', verificationRouter)
-app.use('/api/tournaments/:tournamentId', teamRouter)
-app.use('/api/uiconfig', uiRouter)
-app.use('/api/divisions', divisionsRouter)
+  // Static routes (for serving built UI)
+  // app.use(staticMiddleware({}))
 
-// Static routes (for serving built UI)
-// app.use(staticMiddleware({}))
-
-app.listen(5000, () => {
-  console.log('server listening on port 5000')
+  app.listen(5001, () => {
+    console.log('server listening on port 5001')
+  })
+}
+main().catch((e) => {
+  console.error(`App failed with error: ${e}`, e)
 })

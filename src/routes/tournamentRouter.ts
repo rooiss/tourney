@@ -19,6 +19,7 @@ router.post(
   asyncHandler(async (req: any, res) => {
     try {
       const tourney = req.body
+      console.log('tourneyInfo', tourney)
       const creator = await getUserById(req.session.user.id)
       const tournament = await newTournament(tourney, creator)
       res.json({
@@ -39,7 +40,6 @@ router.get(
     if (!req.session.user) {
       return
     }
-    // console.log('req.session', req.session)
     const user = await getUserById(req.session.user.id)
     const usersFollowing = await getFollowedUsers(user)
 

@@ -52,6 +52,7 @@ export const Teammates = ({ teammates, captain, setCaptain, setTeammates }) => {
             <TableCell align="right">Captain</TableCell>
             <TableCell align="right">Remove</TableCell>
           </TableRow>
+          Í
         </TableHead>
         <TableBody>
           {teammates.map((teammate, index) => {

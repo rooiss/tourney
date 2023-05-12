@@ -11,6 +11,8 @@ import { Division } from '../../types/division'
 
 export interface DivisionsContext {
   divisions: Division[]
+  loading: boolean
+  error: string
 }
 
 export const divisionsContext = createContext<DivisionsContext>(
@@ -46,8 +48,10 @@ export const DivisionsProvider = ({ children }: { children: ReactNode }) => {
   const value: DivisionsContext = useMemo(
     () => ({
       divisions,
+      loading,
+      error,
     }),
-    [divisions],
+    [divisions, loading, error],
   )
 
   return (

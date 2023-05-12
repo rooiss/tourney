@@ -49,7 +49,7 @@ services:
     networks:
       - skynet
     ports:
-      - '5000:5000'
+      - '5001:5001'
       - '9229:9229'
 volumes:
   # This is for the docker-sync container that gets started

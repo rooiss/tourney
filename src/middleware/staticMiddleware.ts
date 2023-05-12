@@ -11,7 +11,7 @@ export const staticMiddleware = ({
   // Static files
   router.use(express.static('client/build'))
   console.log(
-    `resolve(__dirname, '../client/build')`,
+    `resolve(${__dirname}, '../client/build')`,
     resolve(__dirname, '../client/build'),
   )
 

@@ -49,7 +49,7 @@ COPY --from=build /app/build ./build
 COPY --from=build /app/client/build /app/client/build
 
 # Expose the port
-EXPOSE 5000
+EXPOSE 5001
 
 # Command to be run in production
 ENTRYPOINT ["npm", "run", "start:prod"]

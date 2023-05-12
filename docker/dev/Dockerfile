@@ -8,7 +8,7 @@ WORKDIR /root/app
 COPY ./docker/dev/.profile /root
 
 # Port that the app is running on
-EXPOSE 5000
+EXPOSE 5001
 
 # Port for debugging the node app
 EXPOSE 9229

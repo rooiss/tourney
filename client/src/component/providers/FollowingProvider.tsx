@@ -8,6 +8,7 @@ import React, {
 } from 'react'
 import { useEffect } from 'react'
 import { Following } from '../../types/follows'
+import { useAuth } from './AuthContext'
 
 export interface FollowingProviderProps {}
 
@@ -21,13 +22,28 @@ export const followingContext = createContext<FollowingContext>(
   {} as FollowingContext,
 )
 
-async function fetchFollowers() {
-  return fetch('/api/follows').then((res) => res.json())
-}
-
 export const FollowingProvider = ({ children }: { children: ReactNode }) => {
   const [following, setFollowing] = useState<Following[]>([])
-  // const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const { isAuthenticated } = useAuth()
+
+  const fetchFollowers = useCallback(() => {
+    setLoading(true)
+    return fetch(`/api/follows`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setFollowing(data.followedUsers)
+          return data
+        }
+        setError(data.error)
+        return data
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [])
 
   const refetch = useCallback(async () => {
     return fetchFollowers().then((data) => {
@@ -38,17 +54,14 @@ export const FollowingProvider = ({ children }: { children: ReactNode }) => {
       console.log('error in refetch on FollowingProvider')
       return
     })
-  }, [])
+  }, [fetchFollowers])
 
   useEffect(() => {
-    fetchFollowers().then((res) => {
-      if (res.success === true) {
-        setFollowing(res.followedUsers)
-        return
-      }
-      console.log('error in useEffect on FollowingProvider')
-    })
-  }, [])
+    if (!isAuthenticated) {
+      return
+    }
+    fetchFollowers()
+  }, [fetchFollowers, isAuthenticated])
 
   const value: FollowingContext = useMemo(
     () => ({
